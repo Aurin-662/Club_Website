@@ -231,3 +231,88 @@ footer.site-footer {
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
 }
+/* --- BCC Style Registration Overrides --- */
+
+.registration-form-area {
+    min-height: 80vh;
+    /* Soft transition from your body gradient */
+    padding-bottom: 80px;
+}
+
+.registration-card {
+    background: #ffffff; 
+    border-radius: var(--radius);
+    border: none;
+    overflow: hidden;
+    /* Ensuring card sits clearly on the gradient background */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1) !important;
+}
+
+.card-header-bcc {
+    background-color: var(--brand); /* Uses your #004080 */
+    color: white;
+    padding: 35px;
+    text-align: center;
+}
+
+.card-header-bcc h4 {
+    font-weight: 800;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.form-label {
+    font-weight: 700;
+    color: #334155; /* Darker slate color for better visibility */
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.form-control, .form-select {
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    color: #1e293b;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 4px rgba(0, 64, 128, 0.1);
+    border-color: var(--brand);
+}
+
+/* Fix for the "Halka" Checkbox Text */
+.form-check-label {
+    color: #1e293b !important; /* Forces a high-contrast dark color */
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.form-check-label a {
+    color: var(--brand);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: 0.2s;
+}
+
+.form-check-label a:hover {
+    border-bottom: 1px solid var(--brand);
+}
+
+.btn-primary-bcc {
+    background-color: var(--brand);
+    color: white;
+    padding: 14px 50px;
+    border-radius: 50px;
+    font-weight: 700;
+    border: none;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.btn-primary-bcc:hover {
+    background-color: #002d5a;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 64, 128, 0.25);
+}
