@@ -377,3 +377,28 @@ footer.site-footer {
     color: var(--accent);
 }
 
+/* --- Fix for the 'Halka' text in Collaboration Section --- */
+
+#collaborate h2 {
+    color: #0b1220 !important; /* Deep dark blue/black */
+    font-weight: 800;
+    opacity: 1 !important;
+}
+
+#collaborate p.lead {
+    color: #475569 !important; /* Dark slate gray */
+    font-weight: 500;
+    opacity: 1 !important;
+}
+
+#collaborate .eyebrow {
+    color: var(--brand) !important; /* Your #004080 brand color */
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Ensure the card text is also sharp */
+.collab-card p {
+    color: #64748b !important; /* Standard dark gray for body text */
+}
