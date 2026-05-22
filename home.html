@@ -6,57 +6,133 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>KUET Career Club</title>
 
-  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
 
-  <!-- Your custom stylesheet -->
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* BCC-Inspired UI Overrides */
+    :root {
+      --bcc-primary: #8B2D31; /* Signature Deep Dark Red Accent */
+      --bcc-dark: #1A202C;
+      --bcc-muted: #4A5568;
+    }
+
+    /* Notice Marquee Styles */
+    .notice-marquee-container {
+      background: #fff5f5;
+      border-bottom: 1.5px solid #feb2b2;
+      overflow: hidden;
+    }
+    .notice-badge {
+      background: var(--bcc-primary);
+      color: white;
+      font-weight: 700;
+      padding: 6px 16px;
+      z-index: 10;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .marquee-text a {
+      color: var(--bcc-dark);
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .marquee-text a:hover {
+      color: var(--bcc-primary);
+    }
+
+    /* Job Card Restyling */
+    .job-card {
+      background: #ffffff;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      border-top: 4px solid var(--bcc-primary);
+      transition: all 0.25s ease;
+    }
+    .job-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    }
+    
+    /* Feature & Collab Cards */
+    .card-feature, .collab-card {
+      background: #ffffff;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.25s ease;
+    }
+    .card-feature:hover, .collab-card:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.04);
+    }
+    .collab-card.active-card {
+      border: 1.5px solid var(--bcc-primary);
+      background: #fffafb;
+    }
+
+    /* Badges */
+    .bg-info-soft { background-color: #ebf8ff; color: #2b6cb0; }
+    .bg-success-soft { background-color: #f0fff4; color: #2f855a; }
+    .bg-orange-soft { background-color: #fff7ed; color: #c2410c; }
+    
+    /* Global Typography Fixes */
+    h1, h2, h3, h5 {
+      color: var(--bcc-dark);
+      font-weight: 700 !important;
+    }
+    .eyebrow {
+      color: var(--bcc-primary);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.85rem;
+    }
+  </style>
 </head>
 
-<body>
+<body class="bg-light">
 
-  <!-- Header / Navbar -->
-  <header class="site-header">
+  <header class="site-header sticky-top bg-white border-bottom">
     <div class="container py-2 d-flex align-items-center justify-content-between">
-      <a class="brand" href="#">
-        <img src="images/logo.jpg" alt="KUET Career Club logo" class="log">
+      <a class="brand d-flex align-items-center text-decoration-none" href="#">
+        <img src="images/logo.jpg" alt="KUET Career Club logo" class="log" style="height: 45px;">
         <div class="logo-text ms-2">
-          <div class="site-title">KUET CAREER Club</div>
-          <small class="site-sub">Prepare • Connect • Succeed</small>
+          <div class="site-title mb-0 lh-1" style="font-weight:800; font-size:1.2rem; color:var(--bcc-dark);">KUET CAREER CLUB</div>
+          <small class="site-sub text-muted" style="font-size:0.75rem;">Prepare • Connect • Succeed</small>
         </div>
       </a>
 
-      <!-- Desktop nav -->
       <nav class="d-none d-md-block">
         <ul class="nav align-items-center mb-0">
-          <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="#jobs">Jobs</a></li>
-          <li class="nav-item"><a class="nav-link" href="blogs.html">Blogs</a></li>
+          <li class="nav-item"><a class="nav-link active fw-semibold" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link fw-semibold" href="#jobs">Jobs</a></li>
+          <li class="nav-item"><a class="nav-link fw-semibold" href="blogs.html">Blogs</a></li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="portalsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="bi bi-grid-fill me-2"></i>Portals
+            <a class="nav-link dropdown-toggle fw-semibold" href="#" id="portalsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-grid-fill me-1"></i>Portals
             </a>
-            <ul class="dropdown-menu" aria-labelledby="portalsDropdown">
+            <ul class="dropdown-menu border-0 shadow" aria-labelledby="portalsDropdown">
               <li><a class="dropdown-item" href="students.html">Student Portal</a></li>
               <li><a class="dropdown-item" href="alumni.html">Graduate Portal</a></li>
               <li><a class="dropdown-item" href="companies.html">Industry Partner</a></li>
             </ul>
           </li>
-          <li class="nav-item"><a class="nav-link" href="#events">Events</a></li>
-          <li class="nav-item"><a class="nav-link" href="#team">Members</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item"><a class="nav-link fw-semibold" href="#events">Events</a></li>
+          <li class="nav-item"><a class="nav-link fw-semibold" href="#team">Members</a></li>
+          <li class="nav-item"><a class="nav-link fw-semibold" href="#contact">Contact</a></li>
         </ul>
       </nav>
 
-      <!-- Actions -->
       <div class="d-none d-md-flex gap-2 header-actions">
-        <a href="login.html" class="btn btn-outline-custom">Sign In</a>
-        <a href="register.html" class="btn btn-primary-custom">Register</a>
+        <a href="login.html" class="btn btn-outline-secondary px-3 fw-semibold btn-sm">Sign In</a>
+        <a href="register.html" class="btn text-white px-3 fw-semibold btn-sm" style="background: var(--bcc-primary);">Register</a>
       </div>
 
-      <!-- Mobile toggler -->
       <div class="d-md-none">
         <button class="btn btn-outline-secondary mobile-toggle" type="button" data-bs-toggle="offcanvas"
           data-bs-target="#mobileMenu" aria-controls="mobileMenu" aria-label="Open menu">
@@ -66,17 +142,16 @@
     </div>
   </header>
 
-  <!-- Mobile offcanvas menu -->
   <div class="offcanvas offcanvas-end text-bg-white" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
-    <div class="offcanvas-header">
-      <h5 id="mobileMenuLabel" class="offcanvas-title">Menu</h5>
+    <div class="offcanvas-header border-bottom">
+      <h5 id="mobileMenuLabel" class="offcanvas-title fw-bold">Menu</h5>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
       <ul class="nav flex-column gap-2">
         <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="#jobs">Jobs</a></li>
-          <li class="nav-item"><a class="nav-link" href="blogs.html">Blogs</a></li>
+        <li class="nav-item"><a class="nav-link" href="blogs.html">Blogs</a></li>
         <li class="nav-item">
           <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#portalSubmenu" role="button" aria-expanded="false" aria-controls="portalSubmenu">Portals <i class="bi bi-caret-down-fill"></i></a>
           <div class="collapse ps-3" id="portalSubmenu">
@@ -92,162 +167,96 @@
         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
       </ul>
       <div class="mt-4 d-flex gap-2">
-        <a href="login.html" class="btn btn-outline-custom w-100">Sign In</a>
-        <a href="register.html" class="btn btn-primary-custom w-100">Register</a>
+        <a href="login.html" class="btn btn-outline-secondary w-100">Sign In</a>
+        <a href="register.html" class="btn text-white w-100" style="background: var(--bcc-primary);">Register</a>
       </div>
     </div>
   </div>
 
-  <!-- Portal quick links section -->
-<section id="portals" class="portals-section py-5 bg-white">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="mt-3 eyebrow">KUET Career Portals</h2>
-            <p class="text-muted mx-auto" style="max-width: 60ch;">Access student, alumni, company and job portals in one place.</p>
-        </div>
-
-        <div class="row g-4">
-            <div class="col-md-4">
-                <a href="students.html" class="portal-card d-block text-decoration-none">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div>
-                            <h5 class="mb-2">Student Portal</h5>
-                            <p class="mb-3">Explore campus resources, career opportunities, and student events.</p>
-                        </div>
-                        <div class="icon-box bg-primary-soft text-primary">
-                            <i class="bi bi-mortarboard-fill"></i>
-                        </div>
-                    </div>
-                    <span class="btn btn-portal mt-3">Visit Student Portal</span>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="alumni.html" class="portal-card d-block text-decoration-none">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div>
-                            <h5 class="mb-2">Graduate Corner</h5>
-                            <p class="mb-3">Connect with alumni, mentoring programs, and career stories.</p>
-                        </div>
-                        <div class="icon-box bg-success-soft text-success">
-                            <i class="bi bi-person-badge-fill"></i>
-                        </div>
-                    </div>
-                    <span class="btn btn-portal mt-3">Visit Graduate Corner</span>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="companies.html" class="portal-card d-block text-decoration-none">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div>
-                            <h5 class="mb-2">Companies</h5>
-                            <p class="mb-3">Find employer partners, internships, and collaboration opportunities.</p>
-                        </div>
-                        <div class="icon-box bg-orange-soft text-orange">
-                            <i class="bi bi-building-fill"></i>
-                        </div>
-                    </div>
-                    <span class="btn btn-portal mt-3">Explore Companies</span>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="jobs.html" class="portal-card d-block text-decoration-none">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div>
-                            <h5 class="mb-2">Jobs & Internships</h5>
-                            <p class="mb-3">Search open roles, internships, and application resources.</p>
-                        </div>
-                        <div class="icon-box bg-purple-soft text-purple">
-                            <i class="bi bi-briefcase-fill"></i>
-                        </div>
-                    </div>
-                    <span class="btn btn-portal mt-3">Browse Jobs</span>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="support.html" class="portal-card d-block text-decoration-none">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div>
-                            <h5 class="mb-2">Support KUET</h5>
-                            <p class="mb-3">Learn how to support club activities, sponsorships, and events.</p>
-                        </div>
-                        <div class="icon-box bg-yellow-soft text-warning">
-                            <i class="bi bi-heart-fill"></i>
-                        </div>
-                    </div>
-                    <span class="btn btn-portal mt-3">Support KUET</span>
-                </a>
-            </div>
-        </div>
+  <div class="notice-marquee-container d-flex align-items-center">
+    <div class="notice-badge d-flex align-items-center shadow-sm">
+      <i class="bi bi-megaphone-fill me-2"></i> Notice
     </div>
-</section>
+    <div class="flex-grow-1 py-2">
+      <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();" class="marquee-text pt-1">
+        <a href="#" class="me-5"><i class="bi bi-dot text-danger fs-5"></i> Registration for KUET National Career Fair 2026 is now officially open!</a>
+        <a href="blogs.html" class="me-5"><i class="bi bi-dot text-danger fs-5"></i> Check out the new Software Engineering Interview Preparation Guide in our blog hub.</a>
+        <a href="#jobs" class="me-5"><i class="bi bi-dot text-danger fs-5"></i> TechNova Solutions added 3 new internship slots for final-year CSE students.</a>
+      </marquee>
+    </div>
+  </div>
 
-  <!-- Banner / Hero -->
-  <section class="banner main-content">
-    <div class="container">
+  <section class="banner main-content py-5 bg-white border-bottom">
+    <div class="container py-4">
       <div class="row align-items-center gy-4">
         <div class="col-lg-6">
           <div class="hero-copy">
-            <h1>Ready to Join the KUET Network?</h1>
-            <p>Connect with 25,000+ KUETians, discover exclusive opportunities, and accelerate your engineering career
-              with Bangladesh's most prestigious network.</p>
+            <h1 class="display-5 mb-3">Ready to Join the <span style="color: var(--bcc-primary);">KUET Network?</span></h1>
+            <p class="text-muted fs-5 mb-4">Connect with 25,000+ KUETians, discover exclusive opportunities, and accelerate your engineering career with Bangladesh's most prestigious corporate-academic network.</p>
             <div class="d-flex gap-2">
-              <a href="register.html" class="btn btn-primary-custom">Join KUET Network</a>
-              <a href="login.html" class="btn btn-outline-custom">Sign In</a>
+              <a href="register.html" class="btn text-white px-4 py-2 fw-semibold shadow-sm" style="background: var(--bcc-primary);">Join KUET Network</a>
+              <a href="login.html" class="btn btn-outline-secondary px-4 py-2 fw-semibold">Sign In</a>
             </div>
           </div>
         </div>
-
         <div class="col-lg-6 text-center">
-          <img src="images/network.jpg" alt="KUET Network" class="banner-img">
+          <img src="images/network.jpg" alt="KUET Network" class="banner-img img-fluid rounded-3 shadow-sm" style="max-height: 400px; object-fit: cover; width: 100%;">
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Statistics -->
-  <section class="stats py-5 main-content">
+  <section class="stats py-5 border-bottom bg-white">
     <div class="container">
-      <h2 class="text-center mb-4">Empowering Success Through Numbers That Matter</h2>
-      <p class="text-center text-muted mb-5">Join thousands of KUET students, alumni, and industry partners building the
-        future of engineering excellence.</p>
-      <div class="row text-center">
-        <div class="col-md-3 mb-4">
-          <h3 class="text-primary">1000+</h3>
-          <p class="text-muted">Students</p>
+      <div class="text-center mb-5">
+        <h2 class="mb-2">Empowering Success Through Numbers That Matter</h2>
+        <p class="text-muted mx-auto" style="max-width: 65ch;">Join thousands of KUET students, alumni, and industry partners building the future of industrial engineering excellence.</p>
+      </div>
+      <div class="row text-center g-4">
+        <div class="col-6 col-md-3">
+          <div class="p-3 border rounded-3 bg-light">
+            <h3 class="display-6 mb-1" style="color: var(--bcc-primary);">1000+</h3>
+            <p class="text-muted mb-0 fw-medium">Active Students</p>
+          </div>
         </div>
-        <div class="col-md-3 mb-4">
-          <h3 class="text-primary">500+</h3>
-          <p class="text-muted">Alumni</p>
+        <div class="col-6 col-md-3">
+          <div class="p-3 border rounded-3 bg-light">
+            <h3 class="display-6 mb-1" style="color: var(--bcc-primary);">500+</h3>
+            <p class="text-muted mb-0 fw-medium">Global Alumni</p>
+          </div>
         </div>
-        <div class="col-md-3 mb-4">
-          <h3 class="text-primary">50+</h3>
-          <p class="text-muted">Jobs</p>
+        <div class="col-6 col-md-3">
+          <div class="p-3 border rounded-3 bg-light">
+            <h3 class="display-6 mb-1" style="color: var(--bcc-primary);">50+</h3>
+            <p class="text-muted mb-0 fw-medium">Live Openings</p>
+          </div>
         </div>
-        <div class="col-md-3 mb-4">
-          <h3 class="text-primary">20+</h3>
-          <p class="text-muted">Events</p>
+        <div class="col-6 col-md-3">
+          <div class="p-3 border rounded-3 bg-light">
+            <h3 class="display-6 mb-1" style="color: var(--bcc-primary);">20+</h3>
+            <p class="text-muted mb-0 fw-medium">Annual Events</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Jobs Board -->
-  <section id="jobs" class="jobs main-content py-5">
+  <section id="jobs" class="jobs main-content py-5 bg-white border-bottom">
     <div class="container">
       <div class="text-center mb-5">
         <h6 class="eyebrow">Job Board</h6>
-        <h2 class="mt-3">Latest Opportunities for KUET Talent</h2>
+        <h2 class="mt-2">Latest Opportunities for KUET Talent</h2>
         <p class="text-muted mx-auto" style="max-width: 60ch;">Explore curated placements, internships, and part-time roles from employers recruiting strong engineering candidates.</p>
       </div>
 
-      <div class="row align-items-end g-3 mb-5">
+      <div class="row align-items-end g-3 mb-5 p-4 rounded-3 border bg-light shadow-sm mx-1">
         <div class="col-md-5">
-          <label class="form-label visually-hidden" for="jobSearch">Search jobs</label>
-          <input id="jobSearch" type="search" class="form-control" placeholder="Search jobs, companies or skills">
+          <label class="form-label fw-semibold text-secondary small" for="jobSearch">Keywords</label>
+          <input id="jobSearch" type="search" class="form-control border-secondary-subtle" placeholder="Search jobs, companies or skills">
         </div>
         <div class="col-md-3">
-          <label class="form-label visually-hidden" for="jobDepartment">Department</label>
-          <select id="jobDepartment" class="form-select">
+          <label class="form-label fw-semibold text-secondary small" for="jobDepartment">Department filter</label>
+          <select id="jobDepartment" class="form-select border-secondary-subtle">
             <option selected>All Departments</option>
             <option>CSE</option>
             <option>EEE</option>
@@ -256,8 +265,8 @@
           </select>
         </div>
         <div class="col-md-2">
-          <label class="form-label visually-hidden" for="jobType">Job type</label>
-          <select id="jobType" class="form-select">
+          <label class="form-label fw-semibold text-secondary small" for="jobType">Job Category</label>
+          <select id="jobType" class="form-select border-secondary-subtle">
             <option selected>All Types</option>
             <option>Full-time</option>
             <option>Internship</option>
@@ -265,243 +274,193 @@
           </select>
         </div>
         <div class="col-md-2 d-grid">
-          <button id="jobSearchBtn" type="button" class="btn btn-primary-custom">Find Jobs</button>
+          <button id="jobSearchBtn" type="button" class="btn text-white fw-semibold" style="background: var(--bcc-primary);"><i class="bi bi-search me-1"></i> Find Jobs</button>
         </div>
       </div>
 
       <div class="row g-4">
         <div class="col-md-6 col-lg-4">
-          <article class="job-card p-4 h-100" data-department="CSE" data-type="Internship">
+          <article class="job-card p-4 h-100 d-flex flex-column" data-department="CSE" data-type="Internship">
             <div class="d-flex align-items-start justify-content-between mb-3">
               <div>
-                <h5>Software Engineer Intern</h5>
-                <p class="mb-1 text-muted small">TechNova Solutions</p>
+                <h5 class="mb-1" style="font-size:1.15rem;">Software Engineer Intern</h5>
+                <p class="mb-0 text-muted small fw-semibold">TechNova Solutions</p>
               </div>
-              <span class="job-badge bg-info-soft text-info">Internship</span>
+              <span class="badge rounded px-2 py-1 bg-info-soft fw-bold" style="font-size:0.75rem;">Internship</span>
             </div>
-            <p class="text-muted mb-3">Work on web apps, automation tools, and data pipelines with a dynamic product team.</p>
-            <ul class="text-muted small mb-3">
-              <li>Department: CSE</li>
-              <li>Location: Dhaka</li>
-              <li>Apply by: Jun 10</li>
+            <p class="text-muted small mb-4 flex-grow-1">Work on web apps, automation tools, and data pipelines with a dynamic product team.</p>
+            <ul class="list-unstyled text-muted small mb-4 border-top pt-3">
+              <li class="mb-1"><i class="bi bi-building me-2 text-secondary"></i>Department: CSE</li>
+              <li class="mb-1"><i class="bi bi-geo-alt me-2 text-secondary"></i>Location: Dhaka</li>
+              <li><i class="bi bi-calendar-event me-2 text-secondary"></i>Apply by: Jun 10</li>
             </ul>
-            <a href="#" class="btn btn-outline-custom btn-sm">View Details</a>
+            <a href="#" class="btn btn-outline-secondary w-100 btn-sm fw-semibold mt-auto">View Details</a>
           </article>
         </div>
 
         <div class="col-md-6 col-lg-4">
-          <article class="job-card p-4 h-100" data-department="EEE" data-type="Full-time">
+          <article class="job-card p-4 h-100 d-flex flex-column" data-department="EEE" data-type="Full-time">
             <div class="d-flex align-items-start justify-content-between mb-3">
               <div>
-                <h5>Electrical Design Engineer</h5>
-                <p class="mb-1 text-muted small">GreenGrid Engineering</p>
+                <h5 class="mb-1" style="font-size:1.15rem;">Electrical Design Engineer</h5>
+                <p class="mb-0 text-muted small fw-semibold">GreenGrid Engineering</p>
               </div>
-              <span class="job-badge bg-success-soft text-success">Full-time</span>
+              <span class="badge rounded px-2 py-1 bg-success-soft fw-bold" style="font-size:0.75rem;">Full-time</span>
             </div>
-            <p class="text-muted mb-3">Design power systems, support field implementation, and collaborate on sustainable energy projects.</p>
-            <ul class="text-muted small mb-3">
-              <li>Department: EEE</li>
-              <li>Location: Chittagong</li>
-              <li>Apply by: Jun 15</li>
+            <p class="text-muted small mb-4 flex-grow-1">Design power systems, support field implementation, and collaborate on sustainable energy projects.</p>
+            <ul class="list-unstyled text-muted small mb-4 border-top pt-3">
+              <li class="mb-1"><i class="bi bi-building me-2 text-secondary"></i>Department: EEE</li>
+              <li class="mb-1"><i class="bi bi-geo-alt me-2 text-secondary"></i>Location: Chittagong</li>
+              <li><i class="bi bi-calendar-event me-2 text-secondary"></i>Apply by: Jun 15</li>
             </ul>
-            <a href="#" class="btn btn-outline-custom btn-sm">View Details</a>
+            <a href="#" class="btn btn-outline-secondary w-100 btn-sm fw-semibold mt-auto">View Details</a>
           </article>
         </div>
 
         <div class="col-md-6 col-lg-4">
-          <article class="job-card p-4 h-100" data-department="Civil" data-type="Part-time">
+          <article class="job-card p-4 h-100 d-flex flex-column" data-department="Civil" data-type="Part-time">
             <div class="d-flex align-items-start justify-content-between mb-3">
               <div>
-                <h5>Project Coordinator</h5>
-                <p class="mb-1 text-muted small">BuildWorks Ltd.</p>
+                <h5 class="mb-1" style="font-size:1.15rem;">Project Coordinator</h5>
+                <p class="mb-0 text-muted small fw-semibold">BuildWorks Ltd.</p>
               </div>
-              <span class="job-badge bg-orange-soft text-orange">Part-time</span>
+              <span class="badge rounded px-2 py-1 bg-orange-soft fw-bold" style="font-size:0.75rem;">Part-time</span>
             </div>
-            <p class="text-muted mb-3">Support infrastructure planning, scheduling, and communication for ongoing construction projects.</p>
-            <ul class="text-muted small mb-3">
-              <li>Department: Civil</li>
-              <li>Location: Khulna</li>
-              <li>Apply by: Jun 12</li>
+            <p class="text-muted small mb-4 flex-grow-1">Support infrastructure planning, scheduling, and communication for ongoing construction projects.</p>
+            <ul class="list-unstyled text-muted small mb-4 border-top pt-3">
+              <li class="mb-1"><i class="bi bi-building me-2 text-secondary"></i>Department: Civil</li>
+              <li class="mb-1"><i class="bi bi-geo-alt me-2 text-secondary"></i>Location: Khulna</li>
+              <li><i class="bi bi-calendar-event me-2 text-secondary"></i>Apply by: Jun 12</li>
             </ul>
-            <a href="#" class="btn btn-outline-custom btn-sm">View Details</a>
+            <a href="#" class="btn btn-outline-secondary w-100 btn-sm fw-semibold mt-auto">View Details</a>
           </article>
         </div>
       </div>
 
-      <div class="company-logos row g-3 mt-5 align-items-center text-center">
-        <div class="col-6 col-md-3 logo-box">TechNova</div>
-        <div class="col-6 col-md-3 logo-box">GreenGrid</div>
-        <div class="col-6 col-md-3 logo-box">BuildWorks</div>
-        <div class="col-6 col-md-3 logo-box">NextGen Labs</div>
+      <div class="row g-3 mt-5 align-items-center text-center justify-content-center border-top pt-5">
+        <div class="col-4 col-md-2 text-uppercase font-monospace text-muted fw-bold small">TechNova</div>
+        <div class="col-4 col-md-2 text-uppercase font-monospace text-muted fw-bold small">GreenGrid</div>
+        <div class="col-4 col-md-2 text-uppercase font-monospace text-muted fw-bold small">BuildWorks</div>
+        <div class="col-4 col-md-2 text-uppercase font-monospace text-muted fw-bold small">NextGen Labs</div>
       </div>
     </div>
   </section>
 
-  <!-- Events / Features -->
-  <section id="events" class="events main-content">
+  <section id="events" class="events main-content py-5 bg-white border-bottom">
     <div class="container">
-      <div class="text-center mb-4">
-        <h6 class="d-inline-block px-3 py-1 border border-secondary rounded text-secondary">Explore Our Platform</h6>
-        <h2 class="mt-3">Everything You Need to Succeed in Your Career</h2>
-        <p class="text-muted">Whether you're a student, alumnus, or employer â€” our platform connects the entire KUET
-          ecosystem.</p>
+      <div class="text-center mb-5">
+        <h6 class="eyebrow">Explore Our Platform</h6>
+        <h2 class="mt-2">Everything You Need to Succeed</h2>
+        <p class="text-muted mx-auto" style="max-width: 60ch;">Whether you're a student, alumnus, or corporate employer — our platform links the global network directly.</p>
       </div>
 
       <div class="row g-4">
         <div class="col-md-6 col-lg-3">
-          <div class="card-feature h-100">
-            <h5>Student Community</h5>
-            <p class="mb-2">Connect with peers, access mentorship, workshops, and internship opportunities.</p>
-            <ul class="text-muted small">
+          <div class="card-feature h-100 d-flex flex-column">
+            <h5 class="mb-3" style="font-size:1.15rem;"><i class="bi bi-people-fill me-2 text-danger"></i>Student Arena</h5>
+            <p class="text-muted small mb-3 flex-grow-1">Connect with peers, access strategic mentorship channels, technical workshops, and early-stage internship slots.</p>
+            <ul class="text-muted small ps-3 mb-4">
               <li>Career Guidance</li>
-              <li>Study Groups</li>
-              <li>Mentorship</li>
-              <li>Workshops</li>
+              <li>Study Circles</li>
+              <li>1-on-1 Mentorship</li>
+              <li>Skills Bootcamps</li>
             </ul>
-            <div class="mt-3"><a class="btn btn-outline-custom btn-sm" href="#">Student Community</a></div>
+            <a class="btn btn-outline-secondary btn-sm w-100 fw-semibold mt-auto" href="#">Enter Community</a>
           </div>
         </div>
 
         <div class="col-md-6 col-lg-3">
-          <div class="card-feature h-100">
-            <h5>Alumni Network</h5>
-            <p class="mb-2">Build your professional network with KUET alumni worldwide.</p>
-            <ul class="text-muted small">
-              <li>Global Network</li>
-              <li>Events</li>
-              <li>Collaboration</li>
-              <li>Mentorship</li>
+          <div class="card-feature h-100 d-flex flex-column">
+            <h5 class="mb-3" style="font-size:1.15rem;"><i class="bi bi-globe2 me-2 text-success"></i>Alumni Sphere</h5>
+            <p class="text-muted small mb-3 flex-grow-1">Maintain close alignment with the campus ecosystem and engage with global KUET circles active in tech clusters worldwide.</p>
+            <ul class="text-muted small ps-3 mb-4">
+              <li>Global Network Maps</li>
+              <li>Reunion Modules</li>
+              <li>Research Mentorship</li>
+              <li>Job Dispersal Profiles</li>
             </ul>
-            <div class="mt-3"><a class="btn btn-outline-custom btn-sm" href="#">Alumni Network</a></div>
+            <a class="btn btn-outline-secondary btn-sm w-100 fw-semibold mt-auto" href="#">Alumni Directory</a>
           </div>
         </div>
 
         <div class="col-md-6 col-lg-3">
-          <div class="card-feature h-100">
-            <h5>Collaboration</h5>
-            <p class="mb-2">Partner on research, projects, courses, and startups with KUET.</p>
-            <ul class="text-muted small">
-              <li>Research Partnerships</li>
-              <li>Project Collaboration</li>
-              <li>Course Development</li>
-              <li>Startup Incubation</li>
+          <div class="card-feature h-100 d-flex flex-column">
+            <h5 class="mb-3" style="font-size:1.15rem;"><i class="bi bi-briefcase-fill me-2 text-warning"></i>Collaboration</h5>
+            <p class="text-muted small mb-3 flex-grow-1">Partner cleanly on R&D initiatives, complex senior projects, specialized elective syllabi, and structural project incubators.</p>
+            <ul class="text-muted small ps-3 mb-4">
+              <li>R&D Sponsorships</li>
+              <li>Project Partnerships</li>
+              <li>Curriculum Inputs</li>
+              <li>Incubation Hubs</li>
             </ul>
-            <div class="mt-3"><a class="btn btn-outline-custom btn-sm" href="#">Collaboration</a></div>
+            <a class="btn btn-outline-secondary btn-sm w-100 fw-semibold mt-auto" href="#">Partner Paths</a>
           </div>
         </div>
 
         <div class="col-md-6 col-lg-3">
-          <div class="card-feature h-100">
-            <h5>Career Opportunities</h5>
-            <p class="mb-2">Explore job openings, internships, and career development resources.</p>
-            <ul class="text-muted small">
-              <li>Job Board</li>
-              <li>Internship Listings</li>
-              <li>Career Counseling</li>
-              <li>Resume Building</li>
+          <div class="card-feature h-100 d-flex flex-column">
+            <h5 class="mb-3" style="font-size:1.15rem;"><i class="bi bi-award-fill me-2 text-info"></i>Career Tools</h5>
+            <p class="text-muted small mb-3 flex-grow-1">Examine targeted corporate positions, specialized job criteria, mock interview labs, and automated resume building toolkits.</p>
+            <ul class="text-muted small ps-3 mb-4">
+              <li>Live Job Feeds</li>
+              <li>Internship Databases</li>
+              <li>Counseling Interfaces</li>
+              <li>ATS Optimization</li>
             </ul>
-            <div class="mt-3"><a class="btn btn-outline-custom btn-sm" href="#">Career Opportunities</a></div>
+            <a class="btn btn-outline-secondary btn-sm w-100 fw-semibold mt-auto" href="#">Launch Tools</a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- collaborate -->
-  <section id="collaborate" class="collaboration py-5 main-content">
+  <section id="collaborate" class="collaboration py-5 bg-white">
     <div class="container">
       <div class="text-center mb-5">
         <h6 class="eyebrow">Partner With Us</h6>
-        <h2 class="mt-2">Ways to Collaborate</h2>
-        <p class="lead">We bridge the gap between academia and industry through meaningful partnerships.</p>
+        <h2 class="mt-2">Strategic Ways to Collaborate</h2>
+        <p class="text-muted mx-auto" style="max-width: 60ch;">We systematically bridge the space between rigorous academic engineering coursework and actual global market operations.</p>
       </div>
 
       <div class="row g-4">
         <div class="col-md-4">
-          <div class="collab-card">
-            <div class="collab-icon">ðŸ¢</div>
-            <h5>Corporate Partnership</h5>
-            <p>Host recruitment seminars, placement drives, and technical workshops for KUETians.</p>
-            <a href="#contact" class="collab-link">Learn More &rarr;</a>
+          <div class="collab-card h-100 d-flex flex-column">
+            <div class="fs-2 mb-2">🏢</div>
+            <h5 class="mb-2">Corporate Drives</h5>
+            <p class="text-muted small flex-grow-1">Run formal recruitment seminars, target-oriented campus placement pools, and structured tech round tables inside KUET facilities.</p>
+            <a href="#contact" class="text-decoration-none fw-semibold mt-3 small" style="color: var(--bcc-primary);">Learn More &rarr;</a>
           </div>
         </div>
 
         <div class="col-md-4">
-          <div class="collab-card active-card">
-            <div class="collab-icon">ðŸŽ“</div>
-            <h5>Alumni Mentorship</h5>
-            <p>Guide the next generation of engineers by sharing your professional journey and expertise.</p>
-            <a href="register.html" class="collab-link">Become a Mentor &rarr;</a>
+          <div class="collab-card active-card h-100 d-flex flex-column">
+            <div class="fs-2 mb-2">🎓</div>
+            <h5 class="mb-2">Alumni Mentorship</h5>
+            <p class="text-muted small flex-grow-1">Guide upcoming cohorts of engineers by breaking down your industry path, tech stack transitions, and market insights.</p>
+            <a href="register.html" class="text-decoration-none fw-semibold mt-3 small" style="color: var(--bcc-primary);">Become a Mentor &rarr;</a>
           </div>
         </div>
 
         <div class="col-md-4">
-          <div class="collab-card">
-            <div class="collab-icon">ðŸ’¡</div>
-            <h5>Innovation & Research</h5>
-            <p>Collaborate on R&D projects or support the KUET startup ecosystem through incubation.</p>
-            <a href="#contact" class="collab-link">Partner Today &rarr;</a>
+          <div class="collab-card h-100 d-flex flex-column">
+            <div class="fs-2 mb-2">💡</div>
+            <h5 class="mb-2">Innovation Units</h5>
+            <p class="text-muted small flex-grow-1">Sponsor precise engineering research setups or assist the budding development framework of student tech prototypes.</p>
+            <a href="#contact" class="text-decoration-none fw-semibold mt-3 small" style="color: var(--bcc-primary);">Partner Today &rarr;</a>
           </div>
         </div>
       </div>
     </div>
   </section>
-  <!-- Footer -->
-  <footer class="site-footer mt-5">
-    <div class="container py-3">
-      <p class="mb-0 text-center">&copy; 2026 KUET Career Club | All rights reserved.</p>
+
+  <footer class="site-footer bg-white border-top py-4">
+    <div class="container">
+      <p class="mb-0 text-center text-secondary small">&copy; 2026 KUET Career Club | All rights reserved.</p>
     </div>
   </footer>
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      var portalsSection = document.getElementById('portals');
-      var portalsButtons = document.querySelectorAll('.show-portals-btn');
-      var mainContent = document.querySelectorAll('.main-content');
-      
-      if (!portalsSection || !portalsButtons.length) return;
-
-      function closeOffcanvas() {
-        var openOffcanvas = document.querySelector('.offcanvas.show');
-        if (!openOffcanvas || typeof bootstrap === 'undefined') return;
-        var instance = bootstrap.Offcanvas.getInstance(openOffcanvas) || new bootstrap.Offcanvas(openOffcanvas);
-        instance.hide();
-      }
-
-      function showPortalsOnly() {
-        portalsSection.classList.add('show');
-        mainContent.forEach(function (section) {
-          section.style.display = 'none';
-        });
-        closeOffcanvas();
-        portalsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-
-      function showHomeOnly() {
-        portalsSection.classList.remove('show');
-        mainContent.forEach(function (section) {
-          section.style.display = '';
-        });
-      }
-
-      portalsButtons.forEach(function (button) {
-        button.addEventListener('click', function (event) {
-          event.preventDefault();
-          showPortalsOnly();
-        });
-      });
-
-      var homeNavItems = document.querySelectorAll('.nav-item:first-child a');
-      homeNavItems.forEach(function (homeLink) {
-        homeLink.addEventListener('click', function (event) {
-          event.preventDefault();
-          showHomeOnly();
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-      });
-
       var jobCards = document.querySelectorAll('.job-card');
       var jobSearchInput = document.getElementById('jobSearch');
       var jobDepartment = document.getElementById('jobDepartment');
@@ -515,12 +474,16 @@
 
         jobCards.forEach(function (card) {
           var title = card.querySelector('h5').textContent.toLowerCase();
-          var company = card.querySelector('p.text-muted').textContent.toLowerCase();
-          var matchesQuery = query === '' || title.includes(query) || company.includes(query) || card.textContent.toLowerCase().includes(query);
+          var company = card.querySelector('.text-muted').textContent.toLowerCase();
+          var matchesQuery = query === '' || title.includes(query) || company.includes(query);
           var matchesDepartment = departmentValue === 'All Departments' || card.dataset.department === departmentValue;
           var matchesType = typeValue === 'All Types' || card.dataset.type === typeValue;
 
-          card.style.display = matchesQuery && matchesDepartment && matchesType ? '' : 'none';
+          if (matchesQuery && matchesDepartment && matchesType) {
+            card.closest('.col-md-6').style.display = '';
+          } else {
+            card.closest('.col-md-6').style.display = 'none';
+          }
         });
       }
 
@@ -529,10 +492,6 @@
         jobDepartment.addEventListener('change', filterJobs);
         jobType.addEventListener('change', filterJobs);
         jobSearchBtn.addEventListener('click', filterJobs);
-      }
-
-      if (window.location.hash === '#portals') {
-        showPortalsOnly();
       }
     });
   </script>
