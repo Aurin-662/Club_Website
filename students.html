@@ -105,7 +105,7 @@
         <div class="col-md-5">
           <input id="studentSearch" type="search" class="form-control" placeholder="Search by name, ID or skill">
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
           <select id="departmentFilter" class="form-select">
             <option value="all">All Departments</option>
             <option value="CSE">CSE</option>
@@ -124,8 +124,20 @@
             <option value="Final">Final</option>
           </select>
         </div>
-        <div class="col-md-2 d-grid">
-          <button id="clearStudentFilters" class="btn btn-outline-custom">Clear</button>
+        <div class="col-md-2">
+          <select id="sortFilter" class="form-select">
+            <option value="name">Sort by Name</option>
+            <option value="department">Sort by Department</option>
+            <option value="year">Sort by Year</option>
+          </select>
+        </div>
+        <div class="col-md-1 d-grid">
+          <button id="clearStudentFilters" class="btn btn-outline-custom btn-sm">Clear</button>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-12 d-flex justify-content-between align-items-center">
+          <p class="text-muted small mb-0">Showing <strong id="resultCount">6</strong> students</p>
         </div>
       </div>
     </div>
@@ -134,7 +146,7 @@
   <section class="portal-listing py-5">
     <div class="container">
       <div class="row g-4" id="studentGrid">
-        <div class="col-md-6 col-lg-4 student-card" data-name="Riasad Sanvi" data-id="2310102ME20232027" data-department="ME" data-year="Level 2" data-skills="AutoCAD LaTeX SAP2000" data-bio="Enthusiastic about robotics, embedded systems, and design automation." data-experience="Robotics Club Member • CAD Designer Intern at Tech Solutions • Project Lead for Autonomous Vehicle Design" data-projects="Autonomous Vehicle Design, Structural Analysis using SAP2000" data-email="riasad.sanvi@kuet.ac.bd" data-phone="+880-XXX-XXXXXX">
+        <div class="col-md-6 col-lg-4 student-card" data-name="Riasad Sanvi" data-id="2310102ME20232027" data-department="ME" data-year="Level 2" data-skills="AutoCAD LaTeX SAP2000" data-bio="Enthusiastic about robotics, embedded systems, and design automation." data-experience="Robotics Club Member • CAD Designer Intern at Tech Solutions • Project Lead for Autonomous Vehicle Design" data-projects="Autonomous Vehicle Design, Structural Analysis using SAP2000" data-email="riasad.sanvi@kuet.ac.bd" data-phone="+880-XXX-XXXXXX" data-resume="resumes/riasad-sanvi.pdf">
           <div class="card p-4 h-100">
             <div class="d-flex justify-content-between align-items-start mb-3">
               <div>
@@ -149,11 +161,14 @@
               <span>LaTeX</span>
               <span>SAP2000</span>
             </div>
-            <a href="#" class="btn btn-outline-custom btn-sm btn-view-profile">View Profile</a>
+            <div class="d-flex gap-2">
+              <a href="#" class="btn btn-outline-custom btn-sm btn-view-profile flex-grow-1">View Profile</a>
+              <button type="button" class="btn btn-primary-custom btn-sm btn-connect-card">Connect</button>
+            </div>
           </div>
         </div>
 
-        <div class="col-md-6 col-lg-4 student-card" data-name="Muhammad Sazid" data-id="2310103ME23" data-department="ME" data-year="Level 3" data-skills="CAD Matlab" data-bio="Focused on mechanical design, modeling, and sustainable systems." data-experience="Thermal Analysis Project • Manufacturing Systems Research • Design Competition Winner 2023" data-projects="Sustainable Energy Device Design, Thermal Management System" data-email="sazid.mech@kuet.ac.bd" data-phone="+880-XXX-XXXXXX">
+        <div class="col-md-6 col-lg-4 student-card" data-name="Muhammad Sazid" data-id="2310103ME23" data-department="ME" data-year="Level 3" data-skills="CAD Matlab" data-bio="Focused on mechanical design, modeling, and sustainable systems." data-experience="Thermal Analysis Project • Manufacturing Systems Research • Design Competition Winner 2023" data-projects="Sustainable Energy Device Design, Thermal Management System" data-email="sazid.mech@kuet.ac.bd" data-phone="+880-XXX-XXXXXX" data-resume="resumes/muhammad-sazid.pdf">
           <div class="card p-4 h-100">
             <div class="d-flex justify-content-between align-items-start mb-3">
               <div>
@@ -167,11 +182,14 @@
               <span>CAD</span>
               <span>Matlab</span>
             </div>
-            <a href="#" class="btn btn-outline-custom btn-sm btn-view-profile">View Profile</a>
+            <div class="d-flex gap-2">
+              <a href="#" class="btn btn-outline-custom btn-sm btn-view-profile flex-grow-1">View Profile</a>
+              <button type="button" class="btn btn-primary-custom btn-sm btn-connect-card">Connect</button>
+            </div>
           </div>
         </div>
 
-        <div class="col-md-6 col-lg-4 student-card" data-name="Fahmid Yamin" data-id="2204008CE22" data-department="CE" data-year="Level 2" data-skills="Networking JavaScript" data-bio="Working toward expertise in web development and network systems." data-experience="Web Development Intern at WebCraft Solutions • Network Infrastructure Project • Frontend Developer at Campus Tech Club" data-projects="Campus Network Portal, E-Learning Platform" data-email="fahmid.yamin@kuet.ac.bd" data-phone="+880-XXX-XXXXXX">
+        <div class="col-md-6 col-lg-4 student-card" data-name="Fahmid Yamin" data-id="2204008CE22" data-department="CE" data-year="Level 2" data-skills="Networking JavaScript" data-bio="Working toward expertise in web development and network systems." data-experience="Web Development Intern at WebCraft Solutions • Network Infrastructure Project • Frontend Developer at Campus Tech Club" data-projects="Campus Network Portal, E-Learning Platform" data-email="fahmid.yamin@kuet.ac.bd" data-phone="+880-XXX-XXXXXX" data-resume="resumes/fahmid-yamin.pdf">
           <div class="card p-4 h-100">
             <div class="d-flex justify-content-between align-items-start mb-3">
               <div>
@@ -185,11 +203,14 @@
               <span>Networking</span>
               <span>JavaScript</span>
             </div>
-            <a href="#" class="btn btn-outline-custom btn-sm btn-view-profile">View Profile</a>
+            <div class="d-flex gap-2">
+              <a href="#" class="btn btn-outline-custom btn-sm btn-view-profile flex-grow-1">View Profile</a>
+              <button type="button" class="btn btn-primary-custom btn-sm btn-connect-card">Connect</button>
+            </div>
           </div>
         </div>
 
-        <div class="col-md-6 col-lg-4 student-card" data-name="Samir Ahammad" data-id="2018002CSE20" data-department="CSE" data-year="Level 4" data-skills="React Node.js" data-bio="Experienced in full-stack engineering, product development, and leadership." data-experience="Full-Stack Developer at TechVision Inc. (2 years) • Team Lead at Campus Dev Community • Mentored 15+ junior developers" data-projects="E-Commerce Platform, Mobile App API, Cloud Migration Project" data-email="samir.ahammad@kuet.ac.bd" data-phone="+880-XXX-XXXXXX">
+        <div class="col-md-6 col-lg-4 student-card" data-name="Samir Ahammad" data-id="2018002CSE20" data-department="CSE" data-year="Level 4" data-skills="React Node.js" data-bio="Experienced in full-stack engineering, product development, and leadership." data-experience="Full-Stack Developer at TechVision Inc. (2 years) • Team Lead at Campus Dev Community • Mentored 15+ junior developers" data-projects="E-Commerce Platform, Mobile App API, Cloud Migration Project" data-email="samir.ahammad@kuet.ac.bd" data-phone="+880-XXX-XXXXXX" data-resume="resumes/samir-ahammad.pdf">
           <div class="card p-4 h-100">
             <div class="d-flex justify-content-between align-items-start mb-3">
               <div>
@@ -203,11 +224,14 @@
               <span>React</span>
               <span>Node.js</span>
             </div>
-            <a href="#" class="btn btn-outline-custom btn-sm btn-view-profile">View Profile</a>
+            <div class="d-flex gap-2">
+              <a href="#" class="btn btn-outline-custom btn-sm btn-view-profile flex-grow-1">View Profile</a>
+              <button type="button" class="btn btn-primary-custom btn-sm btn-connect-card">Connect</button>
+            </div>
           </div>
         </div>
 
-        <div class="col-md-6 col-lg-4 student-card" data-name="Ratul Hayat Sisir" data-id="2308007IPE23" data-department="IPE" data-year="Level 2" data-skills="SPSS Data Analysis" data-bio="Developing skills in analytics, research, and operations." data-experience="Operations Research Analyst Intern • Data Analytics Project at Manufacturing Firm • Research Assistant on Supply Chain Study" data-projects="Supply Chain Optimization Analysis, Production Planning Model" data-email="ratul.sisir@kuet.ac.bd" data-phone="+880-XXX-XXXXXX">
+        <div class="col-md-6 col-lg-4 student-card" data-name="Ratul Hayat Sisir" data-id="2308007IPE23" data-department="IPE" data-year="Level 2" data-skills="SPSS Data Analysis" data-bio="Developing skills in analytics, research, and operations." data-experience="Operations Research Analyst Intern • Data Analytics Project at Manufacturing Firm • Research Assistant on Supply Chain Study" data-projects="Supply Chain Optimization Analysis, Production Planning Model" data-email="ratul.sisir@kuet.ac.bd" data-phone="+880-XXX-XXXXXX" data-resume="resumes/ratul-hayat-sisir.pdf">
           <div class="card p-4 h-100">
             <div class="d-flex justify-content-between align-items-start mb-3">
               <div>
@@ -221,11 +245,14 @@
               <span>SPSS</span>
               <span>Data Analysis</span>
             </div>
-            <a href="#" class="btn btn-outline-custom btn-sm btn-view-profile">View Profile</a>
+            <div class="d-flex gap-2">
+              <a href="#" class="btn btn-outline-custom btn-sm btn-view-profile flex-grow-1">View Profile</a>
+              <button type="button" class="btn btn-primary-custom btn-sm btn-connect-card">Connect</button>
+            </div>
           </div>
         </div>
 
-        <div class="col-md-6 col-lg-4 student-card" data-name="Md. Al Nazmus Sakib" data-id="2004035CE202026" data-department="CE" data-year="Level 4" data-skills="Instrumentation PLC" data-bio="Instrumentation student with a focus on automation and control systems." data-experience="Automation Engineer at Industrial Solutions Ltd (1.5 years) • PLC Programming Specialist • Control System Design Project" data-projects="Industrial Process Automation, Safety System Implementation" data-email="sakib.nazmus@kuet.ac.bd" data-phone="+880-XXX-XXXXXX">
+        <div class="col-md-6 col-lg-4 student-card" data-name="Md. Al Nazmus Sakib" data-id="2004035CE202026" data-department="CE" data-year="Level 4" data-skills="Instrumentation PLC" data-bio="Instrumentation student with a focus on automation and control systems." data-experience="Automation Engineer at Industrial Solutions Ltd (1.5 years) • PLC Programming Specialist • Control System Design Project" data-projects="Industrial Process Automation, Safety System Implementation" data-email="sakib.nazmus@kuet.ac.bd" data-phone="+880-XXX-XXXXXX" data-resume="resumes/almad-nazmus-sakib.pdf">
           <div class="card p-4 h-100">
             <div class="d-flex justify-content-between align-items-start mb-3">
               <div>
@@ -239,7 +266,10 @@
               <span>Instrumentation</span>
               <span>PLC</span>
             </div>
-            <a href="#" class="btn btn-outline-custom btn-sm btn-view-profile">View Profile</a>
+            <div class="d-flex gap-2">
+              <a href="#" class="btn btn-outline-custom btn-sm btn-view-profile flex-grow-1">View Profile</a>
+              <button type="button" class="btn btn-primary-custom btn-sm btn-connect-card">Connect</button>
+            </div>
           </div>
         </div>
       </div>
@@ -334,82 +364,137 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      var cards = document.querySelectorAll('.student-card');
+      var cards = Array.from(document.querySelectorAll('.student-card'));
+      var studentGrid = document.getElementById('studentGrid');
       var search = document.getElementById('studentSearch');
       var department = document.getElementById('departmentFilter');
       var year = document.getElementById('yearFilter');
+      var sort = document.getElementById('sortFilter');
       var clear = document.getElementById('clearStudentFilters');
+      var resultCount = document.getElementById('resultCount');
 
-      var profileModal = new bootstrap.Modal(document.getElementById('profileModal'));
-      var contactModal = new bootstrap.Modal(document.getElementById('contactModal'));
+      var profileModalEl = document.getElementById('profileModal');
+      var contactModalEl = document.getElementById('contactModal');
+      var profileModal = new bootstrap.Modal(profileModalEl);
+      var contactModal = new bootstrap.Modal(contactModalEl);
       var currentStudentName = '';
 
-      // Filter function
-      function filter() {
-        var query = search.value.trim().toLowerCase();
+      function getVisibleCards() {
+        return cards.filter(function (c) { return c.style.display !== 'none'; });
+      }
+
+      function sortCards(list) {
+        var key = sort ? sort.value : 'name';
+        var order = { 'Level 2': 1, 'Level 3': 2, 'Level 4': 3, 'Final': 4 };
+        return list.sort(function (a, b) {
+          if (key === 'name') return a.dataset.name.localeCompare(b.dataset.name);
+          if (key === 'department') return a.dataset.department.localeCompare(b.dataset.department);
+          if (key === 'year') return (order[a.dataset.year] || 0) - (order[b.dataset.year] || 0);
+          return 0;
+        });
+      }
+
+      function rearrange(list) {
+        // remove existing noResults if present
+        var noResults = document.getElementById('noResults');
+        if (noResults) noResults.remove();
+        list.forEach(function (c) { studentGrid.appendChild(c); });
+      }
+
+      function showNoResultsIfNeeded(count) {
+        if (count === 0) {
+          var el = document.createElement('div');
+          el.id = 'noResults';
+          el.className = 'col-12 text-center py-5';
+          el.innerHTML = '<p class="text-muted">No students found matching your filters.</p>';
+          studentGrid.appendChild(el);
+        }
+      }
+
+      function applyFilters() {
+        var q = (search.value || '').trim().toLowerCase();
         var dept = department.value;
         var yr = year.value;
 
         cards.forEach(function (card) {
-          var name = card.dataset.name.toLowerCase();
-          var skills = card.dataset.skills.toLowerCase();
+          var name = (card.dataset.name || '').toLowerCase();
+          var skills = (card.dataset.skills || '').toLowerCase();
           var deptMatch = dept === 'all' || card.dataset.department === dept;
           var yearMatch = yr === 'all' || card.dataset.year === yr;
-          var queryMatch = query === '' || name.includes(query) || skills.includes(query);
-
-          card.style.display = deptMatch && yearMatch && queryMatch ? '' : 'none';
+          var queryMatch = q === '' || name.includes(q) || skills.includes(q);
+          card.style.display = (deptMatch && yearMatch && queryMatch) ? '' : 'none';
         });
+
+        var visible = getVisibleCards();
+        var sorted = sortCards(visible.slice());
+        rearrange(sorted);
+        resultCount.textContent = visible.length;
+        showNoResultsIfNeeded(visible.length);
       }
 
-      search.addEventListener('input', filter);
-      department.addEventListener('change', filter);
-      year.addEventListener('change', filter);
+      // wire inputs
+      search.addEventListener('input', applyFilters);
+      department.addEventListener('change', applyFilters);
+      year.addEventListener('change', applyFilters);
+      if (sort) sort.addEventListener('change', applyFilters);
       clear.addEventListener('click', function () {
         search.value = '';
         department.value = 'all';
         year.value = 'all';
-        filter();
+        if (sort) sort.value = 'name';
+        applyFilters();
       });
 
-      // View Profile functionality
+      // initial apply
+      applyFilters();
+
+      // View Profile buttons
       document.querySelectorAll('.btn-view-profile').forEach(function (btn) {
         btn.addEventListener('click', function (e) {
           e.preventDefault();
           var card = btn.closest('.student-card');
-          var name = card.dataset.name;
-          var id = card.dataset.id;
-          var bio = card.dataset.bio;
-          var experience = card.dataset.experience;
-          var projects = card.dataset.projects;
-          var skills = card.dataset.skills;
-          var email = card.dataset.email;
-          var phone = card.dataset.phone;
+          var name = card.dataset.name || '';
+          var id = card.dataset.id || '';
+          var bio = card.dataset.bio || '';
+          var experience = card.dataset.experience || '';
+          var projects = card.dataset.projects || '';
+          var skills = card.dataset.skills || '';
+          var email = card.dataset.email || '';
+          var phone = card.dataset.phone || '';
 
-          // Populate modal
           document.getElementById('profileModalLabel').textContent = name;
-          document.getElementById('profileId').textContent = 'Student ID: ' + id + ' • ' + card.dataset.department + ' • ' + card.dataset.year;
+          document.getElementById('profileId').textContent = 'Student ID: ' + id + ' • ' + (card.dataset.department || '') + ' • ' + (card.dataset.year || '');
           document.getElementById('profileBio').textContent = bio;
           document.getElementById('profileExperience').textContent = experience;
           document.getElementById('profileProjects').textContent = projects;
           document.getElementById('profileEmail').textContent = email;
           document.getElementById('profilePhone').textContent = phone;
 
-          // Skills
           var skillsHtml = '';
-          skills.split(' ').forEach(function (skill) {
-            skillsHtml += '<span class="badge bg-primary-light text-dark me-2 mb-2">' + skill + '</span>';
-          });
+          (skills.split(/\s+/) || []).forEach(function (s) { if (s) skillsHtml += '<span class="badge badge-primary-light me-2 mb-2">' + s + '</span>'; });
           document.getElementById('profileSkills').innerHTML = skillsHtml;
 
-          // Download CV link
-          document.getElementById('downloadResume').href = '#';
-
+          document.getElementById('downloadResume').href = card.dataset.resume || '#';
           currentStudentName = name;
           profileModal.show();
         });
       });
 
-      // Connect button functionality
+      // Card-level Connect buttons
+      document.querySelectorAll('.btn-connect-card').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var card = btn.closest('.student-card');
+          var name = card.dataset.name || '';
+          currentStudentName = name;
+          document.getElementById('contactStudentName').textContent = name;
+          document.getElementById('contactEmail').value = '';
+          document.getElementById('contactSubject').value = '';
+          document.getElementById('contactMessage').value = '';
+          contactModal.show();
+        });
+      });
+
+      // Profile -> Connect button
       document.getElementById('connectStudentBtn').addEventListener('click', function () {
         document.getElementById('contactStudentName').textContent = currentStudentName;
         document.getElementById('contactEmail').value = '';
@@ -419,12 +504,11 @@
         contactModal.show();
       });
 
-      // Send message functionality
+      // Send message
       document.getElementById('sendMessageBtn').addEventListener('click', function () {
         var email = document.getElementById('contactEmail').value;
         var subject = document.getElementById('contactSubject').value;
         var message = document.getElementById('contactMessage').value;
-
         if (email && subject && message) {
           alert('Message sent to ' + currentStudentName + '!\n\nYour Email: ' + email + '\nSubject: ' + subject);
           contactModal.hide();
