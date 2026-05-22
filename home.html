@@ -33,7 +33,16 @@
         <ul class="nav align-items-center mb-0">
           <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="#jobs">Jobs</a></li>
-          <li class="nav-item"><a class="nav-link show-portals-btn" href="#portals"><i class="bi bi-grid-fill me-2"></i>Portals</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="portalsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-grid-fill me-2"></i>Portals
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="portalsDropdown">
+              <li><a class="dropdown-item" href="students.html">Student Portal</a></li>
+              <li><a class="dropdown-item" href="alumni.html">Graduate Portal</a></li>
+              <li><a class="dropdown-item" href="companies.html">Industry Partner</a></li>
+            </ul>
+          </li>
           <li class="nav-item"><a class="nav-link" href="#events">Events</a></li>
           <li class="nav-item"><a class="nav-link" href="#team">Members</a></li>
           <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
@@ -66,7 +75,16 @@
       <ul class="nav flex-column gap-2">
         <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="#jobs">Jobs</a></li>
-        <li class="nav-item"><a class="nav-link show-portals-btn" href="#portals">Portals</a></li>
+        <li class="nav-item">
+          <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#portalSubmenu" role="button" aria-expanded="false" aria-controls="portalSubmenu">Portals <i class="bi bi-caret-down-fill"></i></a>
+          <div class="collapse ps-3" id="portalSubmenu">
+            <ul class="nav flex-column gap-2 mt-2">
+              <li class="nav-item"><a class="nav-link" href="students.html">Student Portal</a></li>
+              <li class="nav-item"><a class="nav-link" href="alumni.html">Graduate Portal</a></li>
+              <li class="nav-item"><a class="nav-link" href="companies.html">Industry Partner</a></li>
+            </ul>
+          </div>
+        </li>
         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
         <li class="nav-item"><a class="nav-link" href="#events">Events</a></li>
         <li class="nav-item"><a class="nav-link" href="#team">Members</a></li>
@@ -89,7 +107,7 @@
 
         <div class="row g-4">
             <div class="col-md-4">
-                <a href="register.html" class="portal-card d-block text-decoration-none">
+                <a href="students.html" class="portal-card d-block text-decoration-none">
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
                             <h5 class="mb-2">Student Portal</h5>
@@ -103,7 +121,7 @@
                 </a>
             </div>
             <div class="col-md-4">
-                <a href="#" class="portal-card d-block text-decoration-none">
+                <a href="alumni.html" class="portal-card d-block text-decoration-none">
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
                             <h5 class="mb-2">Graduate Corner</h5>
@@ -117,7 +135,7 @@
                 </a>
             </div>
             <div class="col-md-4">
-                <a href="#" class="portal-card d-block text-decoration-none">
+                <a href="companies.html" class="portal-card d-block text-decoration-none">
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
                             <h5 class="mb-2">Companies</h5>
@@ -131,7 +149,7 @@
                 </a>
             </div>
             <div class="col-md-4">
-                <a href="#" class="portal-card d-block text-decoration-none">
+                <a href="jobs.html" class="portal-card d-block text-decoration-none">
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
                             <h5 class="mb-2">Jobs & Internships</h5>
@@ -145,7 +163,7 @@
                 </a>
             </div>
             <div class="col-md-4">
-                <a href="#" class="portal-card d-block text-decoration-none">
+                <a href="support.html" class="portal-card d-block text-decoration-none">
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
                             <h5 class="mb-2">Support KUET</h5>
@@ -246,13 +264,13 @@
           </select>
         </div>
         <div class="col-md-2 d-grid">
-          <button class="btn btn-primary-custom">Find Jobs</button>
+          <button id="jobSearchBtn" type="button" class="btn btn-primary-custom">Find Jobs</button>
         </div>
       </div>
 
       <div class="row g-4">
         <div class="col-md-6 col-lg-4">
-          <article class="job-card p-4 h-100">
+          <article class="job-card p-4 h-100" data-department="CSE" data-type="Internship">
             <div class="d-flex align-items-start justify-content-between mb-3">
               <div>
                 <h5>Software Engineer Intern</h5>
@@ -271,7 +289,7 @@
         </div>
 
         <div class="col-md-6 col-lg-4">
-          <article class="job-card p-4 h-100">
+          <article class="job-card p-4 h-100" data-department="EEE" data-type="Full-time">
             <div class="d-flex align-items-start justify-content-between mb-3">
               <div>
                 <h5>Electrical Design Engineer</h5>
@@ -290,7 +308,7 @@
         </div>
 
         <div class="col-md-6 col-lg-4">
-          <article class="job-card p-4 h-100">
+          <article class="job-card p-4 h-100" data-department="Civil" data-type="Part-time">
             <div class="d-flex align-items-start justify-content-between mb-3">
               <div>
                 <h5>Project Coordinator</h5>
@@ -482,6 +500,35 @@
           window.scrollTo({ top: 0, behavior: 'smooth' });
         });
       });
+
+      var jobCards = document.querySelectorAll('.job-card');
+      var jobSearchInput = document.getElementById('jobSearch');
+      var jobDepartment = document.getElementById('jobDepartment');
+      var jobType = document.getElementById('jobType');
+      var jobSearchBtn = document.getElementById('jobSearchBtn');
+
+      function filterJobs() {
+        var query = jobSearchInput.value.trim().toLowerCase();
+        var departmentValue = jobDepartment.value;
+        var typeValue = jobType.value;
+
+        jobCards.forEach(function (card) {
+          var title = card.querySelector('h5').textContent.toLowerCase();
+          var company = card.querySelector('p.text-muted').textContent.toLowerCase();
+          var matchesQuery = query === '' || title.includes(query) || company.includes(query) || card.textContent.toLowerCase().includes(query);
+          var matchesDepartment = departmentValue === 'All Departments' || card.dataset.department === departmentValue;
+          var matchesType = typeValue === 'All Types' || card.dataset.type === typeValue;
+
+          card.style.display = matchesQuery && matchesDepartment && matchesType ? '' : 'none';
+        });
+      }
+
+      if (jobSearchInput && jobDepartment && jobType && jobSearchBtn) {
+        jobSearchInput.addEventListener('input', filterJobs);
+        jobDepartment.addEventListener('change', filterJobs);
+        jobType.addEventListener('change', filterJobs);
+        jobSearchBtn.addEventListener('click', filterJobs);
+      }
 
       if (window.location.hash === '#portals') {
         showPortalsOnly();

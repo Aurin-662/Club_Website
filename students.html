@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Student Portal | KUET Career Club</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container py-2 d-flex align-items-center justify-content-between">
+      <a class="brand" href="home.html">
+        <img src="images/logo.jpg" alt="KUET Career Club logo" class="log">
+        <div class="logo-text ms-2">
+          <div class="site-title">KUET CAREER Club</div>
+          <small class="site-sub">Prepare • Connect • Succeed</small>
+        </div>
+      </a>
+      <nav class="d-none d-md-block">
+        <ul class="nav align-items-center mb-0">
+          <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="students.html">Student Portal</a></li>
+          <li class="nav-item"><a class="nav-link" href="alumni.html">Alumni</a></li>
+          <li class="nav-item"><a class="nav-link" href="companies.html">Companies</a></li>
+          <li class="nav-item"><a class="nav-link" href="jobs.html">Jobs</a></li>
+          <li class="nav-item"><a class="nav-link" href="support.html">Support</a></li>
+        </ul>
+      </nav>
+      <div class="d-none d-md-flex gap-2 header-actions">
+        <button class="btn btn-outline-custom">Sign In</button>
+        <a href="register.html" class="btn btn-primary-custom">Register</a>
+      </div>
+      <div class="d-md-none">
+        <button class="btn btn-outline-secondary mobile-toggle" type="button" data-bs-toggle="offcanvas"
+          data-bs-target="#mobileMenu" aria-controls="mobileMenu" aria-label="Open menu">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+  <div class="offcanvas offcanvas-end text-bg-white" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
+    <div class="offcanvas-header">
+      <h5 id="mobileMenuLabel" class="offcanvas-title">Menu</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="nav flex-column gap-2">
+        <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="students.html">Student Portal</a></li>
+        <li class="nav-item"><a class="nav-link" href="alumni.html">Alumni</a></li>
+        <li class="nav-item"><a class="nav-link" href="companies.html">Companies</a></li>
+        <li class="nav-item"><a class="nav-link" href="jobs.html">Jobs</a></li>
+        <li class="nav-item"><a class="nav-link" href="support.html">Support</a></li>
+      </ul>
+      <div class="mt-4 d-flex gap-2">
+        <button class="btn btn-outline-custom w-100">Sign In</button>
+        <a href="register.html" class="btn btn-primary-custom w-100">Register</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="portal-hero py-5">
+    <div class="container">
+      <div class="row align-items-center gy-4">
+        <div class="col-lg-7">
+          <h1>Student Portal</h1>
+          <p class="lead mb-4">Browse current KUET student profiles, connect with talent, and discover academic strengths and skills across departments.</p>
+        </div>
+        <div class="col-lg-5">
+          <div class="portal-hero-card p-4">
+            <h5>Looking for students?</h5>
+            <p>Use search and filters to narrow down candidates by department, year, and skillsets.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="portal-search-section py-5 bg-white">
+    <div class="container">
+      <div class="row g-3 align-items-end">
+        <div class="col-md-5">
+          <input id="studentSearch" type="search" class="form-control" placeholder="Search by name, ID or skill">
+        </div>
+        <div class="col-md-3">
+          <select id="departmentFilter" class="form-select">
+            <option value="all">All Departments</option>
+            <option value="CSE">CSE</option>
+            <option value="EEE">EEE</option>
+            <option value="ME">ME</option>
+            <option value="CE">CE</option>
+            <option value="IPE">IPE</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <select id="yearFilter" class="form-select">
+            <option value="all">All Years</option>
+            <option value="Level 2">Level 2</option>
+            <option value="Level 3">Level 3</option>
+            <option value="Level 4">Level 4</option>
+            <option value="Final">Final</option>
+          </select>
+        </div>
+        <div class="col-md-2 d-grid">
+          <button id="clearStudentFilters" class="btn btn-outline-custom">Clear</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="portal-listing py-5">
+    <div class="container">
+      <div class="row g-4" id="studentGrid">
+        <div class="col-md-6 col-lg-4 student-card" data-name="Riasad Sanvi" data-department="ME" data-year="Level 2" data-skills="AutoCAD LaTeX SAP2000">
+          <div class="card p-4 h-100">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <div>
+                <h5>Riasad Sanvi</h5>
+                <p class="text-muted small mb-0">2310102ME20232027 • Level 2</p>
+              </div>
+              <span class="badge bg-primary">ME</span>
+            </div>
+            <p class="text-muted mb-3">Enthusiastic about robotics, embedded systems, and design automation.</p>
+            <div class="student-skills mb-3">
+              <span>AutoCAD</span>
+              <span>LaTeX</span>
+              <span>SAP2000</span>
+            </div>
+            <a href="#" class="btn btn-outline-custom btn-sm">View Profile</a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 student-card" data-name="Muhammad Sazid" data-department="ME" data-year="Level 3" data-skills="CAD Matlab">
+          <div class="card p-4 h-100">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <div>
+                <h5>Muhammad Sazid</h5>
+                <p class="text-muted small mb-0">2310103ME23 • Level 3</p>
+              </div>
+              <span class="badge bg-primary">ME</span>
+            </div>
+            <p class="text-muted mb-3">Focused on mechanical design, modeling, and sustainable systems.</p>
+            <div class="student-skills mb-3">
+              <span>CAD</span>
+              <span>Matlab</span>
+            </div>
+            <a href="#" class="btn btn-outline-custom btn-sm">View Profile</a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 student-card" data-name="Fahmid Yamin" data-department="CE" data-year="Level 2" data-skills="Networking JavaScript">
+          <div class="card p-4 h-100">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <div>
+                <h5>Fahmid Yamin</h5>
+                <p class="text-muted small mb-0">2204008CE22 • Level 2</p>
+              </div>
+              <span class="badge bg-info">CE</span>
+            </div>
+            <p class="text-muted mb-3">Working toward expertise in web development and network systems.</p>
+            <div class="student-skills mb-3">
+              <span>Networking</span>
+              <span>JavaScript</span>
+            </div>
+            <a href="#" class="btn btn-outline-custom btn-sm">View Profile</a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 student-card" data-name="Samir Ahammad" data-department="CSE" data-year="Level 4" data-skills="React Node.js">
+          <div class="card p-4 h-100">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <div>
+                <h5>Samir Ahammad</h5>
+                <p class="text-muted small mb-0">2018002CSE20 • Level 4</p>
+              </div>
+              <span class="badge bg-success">CSE</span>
+            </div>
+            <p class="text-muted mb-3">Experienced in full-stack engineering, product development, and leadership.</p>
+            <div class="student-skills mb-3">
+              <span>React</span>
+              <span>Node.js</span>
+            </div>
+            <a href="#" class="btn btn-outline-custom btn-sm">View Profile</a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 student-card" data-name="Ratul Hayat Sisir" data-department="IPE" data-year="Level 2" data-skills="SPSS Data Analysis">
+          <div class="card p-4 h-100">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <div>
+                <h5>Ratul Hayat Sisir</h5>
+                <p class="text-muted small mb-0">2308007IPE23 • Level 2</p>
+              </div>
+              <span class="badge bg-warning text-dark">IPE</span>
+            </div>
+            <p class="text-muted mb-3">Developing skills in analytics, research, and operations.</p>
+            <div class="student-skills mb-3">
+              <span>SPSS</span>
+              <span>Data Analysis</span>
+            </div>
+            <a href="#" class="btn btn-outline-custom btn-sm">View Profile</a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 student-card" data-name="Md. Al Nazmus Sakib" data-department="CE" data-year="Level 4" data-skills="Instrumentation PLC">
+          <div class="card p-4 h-100">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <div>
+                <h5>Md. Al Nazmus Sakib</h5>
+                <p class="text-muted small mb-0">2004035CE202026 • Level 4</p>
+              </div>
+              <span class="badge bg-info">CE</span>
+            </div>
+            <p class="text-muted mb-3">Instrumentation student with a focus on automation and control systems.</p>
+            <div class="student-skills mb-3">
+              <span>Instrumentation</span>
+              <span>PLC</span>
+            </div>
+            <a href="#" class="btn btn-outline-custom btn-sm">View Profile</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer mt-5">
+    <div class="container py-3">
+      <p class="mb-0 text-center">&copy; 2026 KUET Career Club | All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var cards = document.querySelectorAll('.student-card');
+      var search = document.getElementById('studentSearch');
+      var department = document.getElementById('departmentFilter');
+      var year = document.getElementById('yearFilter');
+      var clear = document.getElementById('clearStudentFilters');
+
+      function filter() {
+        var query = search.value.trim().toLowerCase();
+        var dept = department.value;
+        var yr = year.value;
+
+        cards.forEach(function (card) {
+          var name = card.dataset.name.toLowerCase();
+          var skills = card.dataset.skills.toLowerCase();
+          var deptMatch = dept === 'all' || card.dataset.department === dept;
+          var yearMatch = yr === 'all' || card.dataset.year === yr;
+          var queryMatch = query === '' || name.includes(query) || skills.includes(query);
+
+          card.style.display = deptMatch && yearMatch && queryMatch ? '' : 'none';
+        });
+      }
+
+      search.addEventListener('input', filter);
+      department.addEventListener('change', filter);
+      year.addEventListener('change', filter);
+      clear.addEventListener('click', function () {
+        search.value = '';
+        department.value = 'all';
+        year.value = 'all';
+        filter();
+      });
+    });
+  </script>
+</body>
+
+</html>

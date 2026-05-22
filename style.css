@@ -110,6 +110,13 @@ header.site-header {
   padding:8px 14px;
   border-radius:8px;
   font-weight:700;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.btn-primary-custom:hover,
+.btn-primary-custom:focus {
+  background:#003366;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(0,64,128,0.18);
 }
 .btn-outline-custom {
   background:transparent;
@@ -118,6 +125,13 @@ header.site-header {
   padding:8px 14px;
   border-radius:8px;
   font-weight:700;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+}
+.btn-outline-custom:hover,
+.btn-outline-custom:focus {
+  background: rgba(0,64,128,0.08);
+  border-color: rgba(0,64,128,0.2);
+  transform: translateY(-1px);
 }
 
 /* Mobile toggler */
@@ -191,6 +205,76 @@ header.site-header {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
+}
+.portal-hero, .portal-search-section, .portal-listing {
+  padding: 64px 0;
+  background: #fff;
+  color: #0b1220;
+}
+.portal-hero {
+  background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(248,251,255,1));
+}
+.portal-hero h1,
+.portal-hero .lead {
+  color: #0b1220;
+}
+.portal-hero-card {
+  border-radius: var(--radius);
+  border: 1px solid rgba(0,0,0,0.06);
+  background: #fff;
+}
+.portal-search-section .form-control,
+.portal-search-section .form-select {
+  border-radius: 12px;
+  border-color: rgba(0,0,0,0.12);
+  padding: 14px 16px;
+}
+.portal-search-section .form-select {
+  min-height: 54px;
+}
+.portal-listing .card,
+.portal-listing .job-card,
+.portal-listing .company-card,
+.portal-listing .alumni-card {
+  min-height: 100%;
+}
+.portal-listing .student-skills span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,64,128,0.1);
+  color: var(--brand);
+  border-radius: 999px;
+  padding: 6px 10px;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.78rem;
+}
+.portal-hero-card,
+.portal-card,
+.company-card,
+.alumni-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.portal-hero-card {
+  box-shadow: 0 16px 36px rgba(0,0,0,0.08);
+}
+.portal-search-section {
+  background: #f8fbff;
+}
+.student-skills span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,64,128,0.1);
+  color: var(--brand);
+  border-radius: 999px;
+  padding: 6px 10px;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
 }
 .job-card {
   background: var(--card-bg);
@@ -268,6 +352,12 @@ header.site-header {
 .portal-card p {
   color: var(--muted);
   margin-bottom: 1.5rem;
+}
+.portal-card .btn-portal {
+  width: fit-content;
+}
+.portal-card .btn-portal:hover {
+  background: rgba(0,64,128,0.08);
 }
 .icon-box {
   width: 54px;
