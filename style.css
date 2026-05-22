@@ -749,3 +749,71 @@ footer.site-footer {
     background-color: #6A2225;
     color: white;
 }
+
+/* Profile Modal Styles */
+#profileModal .modal-header {
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+#profileModal .modal-title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #0b1220;
+}
+
+#profileModal .text-muted {
+    color: #6b7280 !important;
+}
+
+#profileModal h6 {
+    color: #0b1220;
+    font-weight: 700;
+}
+
+#profileSkills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.bg-primary-light {
+    background-color: rgba(0, 64, 128, 0.1) !important;
+}
+
+.badge-primary-light {
+    background-color: rgba(0, 64, 128, 0.1);
+    color: var(--brand);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.btn-view-profile {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-view-profile:hover {
+    background: rgba(0, 64, 128, 0.12);
+    color: var(--brand);
+}
+
+/* Contact Modal */
+#contactModal .form-label {
+    font-weight: 600;
+    color: #0b1220;
+}
+
+#contactModal .form-control,
+#contactModal textarea.form-control {
+    border-radius: 8px;
+    border-color: rgba(0,0,0,0.12);
+    padding: 10px 14px;
+}
+
+#contactModal .form-control:focus,
+#contactModal textarea.form-control:focus {
+    border-color: var(--brand);
+    box-shadow: 0 0 0 0.2rem rgba(0, 64, 128, 0.25);
+}
