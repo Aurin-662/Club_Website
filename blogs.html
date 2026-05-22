@@ -10,71 +10,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
 
   <link rel="stylesheet" href="style.css">
-  
-  <style>
-    /* BCC Layout Alignment Elements */
-    .blog-header {
-      background: #fff;
-      border-bottom: 1px solid #e2e8f0;
-    }
-    .blog-search-bar {
-      max-width: 500px;
-      margin: 0 auto;
-    }
-    .blog-category-btn {
-      border-radius: 50px;
-      padding: 6px 18px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      transition: all 0.2s ease;
-    }
-    /* Dynamic Grid Card Overrides */
-    .bcc-blog-card {
-      background: #fff;
-      border-radius: 12px;
-      border: 1.5px solid #e2e8f0;
-      border-left: 6px solid #8B2D31; /* BCC Signature Red Line Accent */
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-    .bcc-blog-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
-    }
-    .blog-badge {
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      padding: 5px 12px;
-      border-radius: 6px;
-    }
-    .badge-tech { background-color: #ebf8ff; color: #2b6cb0; border: 1px solid #bee3f8; }
-    .badge-career { background-color: #f0fff4; color: #2f855a; border: 1px solid #c6f6d5; }
-    .badge-higher-ed { background-color: #f3e8ff; color: #7e22ce; border: 1px solid #e9d5ff; }
-    .badge-featured { background-color: #8B2D31; color: #fff; }
-    
-    .blog-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: #1a202c;
-    }
-    .blog-description {
-      color: #4a5568;
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-    .btn-bcc-read {
-      background-color: #8B2D31;
-      color: #white !important;
-      font-weight: 600;
-      border-radius: 6px;
-      padding: 6px 16px;
-      font-size: 0.9rem;
-      border: none;
-    }
-    .btn-bcc-read:hover {
-      background-color: #6a2225;
-    }
-  </style>
 </head>
 
 <body class="bg-light">
@@ -92,7 +27,18 @@
       <nav class="d-none d-md-block">
         <ul class="nav align-items-center mb-0">
           <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="home.html#jobs">Jobs</a></li>
           <li class="nav-item"><a class="nav-link active" href="blogs.html"><i class="bi bi-file-text me-1"></i>Blogs</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="portalsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-grid-fill me-2"></i>Portals
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="portalsDropdown">
+              <li><a class="dropdown-item" href="students.html">Student Portal</a></li>
+              <li><a class="dropdown-item" href="alumni.html">Graduate Portal</a></li>
+              <li><a class="dropdown-item" href="companies.html">Industry Partner</a></li>
+            </ul>
+          </li>
           <li class="nav-item"><a class="nav-link" href="home.html#events">Events</a></li>
           <li class="nav-item"><a class="nav-link" href="home.html#team">Members</a></li>
           <li class="nav-item"><a class="nav-link" href="home.html#contact">Contact</a></li>
@@ -100,11 +46,49 @@
       </nav>
 
       <div class="d-none d-md-flex gap-2 header-actions">
-        <button class="btn btn-outline-custom">Sign In</button>
+        <a href="login.html" class="btn btn-outline-custom">Sign In</a>
         <a href="register.html" class="btn btn-primary-custom">Register</a>
+      </div>
+
+      <div class="d-md-none">
+        <button class="btn btn-outline-secondary mobile-toggle" type="button" data-bs-toggle="offcanvas"
+          data-bs-target="#mobileMenu" aria-controls="mobileMenu" aria-label="Open menu">
+          ☰
+        </button>
       </div>
     </div>
   </header>
+
+  <div class="offcanvas offcanvas-end text-bg-white" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
+    <div class="offcanvas-header">
+      <h5 id="mobileMenuLabel" class="offcanvas-title">Menu</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="nav flex-column gap-2">
+        <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="home.html#jobs">Jobs</a></li>
+        <li class="nav-item"><a class="nav-link active" href="blogs.html">Blogs</a></li>
+        <li class="nav-item">
+          <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#portalSubmenu" role="button" aria-expanded="false" aria-controls="portalSubmenu">Portals <i class="bi bi-caret-down-fill"></i></a>
+          <div class="collapse ps-3" id="portalSubmenu">
+            <ul class="nav flex-column gap-2 mt-2">
+              <li class="nav-item"><a class="nav-link" href="students.html">Student Portal</a></li>
+              <li class="nav-item"><a class="nav-link" href="alumni.html">Graduate Portal</a></li>
+              <li class="nav-item"><a class="nav-link" href="companies.html">Industry Partner</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="home.html#events">Events</a></li>
+        <li class="nav-item"><a class="nav-link" href="home.html#team">Members</a></li>
+        <li class="nav-item"><a class="nav-link" href="home.html#contact">Contact</a></li>
+      </ul>
+      <div class="mt-4 d-flex gap-2">
+        <a href="login.html" class="btn btn-outline-custom w-100">Sign In</a>
+        <a href="register.html" class="btn btn-primary-custom w-100">Register</a>
+      </div>
+    </div>
+  </div>
 
   <section class="blog-header py-5">
     <div class="container text-center">
@@ -112,15 +96,13 @@
         <i class="bi bi-journal-text fs-3 text-danger"></i>
         <h1 class="fw-bold mb-0" style="color: #2d3748;">Knowledge Hub & Insights</h1>
       </div>
-      <p class="text-muted mb-4">Read career roadmaps, alumni placement stories, and preparation guides.</p>
-      
+      <p class="text-muted mb-4">Read career roadmaps, placement stories, and preparation guides from the KUET community.</p>
       <div class="blog-search-bar mb-4">
-        <div class="input-group">
+        <div class="input-group mx-auto" style="max-width:560px;">
           <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
           <input type="text" class="form-control border-start-0 p-2" placeholder="Search resources or keywords...">
         </div>
       </div>
-
       <div class="d-flex justify-content-center gap-2 flex-wrap">
         <button class="btn btn-dark blog-category-btn">All Articles</button>
         <button class="btn btn-outline-secondary blog-category-btn">Software Engineering</button>
@@ -131,73 +113,100 @@
   </section>
 
   <main class="container py-5">
-    <div class="row g-4">
-      
-      <div class="col-md-6">
-        <div class="bcc-blog-card h-100">
-          <div class="card-body p-4 d-flex flex-column">
-            <div class="d-flex gap-2 mb-3">
-              <span class="blog-badge badge-tech"><i class="bi bi-laptop me-1"></i>Tech Career</span>
-              <span class="blog-badge badge-featured"><i class="bi bi-bookmark-star-fill me-1"></i>Featured</span>
+    <div class="row gy-4">
+      <div class="col-xl-8">
+        <div class="row g-4">
+          <div class="col-md-6">
+            <div class="bcc-blog-card h-100">
+              <div class="card-body p-4 d-flex flex-column">
+                <div class="d-flex gap-2 mb-3 flex-wrap">
+                  <span class="blog-badge badge-tech"><i class="bi bi-laptop me-1"></i>Tech Career</span>
+                  <span class="blog-badge badge-featured"><i class="bi bi-bookmark-star-fill me-1"></i>Featured</span>
+                </div>
+                <h3 class="blog-title">Cracking the Software Engineering Interview</h3>
+                <p class="blog-description my-3">A deep-dive template explaining how KUET graduates passed interviews at top local and international tech firms, with a practical interview preparation timeline.</p>
+                <div class="mt-auto pt-3 border-top d-flex align-items-center justify-content-between">
+                  <small class="text-muted"><i class="bi bi-calendar3 me-1"></i> May 2026</small>
+                  <a href="#" class="btn btn-bcc-read">Read Article</a>
+                </div>
+              </div>
             </div>
-            <h3 class="blog-title">Cracking the Software Engineering Interview</h3>
-            <p class="blog-description my-3">A deep-dive template detailing how KUET graduates cracked interview loops at top software firms like Samsung R&D, Therap, and dynamic tech startups. Includes essential code review structures.</p>
-            <div class="mt-auto pt-3 border-top d-flex align-items-center justify-content-between">
-              <small class="text-muted"><i class="bi bi-calendar3 me-1"></i> May 2026</small>
-              <a href="#" class="btn btn-bcc-read text-white">Read Article</a>
+          </div>
+          <div class="col-md-6">
+            <div class="bcc-blog-card h-100">
+              <div class="card-body p-4 d-flex flex-column">
+                <div class="d-flex gap-2 mb-3">
+                  <span class="blog-badge badge-career"><i class="bi bi-file-earmark-person me-1"></i>Resume Tips</span>
+                </div>
+                <h3 class="blog-title">Resume & CV Formatting Guide</h3>
+                <p class="blog-description my-3">Standard guidelines to pass ATS screening, with advice on highlighting lab projects, Git contributions, and internship accomplishments.</p>
+                <div class="mt-auto pt-3 border-top d-flex align-items-center justify-content-between">
+                  <small class="text-muted"><i class="bi bi-calendar3 me-1"></i> April 2026</small>
+                  <a href="#" class="btn btn-bcc-read">Read Article</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="bcc-blog-card h-100">
+              <div class="card-body p-4 d-flex flex-column">
+                <div class="d-flex gap-2 mb-3">
+                  <span class="blog-badge badge-higher-ed"><i class="bi bi-globe me-1"></i>Higher Ed</span>
+                </div>
+                <h3 class="blog-title">Post-Graduation Masters & PhD Plans</h3>
+                <p class="blog-description my-3">Balancing GRE, TOEFL, and research publication timelines with final-year course schedules and application planning.</p>
+                <div class="mt-auto pt-3 border-top d-flex align-items-center justify-content-between">
+                  <small class="text-muted"><i class="bi bi-calendar3 me-1"></i> March 2026</small>
+                  <a href="#" class="btn btn-bcc-read">Read Article</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="bcc-blog-card h-100">
+              <div class="card-body p-4 d-flex flex-column">
+                <div class="d-flex gap-2 mb-3">
+                  <span class="blog-badge badge-career"><i class="bi bi-people me-1"></i>HR Rounds</span>
+                </div>
+                <h3 class="blog-title">Mastering Behavioral Interview Stories</h3>
+                <p class="blog-description my-3">How to frame engineering challenges and campus projects into compelling STAR-style responses for HR and leadership rounds.</p>
+                <div class="mt-auto pt-3 border-top d-flex align-items-center justify-content-between">
+                  <small class="text-muted"><i class="bi bi-calendar3 me-1"></i> February 2026</small>
+                  <a href="#" class="btn btn-bcc-read">Read Article</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="col-md-6">
-        <div class="bcc-blog-card h-100">
-          <div class="card-body p-4 d-flex flex-column">
-            <div class="d-flex gap-2 mb-3">
-              <span class="blog-badge badge-career"><i class="bi bi-file-earmark-person me-1"></i>Resume Tips</span>
-            </div>
-            <h3 class="blog-title">Complete Resume & CV Formatting Guide</h3>
-            <p class="blog-description my-3">Standard guidelines to pass ATS screening algorithms. Learn how to highlight technical lab projects, Git version control logs, and showcase industrial training parameters systematically.</p>
-            <div class="mt-auto pt-3 border-top d-flex align-items-center justify-content-between">
-              <small class="text-muted"><i class="bi bi-calendar3 me-1"></i> April 2026</small>
-              <a href="#" class="btn btn-bcc-read text-white">Read Article</a>
-            </div>
-          </div>
+      <aside class="col-xl-4">
+        <div class="blog-aside-card mb-4">
+          <h4>Quick links</h4>
+          <ul class="list-unstyled mb-0">
+            <li><a href="#">Latest stories</a></li>
+            <li><a href="#">Interview preparation</a></li>
+            <li><a href="#">CV & cover letters</a></li>
+            <li><a href="#">Graduate study plans</a></li>
+          </ul>
         </div>
-      </div>
 
-      <div class="col-md-6">
-        <div class="bcc-blog-card h-100">
-          <div class="card-body p-4 d-flex flex-column">
-            <div class="d-flex gap-2 mb-3">
-              <span class="blog-badge badge-higher-ed"><i class="bi bi-globe me-1"></i>Higher Ed</span>
-            </div>
-            <h3 class="blog-title">Navigating Post-Graduation Masters & PhD Plans</h3>
-            <p class="blog-description my-3">Balancing GRE, TOEFL, and research paper publication timelines during the final year university semesters. Shared firsthand experiences and step-by-step roadmap by academic mentors.</p>
-            <div class="mt-auto pt-3 border-top d-flex align-items-center justify-content-between">
-              <small class="text-muted"><i class="bi bi-calendar3 me-1"></i> March 2026</small>
-              <a href="#" class="btn btn-bcc-read text-white">Read Article</a>
-            </div>
-          </div>
+        <div class="blog-aside-card mb-4">
+          <h4>Popular categories</h4>
+          <ul class="list-unstyled mb-0">
+            <li><a href="#">Campus life</a></li>
+            <li><a href="#">Career advice</a></li>
+            <li><a href="#">Events & workshops</a></li>
+            <li><a href="#">Success stories</a></li>
+          </ul>
         </div>
-      </div>
 
-      <div class="col-md-6">
-        <div class="bcc-blog-card h-100">
-          <div class="card-body p-4 d-flex flex-column">
-            <div class="d-flex gap-2 mb-3">
-              <span class="blog-badge badge-career"><i class="bi bi-people me-1"></i>HR Rounds</span>
-            </div>
-            <h3 class="blog-title">Mastering the Behavioral Star Method</h3>
-            <p class="blog-description my-3">Learn how to frame complex engineering problems encountered during database management modules or micro-controller hardware implementations into clear communication answers.</p>
-            <div class="mt-auto pt-3 border-top d-flex align-items-center justify-content-between">
-              <small class="text-muted"><i class="bi bi-calendar3 me-1"></i> February 2026</small>
-              <a href="#" class="btn btn-bcc-read text-white">Read Article</a>
-            </div>
-          </div>
+        <div class="blog-aside-card">
+          <h4>Need help?</h4>
+          <p class="text-muted">Contact the KUET Career Club team for blog contributions, guest posts, or event coverage.</p>
+          <p class="mb-0"><strong>Email:</strong> <a href="mailto:contact@kuetcareerclub.bd">contact@kuetcareerclub.bd</a></p>
         </div>
-      </div>
-
+      </aside>
     </div>
   </main>
 

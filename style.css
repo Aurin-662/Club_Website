@@ -519,6 +519,99 @@ footer.site-footer {
     margin-bottom: 8px;
 }
 
+/* Blogs page */
+.blog-header {
+  background: #fff;
+  border-bottom: 1px solid rgba(226,232,240,0.9);
+}
+.blog-search-bar .input-group-text {
+  background: #fff;
+  border-right: 0;
+  color: #64748b;
+}
+.blog-search-bar .form-control {
+  border-left: 0;
+}
+.blog-category-btn {
+  border-radius: 50px;
+  padding: 0.75rem 1.35rem;
+  font-weight: 700;
+  transition: transform 0.2s ease;
+}
+.blog-category-btn:hover {
+  transform: translateY(-1px);
+}
+.bcc-blog-card {
+  background: #fff;
+  border-radius: 1rem;
+  border: 1px solid rgba(226,232,240,0.95);
+  border-left: 6px solid #8B2D31;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.bcc-blog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(15,23,42,0.12);
+}
+.blog-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+}
+.badge-tech { background: #ebf8ff; color: #2b6cb0; border: 1px solid #bee3f8; }
+.badge-career { background: #f0fff4; color: #2f855a; border: 1px solid #c6f6d5; }
+.badge-higher-ed { background: #f3e8ff; color: #7e22ce; border: 1px solid #e9d5ff; }
+.badge-featured { background: #8B2D31; color: #fff; }
+.blog-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1a202c;
+  line-height: 1.2;
+}
+.blog-description {
+  color: #4a5568;
+  font-size: 0.96rem;
+  line-height: 1.75;
+}
+.btn-bcc-read {
+  background: #8B2D31;
+  color: #fff !important;
+  font-weight: 700;
+  border-radius: 0.85rem;
+  padding: 0.75rem 1.3rem;
+  border: 0;
+  transition: background 0.18s ease, transform 0.18s ease;
+}
+.btn-bcc-read:hover {
+  background: #6a2225;
+  transform: translateY(-1px);
+}
+.blog-aside-card {
+  background: #fff;
+  border-radius: 1rem;
+  border: 1px solid rgba(226,232,240,0.95);
+  padding: 1.6rem;
+  box-shadow: 0 14px 32px rgba(15,23,42,0.06);
+}
+.blog-aside-card h4 {
+  margin-bottom: 1rem;
+}
+.blog-aside-card .list-unstyled li + li {
+  margin-top: 0.85rem;
+}
+.blog-aside-card .list-unstyled li a {
+  color: #0b1220;
+  font-weight: 600;
+}
+.blog-aside-card .list-unstyled li a:hover {
+  color: #8B2D31;
+}
+
+
 .form-control, .form-select {
     padding: 12px;
     border: 1px solid #e2e8f0;
