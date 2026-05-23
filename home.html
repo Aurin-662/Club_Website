@@ -226,7 +226,7 @@
     </div>
   </div>
 
-  <section class="banner main-content py-5 bg-white border-bottom">
+  <section class="banner main-content py-5 bg-white border-bottom reveal-on-scroll">
     <div class="container py-4">
       <div class="row align-items-center gy-4">
         <div class="col-lg-6">
@@ -240,13 +240,15 @@
           </div>
         </div>
         <div class="col-lg-6 text-center">
-          <img src="images/network.jpg" alt="KUET Network" class="banner-img img-fluid rounded-3 shadow-sm" style="max-height: 400px; object-fit: cover; width: 100%;">
+          <img src="images/network.jpg" alt="KUET Network" class="banner-img img-fluid rounded-3 shadow-sm float-on-scroll" style="max-height: 400px; object-fit: cover; width: 100%;">
         </div>
       </div>
     </div>
   </section>
 
   <section class="stats py-5 border-bottom bg-white">
+    <!-- reveal -->
+    <div class="reveal-on-scroll">
     <div class="container">
       <div class="text-center mb-5">
         <h2 class="mb-2">Empowering Success Through Numbers That Matter</h2>
@@ -280,8 +282,9 @@
       </div>
     </div>
   </section>
+  </div>
 
-  <section id="jobs" class="jobs main-content py-5 bg-white border-bottom">
+  <section id="jobs" class="jobs main-content py-5 bg-white border-bottom reveal-on-scroll">
     <div class="container">
       <div class="text-center mb-5">
         <h6 class="eyebrow">Job Board</h6>
@@ -386,7 +389,7 @@
     </div>
   </section>
 
-  <section id="events" class="events main-content py-5 bg-white border-bottom">
+  <section id="events" class="events main-content py-5 bg-white border-bottom reveal-on-scroll">
     <div class="container">
       <div class="text-center mb-5">
         <h6 class="eyebrow">Explore Our Platform</h6>
@@ -455,7 +458,7 @@
   </section>
 
   <!-- Career Counselling -->
-  <section id="counseling" class="counseling-section py-5 bg-white border-bottom">
+  <section id="counseling" class="counseling-section py-5 bg-white border-bottom reveal-on-scroll">
     <div class="container">
       <div class="text-center mb-4">
         <h6 class="eyebrow">Career Counselling</h6>
@@ -488,7 +491,7 @@
     </div>
   </section>
 
-  <section id="collaborate" class="collaboration py-5 bg-white">
+  <section id="collaborate" class="collaboration py-5 bg-white reveal-on-scroll">
     <div class="container">
       <div class="text-center mb-5">
         <h6 class="eyebrow">Partner With Us</h6>
@@ -528,7 +531,7 @@
   </section>
 
   <!-- Ready to Start CTA -->
-  <section class="journey-cta py-5 text-white">
+  <section class="journey-cta py-5 text-white reveal-on-scroll">
     <div class="container text-center">
       <h2 class="mb-3">Ready to Start Your Journey?</h2>
       <p class="mb-4 text-white-50">Join KUET Career Club today — connect with mentors, access exclusive jobs, and build your future.</p>
@@ -607,6 +610,7 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       var jobCards = document.querySelectorAll('.job-card');
