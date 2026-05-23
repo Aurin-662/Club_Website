@@ -457,6 +457,69 @@
     </div>
   </section>
 
+  <section id="upcoming-events" class="events main-content py-5 bg-white border-bottom reveal-on-scroll">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h6 class="eyebrow">Upcoming Events</h6>
+        <h2 class="mt-2">Register for KUET Career Sessions</h2>
+        <p class="text-muted mx-auto" style="max-width: 64ch;">Attend our curated workshops, employer panels, and resume clinics to sharpen your career readiness.</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <article class="event-card p-4 h-100 d-flex flex-column">
+            <div class="d-flex align-items-start justify-content-between mb-3">
+              <div>
+                <h5 class="mb-1">Career Launch Bootcamp</h5>
+                <p class="mb-0 text-muted small fw-semibold">June 30 | Main Auditorium</p>
+              </div>
+              <span class="badge rounded px-2 py-1 bg-primary-soft fw-bold" style="font-size:0.75rem;">Workshop</span>
+            </div>
+            <p class="text-muted small mb-4 flex-grow-1">Practical sessions on resume writing, interview prep, and networking with KUET industry partners.</p>
+            <ul class="list-unstyled text-muted small mb-4 border-top pt-3">
+              <li class="mb-1"><i class="bi bi-clock me-2"></i>10:00 AM – 1:00 PM</li>
+              <li class="mb-1"><i class="bi bi-geo-alt me-2"></i>KUET Main Campus</li>
+            </ul>
+            <button type="button" class="btn btn-outline-secondary w-100 btn-sm fw-semibold mt-auto event-register-btn" data-event="bootcamp">Register</button>
+          </article>
+        </div>
+        <div class="col-md-4">
+          <article class="event-card p-4 h-100 d-flex flex-column">
+            <div class="d-flex align-items-start justify-content-between mb-3">
+              <div>
+                <h5 class="mb-1">Employer Panel</h5>
+                <p class="mb-0 text-muted small fw-semibold">July 5 | Innovation Hub</p>
+              </div>
+              <span class="badge rounded px-2 py-1 bg-success-soft fw-bold" style="font-size:0.75rem;">Panel</span>
+            </div>
+            <p class="text-muted small mb-4 flex-grow-1">Hear from hiring managers about current roles and career pathways for KUET graduates.</p>
+            <ul class="list-unstyled text-muted small mb-4 border-top pt-3">
+              <li class="mb-1"><i class="bi bi-clock me-2"></i>2:00 PM – 5:00 PM</li>
+              <li class="mb-1"><i class="bi bi-geo-alt me-2"></i>Innovation Hub</li>
+            </ul>
+            <button type="button" class="btn btn-outline-secondary w-100 btn-sm fw-semibold mt-auto event-register-btn" data-event="panel">Register</button>
+          </article>
+        </div>
+        <div class="col-md-4">
+          <article class="event-card p-4 h-100 d-flex flex-column">
+            <div class="d-flex align-items-start justify-content-between mb-3">
+              <div>
+                <h5 class="mb-1">Resume & Interview Clinic</h5>
+                <p class="mb-0 text-muted small fw-semibold">July 10 | Career Lab</p>
+              </div>
+              <span class="badge rounded px-2 py-1 bg-orange-soft fw-bold" style="font-size:0.75rem;">Clinic</span>
+            </div>
+            <p class="text-muted small mb-4 flex-grow-1">One-on-one feedback sessions for CVs, cover letters, and mock interviews.</p>
+            <ul class="list-unstyled text-muted small mb-4 border-top pt-3">
+              <li class="mb-1"><i class="bi bi-clock me-2"></i>11:00 AM – 2:00 PM</li>
+              <li class="mb-1"><i class="bi bi-geo-alt me-2"></i>Career Lab</li>
+            </ul>
+            <button type="button" class="btn btn-outline-secondary w-100 btn-sm fw-semibold mt-auto event-register-btn" data-event="clinic">Register</button>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Career Counselling -->
   <section id="counseling" class="counseling-section py-5 bg-white border-bottom reveal-on-scroll">
     <div class="container">
@@ -740,6 +803,58 @@
           bookingForm.reset();
         });
       }
+
+      var eventData = {
+        bootcamp: {
+          title: 'Career Launch Bootcamp',
+          date: 'June 30',
+          time: '10:00 AM – 1:00 PM',
+          location: 'KUET Main Auditorium',
+          description: 'Join this practical workshop on resume building, interview preparation, and career networking with KUET partners.'
+        },
+        panel: {
+          title: 'Employer Panel',
+          date: 'July 5',
+          time: '2:00 PM – 5:00 PM',
+          location: 'Innovation Hub',
+          description: 'Hear from leading employers about current openings, hiring criteria, and pathways for KUET graduates.'
+        },
+        clinic: {
+          title: 'Resume & Interview Clinic',
+          date: 'July 10',
+          time: '11:00 AM – 2:00 PM',
+          location: 'Career Lab',
+          description: 'Book a one-on-one session for CV feedback, mock interviews, and tailored career guidance.'
+        }
+      };
+
+      var eventRegisterBtns = document.querySelectorAll('.event-register-btn');
+      var eventModalEl = document.getElementById('eventModal');
+      var eventModal = eventModalEl ? new bootstrap.Modal(eventModalEl) : null;
+      var eventForm = document.getElementById('eventForm');
+
+      eventRegisterBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var eventKey = btn.dataset.event;
+          var detail = eventData[eventKey];
+          if (!detail || !eventModal) return;
+          document.getElementById('eventModalLabel').textContent = detail.title;
+          document.getElementById('selectedEvent').value = detail.title + ' — ' + detail.date;
+          document.getElementById('eventModalInfo').innerHTML = '<strong>' + detail.date + ' • ' + detail.time + ' • ' + detail.location + '</strong><br>' + detail.description;
+          if (eventModal) eventModal.show();
+        });
+      });
+
+      if (eventForm) {
+        eventForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          var name = eventForm.querySelector('[name="name"]').value || 'Participant';
+          var eventName = eventForm.querySelector('[name="event"]').value;
+          if (eventModal) eventModal.hide();
+          showInlineAlert('Thanks, ' + name + '! You are registered for "' + eventName + '". We will contact you with event details shortly.');
+          eventForm.reset();
+        });
+      }
     });
   </script>
 
@@ -760,6 +875,43 @@
           <a href="register.html" class="btn btn-primary">Apply / Sign In</a>
           <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Event registration modal -->
+  <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="eventModalLabel">Event Registration</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="eventForm">
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label">Event</label>
+              <input id="selectedEvent" name="event" type="text" class="form-control" readonly>
+            </div>
+            <div id="eventModalInfo" class="mb-3 text-muted small"></div>
+            <div class="mb-3">
+              <label class="form-label">Your Name</label>
+              <input name="name" type="text" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input name="email" type="email" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Message</label>
+              <textarea name="message" class="form-control" rows="3" placeholder="Any special requirements or questions?"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Confirm Registration</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
