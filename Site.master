@@ -1,0 +1,161 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="SiteMaster" %>
+<!doctype html>
+<html lang="en">
+<head runat="server">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title><asp:ContentPlaceHolder ID="TitleContent" runat="server">KUET Career Club</asp:ContentPlaceHolder></title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Page-specific overrides from original home.html to keep exact UI */
+    :root {
+      --bcc-primary: #8B2D31; /* Signature Deep Dark Red Accent */
+      --bcc-dark: #1A202C;
+      --bcc-muted: #4A5568;
+    }
+    .notice-marquee-container { background: #fff5f5; border-bottom: 1.5px solid #feb2b2; overflow: hidden; }
+    .notice-badge { background: var(--bcc-primary); color: white; font-weight: 700; padding: 6px 16px; z-index: 10; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .marquee-text a { color: var(--bcc-dark); font-weight: 500; text-decoration: none; transition: color 0.2s; }
+    .marquee-text a:hover { color: var(--bcc-primary); }
+    .job-card { background: #ffffff; border: 1px solid #E2E8F0; border-radius: 12px; border-top: 4px solid var(--bcc-primary); transition: all 0.25s ease; }
+    .job-card:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+    .card-feature, .collab-card { background: #ffffff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 24px; transition: all 0.25s ease; }
+    .card-feature:hover, .collab-card:hover { border-color: #cbd5e1; box-shadow: 0 8px 16px rgba(0,0,0,0.04); }
+    .collab-card.active-card { border: 1.5px solid var(--bcc-primary); background: #fffafb; }
+    .bg-info-soft { background-color: #ebf8ff; color: #2b6cb0; }
+    .bg-success-soft { background-color: #f0fff4; color: #2f855a; }
+    .bg-orange-soft { background-color: #fff7ed; color: #c2410c; }
+    h1,h2,h3,h5 { color: var(--bcc-dark); font-weight:700 !important; }
+    .eyebrow { color: var(--bcc-primary); font-weight:700; text-transform:uppercase; letter-spacing:1px; font-size:0.85rem; }
+  </style>
+  <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
+</head>
+<body class="bg-light">
+  <form id="form1" runat="server">
+    
+    <header class="site-header">
+      <div class="container py-2 d-flex align-items-center justify-content-between">
+        <a class="brand" href="home.aspx">
+          <img src="images/logo.jpg" alt="KUET Career Club logo" class="log" />
+          <div class="logo-text ms-2">
+            <div class="site-title">KUET CAREER Club</div>
+            <small class="site-sub">Prepare • Connect • Succeed</small>
+          </div>
+        </a>
+
+        <nav class="d-none d-md-block">
+          <ul class="nav align-items-center mb-0">
+            <li class="nav-item"><a id="navHome" runat="server" class="nav-link fw-semibold" href="home.aspx">Home</a></li>
+            <li class="nav-item"><a id="navJobs" runat="server" class="nav-link fw-semibold" href="home.aspx#jobs">Jobs</a></li>
+            <li class="nav-item"><a id="navBlogs" runat="server" class="nav-link fw-semibold" href="blogs.aspx">Blogs</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle fw-semibold" href="#" id="portalsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-grid-fill me-1"></i>Portals</a>
+              <ul class="dropdown-menu border-0 shadow" aria-labelledby="portalsDropdown">
+                <li><a class="dropdown-item" href="students.aspx">Student Portal</a></li>
+                <li><a class="dropdown-item" href="alumni.aspx">Graduate Portal</a></li>
+                <li><a class="dropdown-item" href="companies.aspx">Industry Partner</a></li>
+              </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link fw-semibold" href="home.aspx#events">Events</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle fw-semibold" href="#" id="moreDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">More</a>
+              <ul class="dropdown-menu border-0 shadow" aria-labelledby="moreDropdown">
+                <li><a class="dropdown-item" href="students.aspx">Student Portal</a></li>
+                <li><a class="dropdown-item" href="alumni.aspx">Graduate Corner</a></li>
+                <li><a class="dropdown-item" href="companies.aspx">Companies</a></li>
+                <li><a class="dropdown-item" href="jobs.aspx">Jobs &amp; Internships</a></li>
+                <li><a class="dropdown-item" href="collaborate.aspx">Collaborate</a></li>
+                <li><a class="dropdown-item" href="support.aspx">Support / Donate</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="help.aspx">Help Center</a></li>
+                <li><a class="dropdown-item" href="faq.aspx">FAQs</a></li>
+                <li><a class="dropdown-item" href="contact.aspx">Contact Us</a></li>
+                <li><a class="dropdown-item" href="feedback.aspx">Feedback</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="privacy.aspx">Privacy Policy</a></li>
+                <li><a class="dropdown-item" href="terms.aspx">Terms of Service</a></li>
+                <li><a class="dropdown-item" href="refund.aspx">Return &amp; Refund Policy</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="d-none d-md-flex gap-2 header-actions">
+          <a href="login.aspx" class="btn btn-outline-custom">Sign In</a>
+          <a href="register.aspx" class="btn btn-primary-custom">Register</a>
+        </div>
+
+        <div class="d-md-none">
+          <button class="btn btn-outline-secondary mobile-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu" aria-label="Open menu"><i class="bi bi-list"></i></button>
+        </div>
+      </div>
+    </header>
+
+    <div class="offcanvas offcanvas-end text-bg-white" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
+      <div class="offcanvas-header border-bottom">
+        <h5 id="mobileMenuLabel" class="offcanvas-title fw-bold">Menu</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="nav flex-column gap-2">
+            <li class="nav-item"><a id="navHomeMobile" runat="server" class="nav-link fw-semibold" href="home.aspx">Home</a></li>
+          <li class="nav-item"><a id="navJobsMobile" runat="server" class="nav-link fw-semibold" href="home.aspx#jobs">Jobs</a></li>
+          <li class="nav-item"><a id="navBlogsMobile" runat="server" class="nav-link fw-semibold" href="blogs.aspx">Blogs</a></li>
+          <li class="nav-item">
+            <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#portalSubmenu" role="button" aria-expanded="false" aria-controls="portalSubmenu">Portals <i class="bi bi-caret-down-fill"></i></a>
+            <div class="collapse ps-3" id="portalSubmenu">
+              <ul class="nav flex-column gap-2 mt-2">
+                <li class="nav-item"><a class="nav-link" href="students.aspx">Student Portal</a></li>
+                <li class="nav-item"><a class="nav-link" href="alumni.aspx">Graduate Portal</a></li>
+                <li class="nav-item"><a class="nav-link" href="companies.aspx">Industry Partner</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item"><a class="nav-link fw-semibold" href="home.aspx#events">Events</a></li>
+          <li class="nav-item">
+            <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#moreSubmenu" role="button" aria-expanded="false" aria-controls="moreSubmenu">More <i class="bi bi-caret-down-fill"></i></a>
+            <div class="collapse ps-3" id="moreSubmenu">
+              <ul class="nav flex-column gap-2 mt-2">
+                <li class="nav-item"><a class="nav-link" href="students.aspx">Student Portal</a></li>
+                <li class="nav-item"><a class="nav-link" href="alumni.aspx">Graduate Corner</a></li>
+                <li class="nav-item"><a class="nav-link" href="companies.aspx">Companies</a></li>
+                <li class="nav-item"><a class="nav-link" href="jobs.aspx">Jobs &amp; Internships</a></li>
+                <li class="nav-item"><a class="nav-link" href="collaborate.aspx">Collaborate</a></li>
+                <li class="nav-item"><a class="nav-link" href="support.aspx">Support / Donate</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item"><a class="nav-link" href="help.aspx">Help Center</a></li>
+                <li class="nav-item"><a class="nav-link" href="faq.aspx">FAQs</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.aspx">Contact Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="feedback.aspx">Feedback</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li class="nav-item"><a class="nav-link" href="privacy.aspx">Privacy Policy</a></li>
+                <li class="nav-item"><a class="nav-link" href="terms.aspx">Terms of Service</a></li>
+                <li class="nav-item"><a class="nav-link" href="refund.aspx">Return &amp; Refund Policy</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+        <div class="mt-4 d-flex gap-2">
+          <a href="login.aspx" class="btn btn-outline-secondary w-100 btn-sm">Sign In</a>
+          <a href="register.aspx" class="btn text-white w-100 btn-sm" style="background: #8B2D31;">Register</a>
+        </div>
+      </div>
+    </div>
+
+    <main>
+        <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+    </main>
+
+    <footer class="site-footer bg-white border-top py-4" style="background:#ffffff; border-top:1px solid rgba(15,23,42,0.06);">
+      <div class="container">
+        <p class="mb-0 text-center small" style="color:#6b7280">&copy; 2026 KUET Career Club | All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+  </form>
+</body>
+</html>

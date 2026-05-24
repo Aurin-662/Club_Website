@@ -169,6 +169,11 @@ header.site-header {
 /* Mobile toggler */
 .mobile-toggle { display:none; background:transparent; border:0; font-size:1.2rem; }
 
+/* Show mobile toggle on small screens (bootstrap md breakpoint) */
+@media (max-width: 767.98px) {
+  .mobile-toggle { display: inline-block; }
+}
+
 /* Banner / Hero */
 .banner {
   padding:64px 0;
@@ -403,6 +408,72 @@ header.site-header {
   transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
   border: 1px solid rgba(0,0,0,0.05);
 }
+.note: /* ---- Overrides imported from original home.html ---- */ {}
+:root {
+  /* Map BCC variables to the site brand (student portal palette) */
+  --bcc-primary: var(--brand); /* primary accent follows --brand (#004080) */
+  --bcc-dark: #0b1220; /* dark text color consistent with student pages */
+  --bcc-muted: var(--muted);
+}
+.notice-marquee-container {
+  background: #fff5f5;
+  border-bottom: 1.5px solid #feb2b2;
+  overflow: hidden;
+}
+.notice-badge {
+  background: var(--bcc-primary);
+  color: white;
+  font-weight: 700;
+  padding: 6px 16px;
+  z-index: 10;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.marquee-text a {
+  color: var(--bcc-dark);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.marquee-text a:hover {
+  color: var(--bcc-primary);
+}
+.job-card {
+  background: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  border-top: 4px solid var(--bcc-primary);
+  transition: all 0.25s ease;
+}
+.job-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+.card-feature,
+.collab-card {
+  background: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 24px;
+  transition: all 0.25s ease;
+}
+.card-feature:hover,
+.collab-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.04);
+}
+.collab-card.active-card {
+  border: 1.5px solid var(--bcc-primary);
+  background: #fffafb;
+}
+.bg-info-soft { background-color: #ebf8ff; color: #2b6cb0; }
+.bg-success-soft { background-color: #f0fff4; color: #2f855a; }
+.bg-orange-soft { background-color: #fff7ed; color: #c2410c; }
+h1, h2, h3, h5 { color: var(--bcc-dark); font-weight: 700 !important; }
+.eyebrow { color: var(--bcc-primary); font-weight:700; text-transform:uppercase; letter-spacing:1px; font-size:0.85rem; }
+
+/* End imported overrides */
 .portal-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 22px 48px rgba(0,0,0,0.12);
@@ -1183,3 +1254,12 @@ footer.site-footer {
 .journey-cta .btn-outline-light {
   border: 1px solid rgba(255,255,255,0.18);
 }
+
+/* Footer (match student portal) */
+.site-footer {
+  background: #ffffff;
+  border-top: 1px solid rgba(15,23,42,0.06);
+  padding: 16px 0;
+  color: #6b7280; /* muted text color */
+}
+.site-footer p, .site-footer a { color: #6b7280; }

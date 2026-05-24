@@ -1,218 +1,13 @@
-﻿<!doctype html>
-<html lang="en">
+<%@ Page Title="KUET Career Club" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" %>
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>KUET Career Club</title>
+<asp:Content ID="TitleContent" ContentPlaceHolderID="TitleContent" runat="server">
+    Home | KUET Career Club
+</asp:Content>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+<asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
+</asp:Content>
 
-  <link rel="stylesheet" href="style.css">
-
-  <style>
-    /* BCC-Inspired UI Overrides */
-    :root {
-      --bcc-primary: #8B2D31; /* Signature Deep Dark Red Accent */
-      --bcc-dark: #1A202C;
-      --bcc-muted: #4A5568;
-    }
-
-    /* Notice Marquee Styles */
-    .notice-marquee-container {
-      background: #fff5f5;
-      border-bottom: 1.5px solid #feb2b2;
-      overflow: hidden;
-    }
-    .notice-badge {
-      background: var(--bcc-primary);
-      color: white;
-      font-weight: 700;
-      padding: 6px 16px;
-      z-index: 10;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .marquee-text a {
-      color: var(--bcc-dark);
-      font-weight: 500;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .marquee-text a:hover {
-      color: var(--bcc-primary);
-    }
-
-    /* Job Card Restyling */
-    .job-card {
-      background: #ffffff;
-      border: 1px solid #E2E8F0;
-      border-radius: 12px;
-      border-top: 4px solid var(--bcc-primary);
-      transition: all 0.25s ease;
-    }
-    .job-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-    }
-    
-    /* Feature & Collab Cards */
-    .card-feature, .collab-card {
-      background: #ffffff;
-      border: 1px solid #E2E8F0;
-      border-radius: 12px;
-      padding: 24px;
-      transition: all 0.25s ease;
-    }
-    .card-feature:hover, .collab-card:hover {
-      border-color: #cbd5e1;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.04);
-    }
-    .collab-card.active-card {
-      border: 1.5px solid var(--bcc-primary);
-      background: #fffafb;
-    }
-
-    /* Badges */
-    .bg-info-soft { background-color: #ebf8ff; color: #2b6cb0; }
-    .bg-success-soft { background-color: #f0fff4; color: #2f855a; }
-    .bg-orange-soft { background-color: #fff7ed; color: #c2410c; }
-    
-    /* Global Typography Fixes */
-    h1, h2, h3, h5 {
-      color: var(--bcc-dark);
-      font-weight: 700 !important;
-    }
-    .eyebrow {
-      color: var(--bcc-primary);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-size: 0.85rem;
-    }
-  </style>
-</head>
-
-<body class="bg-light">
-
-  <header class="site-header sticky-top bg-white border-bottom">
-    <div class="container py-2 d-flex align-items-center justify-content-between">
-      <a class="brand d-flex align-items-center text-decoration-none" href="home.html">
-        <img src="images/logo.jpg" alt="KUET Career Club logo" class="log" style="height: 45px;">
-        <div class="logo-text ms-2">
-          <div class="site-title mb-0 lh-1" style="font-weight:800; font-size:1.2rem; color:var(--bcc-dark);">KUET CAREER CLUB</div>
-          <small class="site-sub text-muted" style="font-size:0.75rem;">Prepare • Connect • Succeed</small>
-        </div>
-      </a>
-
-      <nav class="d-none d-md-block">
-        <ul class="nav align-items-center mb-0">
-          <li class="nav-item"><a class="nav-link active fw-semibold" href="home.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link fw-semibold" href="#jobs">Jobs</a></li>
-          <li class="nav-item"><a class="nav-link fw-semibold" href="blogs.html">Blogs</a></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle fw-semibold" href="#" id="portalsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="bi bi-grid-fill me-1"></i>Portals
-            </a>
-            <ul class="dropdown-menu border-0 shadow" aria-labelledby="portalsDropdown">
-              <li><a class="dropdown-item" href="students.html">Student Portal</a></li>
-              <li><a class="dropdown-item" href="alumni.html">Graduate Portal</a></li>
-              <li><a class="dropdown-item" href="companies.html">Industry Partner</a></li>
-            </ul>
-          </li>
-          <li class="nav-item"><a class="nav-link fw-semibold" href="#events">Events</a></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle fw-semibold" href="#" id="moreDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              More
-            </a>
-            <ul class="dropdown-menu border-0 shadow" aria-labelledby="moreDropdown">
-              <li><a class="dropdown-item" href="students.html">Student Portal</a></li>
-              <li><a class="dropdown-item" href="alumni.html">Graduate Corner</a></li>
-              <li><a class="dropdown-item" href="companies.html">Companies</a></li>
-              <li><a class="dropdown-item" href="jobs.html">Jobs &amp; Internships</a></li>
-              <li><a class="dropdown-item" href="collaborate.html">Collaborate</a></li>
-              <li><a class="dropdown-item" href="support.html">Support / Donate</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="help.html">Help Center</a></li>
-              <li><a class="dropdown-item" href="faq.html">FAQs</a></li>
-              <li><a class="dropdown-item" href="contact.html">Contact Us</a></li>
-              <li><a class="dropdown-item" href="feedback.html">Feedback</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="privacy.html">Privacy Policy</a></li>
-              <li><a class="dropdown-item" href="terms.html">Terms of Service</a></li>
-              <li><a class="dropdown-item" href="refund.html">Return &amp; Refund Policy</a></li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
-
-      <div class="d-none d-md-flex gap-2 header-actions">
-        <a href="login.html" class="btn btn-outline-secondary px-3 fw-semibold btn-sm">Sign In</a>
-        <a href="register.html" class="btn text-white px-3 fw-semibold btn-sm" style="background: var(--bcc-primary);">Register</a>
-      </div>
-
-      <div class="d-md-none">
-        <button class="btn btn-outline-secondary mobile-toggle" type="button" data-bs-toggle="offcanvas"
-          data-bs-target="#mobileMenu" aria-controls="mobileMenu" aria-label="Open menu">
-          ☰
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <div class="offcanvas offcanvas-end text-bg-white" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
-    <div class="offcanvas-header border-bottom">
-      <h5 id="mobileMenuLabel" class="offcanvas-title fw-bold">Menu</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-      <ul class="nav flex-column gap-2">
-        <li class="nav-item"><a class="nav-link active" href="home.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#jobs">Jobs</a></li>
-        <li class="nav-item"><a class="nav-link" href="blogs.html">Blogs</a></li>
-        <li class="nav-item">
-          <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#portalSubmenu" role="button" aria-expanded="false" aria-controls="portalSubmenu">Portals <i class="bi bi-caret-down-fill"></i></a>
-          <div class="collapse ps-3" id="portalSubmenu">
-            <ul class="nav flex-column gap-2 mt-2">
-              <li class="nav-item"><a class="nav-link" href="students.html">Student Portal</a></li>
-              <li class="nav-item"><a class="nav-link" href="alumni.html">Graduate Portal</a></li>
-              <li class="nav-item"><a class="nav-link" href="companies.html">Industry Partner</a></li>
-            </ul>
-          </div>
-        </li>
-        <li class="nav-item"><a class="nav-link" href="#events">Events</a></li>
-        <li class="nav-item">
-          <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#moreSubmenu" role="button" aria-expanded="false" aria-controls="moreSubmenu">More <i class="bi bi-caret-down-fill"></i></a>
-          <div class="collapse ps-3" id="moreSubmenu">
-            <ul class="nav flex-column gap-2 mt-2">
-              <li class="nav-item"><a class="nav-link" href="students.html">Student Portal</a></li>
-              <li class="nav-item"><a class="nav-link" href="alumni.html">Graduate Corner</a></li>
-              <li class="nav-item"><a class="nav-link" href="companies.html">Companies</a></li>
-              <li class="nav-item"><a class="nav-link" href="jobs.html">Jobs &amp; Internships</a></li>
-              <li class="nav-item"><a class="nav-link" href="collaborate.html">Collaborate</a></li>
-              <li class="nav-item"><a class="nav-link" href="support.html">Support / Donate</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li class="nav-item"><a class="nav-link" href="help.html">Help Center</a></li>
-              <li class="nav-item"><a class="nav-link" href="faq.html">FAQs</a></li>
-              <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
-              <li class="nav-item"><a class="nav-link" href="feedback.html">Feedback</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li class="nav-item"><a class="nav-link" href="privacy.html">Privacy Policy</a></li>
-              <li class="nav-item"><a class="nav-link" href="terms.html">Terms of Service</a></li>
-              <li class="nav-item"><a class="nav-link" href="refund.html">Return &amp; Refund Policy</a></li>
-            </ul>
-          </div>
-        </li>
-      </ul>
-      <div class="mt-4 d-flex gap-2">
-        <a href="login.html" class="btn btn-outline-secondary w-100">Sign In</a>
-        <a href="register.html" class="btn text-white w-100" style="background: var(--bcc-primary);">Register</a>
-      </div>
-    </div>
-  </div>
-
+<asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
   <div class="notice-marquee-container d-flex align-items-center">
     <div class="notice-badge d-flex align-items-center shadow-sm">
       <i class="bi bi-megaphone-fill me-2"></i> Notice
@@ -220,7 +15,7 @@
     <div class="flex-grow-1 py-2">
       <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();" class="marquee-text pt-1">
         <a href="#" class="me-5"><i class="bi bi-dot text-danger fs-5"></i> Registration for KUET National Career Fair 2026 is now officially open!</a>
-        <a href="blogs.html" class="me-5"><i class="bi bi-dot text-danger fs-5"></i> Check out the new Software Engineering Interview Preparation Guide in our blog hub.</a>
+        <a href="blogs.aspx" class="me-5"><i class="bi bi-dot text-danger fs-5"></i> Check out the new Software Engineering Interview Preparation Guide in our blog hub.</a>
         <a href="#jobs" class="me-5"><i class="bi bi-dot text-danger fs-5"></i> TechNova Solutions added 3 new internship slots for final-year CSE students.</a>
       </marquee>
     </div>
@@ -234,8 +29,8 @@
             <h1 class="display-5 mb-3">Ready to Join the <span style="color: var(--bcc-primary);">KUET Network?</span></h1>
             <p class="text-muted fs-5 mb-4">Connect with 25,000+ KUETians, discover exclusive opportunities, and accelerate your engineering career with Bangladesh's most prestigious corporate-academic network.</p>
             <div class="d-flex gap-2">
-              <a href="register.html" class="btn text-white px-4 py-2 fw-semibold shadow-sm" style="background: var(--bcc-primary);">Join KUET Network</a>
-              <a href="login.html" class="btn btn-outline-secondary px-4 py-2 fw-semibold">Sign In</a>
+              <a href="register.aspx" class="btn text-white px-4 py-2 fw-semibold shadow-sm" style="background: var(--bcc-primary);">Join KUET Network</a>
+              <a href="login.aspx" class="btn btn-outline-secondary px-4 py-2 fw-semibold">Sign In</a>
             </div>
           </div>
         </div>
@@ -247,7 +42,6 @@
   </section>
 
   <section class="stats py-5 border-bottom bg-white">
-    <!-- reveal -->
     <div class="reveal-on-scroll">
     <div class="container">
       <div class="text-center mb-5">
@@ -282,7 +76,6 @@
       </div>
     </div>
   </section>
-  </div>
 
   <section id="jobs" class="jobs main-content py-5 bg-white border-bottom reveal-on-scroll">
     <div class="container">
@@ -337,7 +130,7 @@
               <li class="mb-1"><i class="bi bi-geo-alt me-2 text-secondary"></i>Location: Dhaka</li>
               <li><i class="bi bi-calendar-event me-2 text-secondary"></i>Apply by: Jun 10</li>
             </ul>
-            <a href="jobs.html" class="btn btn-outline-secondary w-100 btn-sm fw-semibold mt-auto">View Details</a>
+            <a href="jobs.aspx" class="btn btn-outline-secondary w-100 btn-sm fw-semibold mt-auto">View Details</a>
           </article>
         </div>
 
@@ -356,7 +149,7 @@
               <li class="mb-1"><i class="bi bi-geo-alt me-2 text-secondary"></i>Location: Chittagong</li>
               <li><i class="bi bi-calendar-event me-2 text-secondary"></i>Apply by: Jun 15</li>
             </ul>
-            <a href="jobs.html" class="btn btn-outline-secondary w-100 btn-sm fw-semibold mt-auto">View Details</a>
+            <a href="jobs.aspx" class="btn btn-outline-secondary w-100 btn-sm fw-semibold mt-auto">View Details</a>
           </article>
         </div>
 
@@ -375,7 +168,7 @@
               <li class="mb-1"><i class="bi bi-geo-alt me-2 text-secondary"></i>Location: Khulna</li>
               <li><i class="bi bi-calendar-event me-2 text-secondary"></i>Apply by: Jun 12</li>
             </ul>
-            <a href="jobs.html" class="btn btn-outline-secondary w-100 btn-sm fw-semibold mt-auto">View Details</a>
+            <a href="jobs.aspx" class="btn btn-outline-secondary w-100 btn-sm fw-semibold mt-auto">View Details</a>
           </article>
         </div>
       </div>
@@ -408,10 +201,9 @@
               <li>1-on-1 Mentorship</li>
               <li>Skills Bootcamps</li>
             </ul>
-            <a class="btn btn-outline-secondary btn-sm w-100 fw-semibold mt-auto" href="students.html">Enter Community</a>
+            <a class="btn btn-outline-secondary btn-sm w-100 fw-semibold mt-auto" href="students.aspx">Enter Community</a>
           </div>
         </div>
-
         <div class="col-md-6 col-lg-3">
           <div class="card-feature h-100 d-flex flex-column">
             <h5 class="mb-3" style="font-size:1.15rem;"><i class="bi bi-globe2 me-2 text-success"></i>Alumni Sphere</h5>
@@ -422,10 +214,9 @@
               <li>Research Mentorship</li>
               <li>Job Dispersal Profiles</li>
             </ul>
-            <a class="btn btn-outline-secondary btn-sm w-100 fw-semibold mt-auto" href="alumni.html">Alumni Directory</a>
+            <a class="btn btn-outline-secondary btn-sm w-100 fw-semibold mt-auto" href="alumni.aspx">Alumni Directory</a>
           </div>
         </div>
-
         <div class="col-md-6 col-lg-3">
           <div class="card-feature h-100 d-flex flex-column">
             <h5 class="mb-3" style="font-size:1.15rem;"><i class="bi bi-briefcase-fill me-2 text-warning"></i>Collaboration</h5>
@@ -436,10 +227,9 @@
               <li>Curriculum Inputs</li>
               <li>Incubation Hubs</li>
             </ul>
-            <a class="btn btn-outline-secondary btn-sm w-100 fw-semibold mt-auto" href="companies.html">Partner Paths</a>
+            <a class="btn btn-outline-secondary btn-sm w-100 fw-semibold mt-auto" href="companies.aspx">Partner Paths</a>
           </div>
         </div>
-
         <div class="col-md-6 col-lg-3">
           <div class="card-feature h-100 d-flex flex-column">
             <h5 class="mb-3" style="font-size:1.15rem;"><i class="bi bi-award-fill me-2 text-info"></i>Career Tools</h5>
@@ -450,7 +240,7 @@
               <li>Counseling Interfaces</li>
               <li>ATS Optimization</li>
             </ul>
-            <a class="btn btn-outline-secondary btn-sm w-100 fw-semibold mt-auto" href="jobs.html">Launch Tools</a>
+            <a class="btn btn-outline-secondary btn-sm w-100 fw-semibold mt-auto" href="jobs.aspx">Launch Tools</a>
           </div>
         </div>
       </div>
@@ -520,7 +310,6 @@
     </div>
   </section>
 
-  <!-- Career Counselling -->
   <section id="counseling" class="counseling-section py-5 bg-white border-bottom reveal-on-scroll">
     <div class="container">
       <div class="text-center mb-4">
@@ -533,7 +322,7 @@
           <div class="resource-card p-4 h-100">
             <h5 class="mb-2">CV Review & Optimization</h5>
             <p class="text-muted small">Make your CV stand out and pass Applicant Tracking Systems with targeted improvements.</p>
-            <a href="blogs.html" class="btn btn-resource-outline mt-3">Learn More</a>
+            <a href="blogs.aspx" class="btn btn-resource-outline mt-3">Learn More</a>
           </div>
         </div>
         <div class="col-md-4">
@@ -565,45 +354,43 @@
       <div class="row g-4">
         <div class="col-md-4">
           <div class="collab-card h-100 d-flex flex-column">
-            <div class="fs-2 mb-2">🏢</div>
+            <i class="bi bi-building fs-2 mb-2 text-primary"></i>
             <h5 class="mb-2">Corporate Drives</h5>
             <p class="text-muted small flex-grow-1">Run formal recruitment seminars, target-oriented campus placement pools, and structured tech round tables inside KUET facilities.</p>
-            <a href="#contact" class="text-decoration-none fw-semibold mt-3 small" style="color: var(--bcc-primary);">Learn More &rarr;</a>
+            <a href="#contact" class="text-decoration-none fw-semibold mt-3 small" style="color: var(--bcc-primary);">Learn More <i class="bi bi-arrow-right ms-2"></i></a>
           </div>
         </div>
 
         <div class="col-md-4">
           <div class="collab-card active-card h-100 d-flex flex-column">
-            <div class="fs-2 mb-2">🎓</div>
+            <i class="bi bi-people-fill fs-2 mb-2 text-danger"></i>
             <h5 class="mb-2">Alumni Mentorship</h5>
             <p class="text-muted small flex-grow-1">Guide upcoming cohorts of engineers by breaking down your industry path, tech stack transitions, and market insights.</p>
-            <a href="register.html" class="text-decoration-none fw-semibold mt-3 small" style="color: var(--bcc-primary);">Become a Mentor &rarr;</a>
+            <a href="register.aspx" class="text-decoration-none fw-semibold mt-3 small" style="color: var(--bcc-primary);">Become a Mentor <i class="bi bi-arrow-right ms-2"></i></a>
           </div>
         </div>
 
         <div class="col-md-4">
           <div class="collab-card h-100 d-flex flex-column">
-            <div class="fs-2 mb-2">💡</div>
+            <i class="bi bi-lightbulb-fill fs-2 mb-2 text-warning"></i>
             <h5 class="mb-2">Innovation Units</h5>
             <p class="text-muted small flex-grow-1">Sponsor precise engineering research setups or assist the budding development framework of student tech prototypes.</p>
-            <a href="#contact" class="text-decoration-none fw-semibold mt-3 small" style="color: var(--bcc-primary);">Partner Today &rarr;</a>
+            <a href="#contact" class="text-decoration-none fw-semibold mt-3 small" style="color: var(--bcc-primary);">Partner Today <i class="bi bi-arrow-right ms-2"></i></a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Ready to Start CTA -->
   <section class="journey-cta py-5 text-white reveal-on-scroll">
     <div class="container text-center">
       <h2 class="mb-3">Ready to Start Your Journey?</h2>
       <p class="mb-4 text-white-50">Join KUET Career Club today — connect with mentors, access exclusive jobs, and build your future.</p>
-      <a href="register.html" class="btn btn-bcc-cta btn-bcc-cta-primary btn-bcc-cta-lg me-2">Get Started</a>
-      <a href="blogs.html" class="btn btn-outline-light">Explore Resources</a>
+      <a href="register.aspx" class="btn btn-bcc-cta btn-bcc-cta-primary btn-bcc-cta-lg me-2">Get Started</a>
+      <a href="blogs.aspx" class="btn btn-outline-light">Explore Resources</a>
     </div>
   </section>
 
-  <!-- Book / Plan Modals -->
   <div class="modal fade" id="bookModal" tabindex="-1" aria-labelledby="bookModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -666,14 +453,6 @@
     </div>
   </div>
 
-  <footer class="site-footer bg-white border-top py-4">
-    <div class="container">
-      <p class="mb-0 text-center text-secondary small">&copy; 2026 KUET Career Club | All rights reserved.</p>
-    </div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="script.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       var jobCards = document.querySelectorAll('.job-card');
@@ -709,7 +488,6 @@
         jobSearchBtn.addEventListener('click', filterJobs);
       }
 
-      // Counselling / Planning form handlers
       var bookForm = document.getElementById('bookForm');
       var planForm = document.getElementById('planForm');
 
@@ -726,7 +504,6 @@
         bookForm.addEventListener('submit', function (e) {
           e.preventDefault();
           var name = bookForm.querySelector('[name="name"]').value || 'Applicant';
-          // simulate submit
           var modalEl = document.getElementById('bookModal');
           var modal = bootstrap.Modal.getInstance(modalEl);
           if (modal) modal.hide();
@@ -746,8 +523,7 @@
           planForm.reset();
         });
       }
-      
-      // JOB DETAILS MODAL: open modal populated from card
+
       var jobDetailButtons = document.querySelectorAll('.job-card a.btn-outline-secondary');
       var jobModalEl = document.getElementById('jobModal');
       var jobModal = jobModalEl ? new bootstrap.Modal(jobModalEl) : null;
@@ -769,7 +545,6 @@
         });
       });
 
-      // BOOKING / COUNSELING BUTTONS
       var bookBtns = document.querySelectorAll('.resource-card a');
       var bookingModalEl = document.getElementById('bookingModal');
       var bookingModal = bookingModalEl ? new bootstrap.Modal(bookingModalEl) : null;
@@ -781,8 +556,7 @@
             e.preventDefault();
           }
           if (!bookingModal) {
-            // fallback: navigate to register
-            window.location.href = 'register.html';
+            window.location.href = 'register.aspx';
             return;
           }
           var subject = 'Booking: ' + (btn.closest('.resource-card') ? btn.closest('.resource-card').querySelector('h5').textContent : 'Session');
@@ -791,13 +565,11 @@
         });
       });
 
-      // handle booking form submission (no backend): show success and close
       var bookingForm = document.getElementById('bookingForm');
       if (bookingForm) {
         bookingForm.addEventListener('submit', function(e){
           e.preventDefault();
           var name = bookingForm.querySelector('[name="name"]').value || 'Participant';
-          // show a simple success message then close
           alert('Thanks, ' + name + '! Your request has been received. We will contact you via email.');
           if (bookingModal) bookingModal.hide();
           bookingForm.reset();
@@ -858,7 +630,6 @@
     });
   </script>
 
-  <!-- Job details modal -->
   <div class="modal fade" id="jobModal" tabindex="-1" aria-labelledby="jobModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
@@ -872,14 +643,13 @@
           <ul id="jobModalList" class="small text-muted"></ul>
         </div>
         <div class="modal-footer">
-          <a href="register.html" class="btn btn-primary">Apply / Sign In</a>
+          <a href="register.aspx" class="btn btn-primary">Apply / Sign In</a>
           <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Event registration modal -->
   <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -916,7 +686,6 @@
     </div>
   </div>
 
-  <!-- Booking modal -->
   <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md modal-dialog-centered">
       <div class="modal-content">
@@ -950,6 +719,4 @@
       </div>
     </div>
   </div>
-</body>
-
-</html>
+</asp:Content>
