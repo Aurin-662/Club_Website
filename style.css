@@ -583,11 +583,41 @@ h1, h2, h3, h5 { color: var(--bcc-dark); font-weight: 700 !important; }
 .event-card .btn { margin-top: auto; }
 
 /* Footer */
+/* Clean, professional footer inspired by the example site */
 footer.site-footer {
-  padding:18px 0;
-  background:var(--bg-dark);
-  color: rgba(230,238,248,0.75);
-  text-align:center;
+  padding:48px 0 28px;
+  background: #0b2545; /* deep navy for a clean look */
+  color: #ffffff;
+  text-align:left;
+  border-top: 4px solid rgba(255,255,255,0.03);
+}
+
+.footer-container { padding-left: 0; padding-right: 0; }
+.footer-logo { width:48px; height:48px; border-radius:8px; }
+.text-white-85 { color: rgba(255,255,255,0.90); }
+.text-white-65 { color: rgba(255,255,255,0.72); }
+.footer-heading { font-weight:700; font-size:0.95rem; }
+.footer-links li a { color: rgba(255,255,255,0.9); text-decoration:none; display:block; padding:6px 0; }
+.footer-links li a:hover { color: #ffefee; text-decoration:underline; }
+.footer-social a { color: rgba(255,255,255,0.9); font-size:1.05rem; }
+.footer-divider { border-color: rgba(255,255,255,0.08); }
+.footer-input { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); color: #fff; }
+.footer-input::placeholder { color: rgba(255,255,255,0.5); }
+.footer-cta { padding: 8px 12px; }
+
+/* BCC primary button to match register styles */
+.btn-bcc {
+  background: #8B2D31; /* solid brand color for clarity */
+  color: #fff;
+  border: 0;
+  box-shadow: 0 10px 24px rgba(139,45,49,0.14);
+}
+.btn-bcc:hover { background: #6a2225; }
+.footer-cta { padding: 8px 12px; }
+
+@media (max-width: 767.98px) {
+  .footer-container { padding-left: 12px; padding-right: 12px; }
+  .footer-logo { width:44px; height:44px; }
 }
 
 /* Utility */
@@ -1263,3 +1293,49 @@ footer.site-footer {
   color: #6b7280; /* muted text color */
 }
 .site-footer p, .site-footer a { color: #6b7280; }
+
+/* ==========================================
+   BUET-style footer theme
+   ========================================== */
+.site-footer {
+    background-color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.footer-heading {
+    color: #1a202c !important;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.footer-links a {
+    transition: color 0.2s ease-in-out, padding-left 0.2s ease-in-out;
+    color: inherit;
+    text-decoration: none;
+}
+
+/* মাউস হোভার করলে টেক্সট লাল হবে এবং একটু ডানদিকে সরবে */
+.footer-links a:hover {
+    color: #8B2D31 !important; /* BUET / BCC Red Accent */
+    padding-left: 4px;
+}
+
+.footer-contact-list a {
+    transition: color 0.2s ease;
+}
+
+.footer-contact-list a:hover {
+    color: #8B2D31 !important;
+}
+
+.footer-bottom {
+    border-top: 1px solid #e2e8f0 !important;
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+}
+
+.footer-logo { width:56px; height:56px; object-fit:cover; border-radius:8px; }
+.footer-brand .logo-text .footer-site-title { color: #0b1220; font-weight:800; }
+.footer-brand p { color: #475569; margin-top:4px; }
+.footer-links .text-muted { color: #475569 !important; }
+.footer-contact-list .text-muted { color: #475569 !important; }

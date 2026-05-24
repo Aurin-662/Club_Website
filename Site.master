@@ -148,9 +148,66 @@
         <asp:ContentPlaceHolder ID="MainContent" runat="server" />
     </main>
 
-    <footer class="site-footer bg-white border-top py-4" style="background:#ffffff; border-top:1px solid rgba(15,23,42,0.06);">
+    <footer class="site-footer pt-5 pb-3 border-top bg-white mt-5">
       <div class="container">
-        <p class="mb-0 text-center small" style="color:#6b7280">&copy; 2026 KUET Career Club | All rights reserved.</p>
+        <div class="row gy-4">
+
+          <div class="col-lg-4 col-md-6">
+            <div class="footer-brand d-flex align-items-center mb-3">
+              <img src="images/logo.jpg" alt="BUET Career Center Logo" class="footer-logo" style="height: 45px;" />
+              <div class="logo-text ms-2">
+                <div class="footer-site-title fw-bold text-dark" style="font-size: 1.15rem; font-weight: 800;">KUET Career Club</div>
+                <small class="text-muted d-block" style="font-size: 0.75rem;">Prepare • Connect • Succeed</small>
+              </div>
+            </div>
+            <p class="text-muted small pe-lg-4">
+              Join thousands of KUET students, alumni, and industry partners building the future of engineering excellence.
+            </p>
+          </div>
+
+          <div class="col-lg-2 col-md-6">
+            <h6 class="footer-heading text-uppercase fw-bold text-dark small mb-3" style="letter-spacing: 0.5px;">Quick Links</h6>
+            <ul class="list-unstyled footer-links small d-flex flex-column gap-2">
+              <li><a href="students.aspx" class="text-muted text-decoration-none">Student Portal</a></li>
+              <li><a href="alumni.aspx" class="text-muted text-decoration-none">Alumni Corner</a></li>
+              <li><a href="companies.aspx" class="text-muted text-decoration-none">Industry Partners</a></li>
+              <li><a href="jobs.aspx" class="text-muted text-decoration-none">Job Board</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-2 col-md-6">
+            <h6 class="footer-heading text-uppercase fw-bold text-dark small mb-3" style="letter-spacing: 0.5px;">Support</h6>
+            <ul class="list-unstyled footer-links small d-flex flex-column gap-2">
+              <li><a href="help.aspx" class="text-muted text-decoration-none">Help Center</a></li>
+              <li><a href="faq.aspx" class="text-muted text-decoration-none">FAQs</a></li>
+              <li><a href="privacy.aspx" class="text-muted text-decoration-none">Privacy Policy</a></li>
+              <li><a href="terms.aspx" class="text-muted text-decoration-none">Terms of Service</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <h6 class="footer-heading text-uppercase fw-bold text-dark small mb-3" style="letter-spacing: 0.5px;">Contact Info</h6>
+            <ul class="list-unstyled footer-contact-list small d-flex flex-column gap-2 text-muted">
+              <li class="d-flex align-items-start gap-2">
+                <i class="bi bi-geo-alt-fill text-danger mt-1"></i>
+                <span>KUET Career Club, KUET Campus,<br />Khulna, Bangladesh.</span>
+              </li>
+              <li class="d-flex align-items-center gap-2">
+                <i class="bi bi-envelope-fill text-secondary"></i>
+                <a href="mailto:info@kuetcareerclub.edu" class="text-muted text-decoration-none">info@kuetcareerclub.edu</a>
+              </li>
+              <li class="d-flex align-items-center gap-2">
+                <i class="bi bi-telephone-fill text-success"></i>
+                <span>+880-XXX-XXXXXX</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="footer-bottom border-top mt-4 pt-3 text-center">
+          <p class="mb-0 text-muted small">&copy; 2026 KUET Career Club | All rights reserved.</p>
+        </div>
       </div>
     </footer>
 
