@@ -77,110 +77,43 @@
     </div>
   </section>
 
-  <section id="jobs" class="jobs main-content py-5 bg-white border-bottom reveal-on-scroll">
-    <div class="container">
-      <div class="text-center mb-5">
-        <h6 class="eyebrow">Job Board</h6>
-        <h2 class="mt-2">Latest Opportunities for KUET Talent</h2>
-        <p class="text-muted mx-auto" style="max-width: 60ch;">Explore curated placements, internships, and part-time roles from employers recruiting strong engineering candidates.</p>
-      </div>
-
-      <div class="row align-items-end g-3 mb-5 p-4 rounded-3 border bg-light shadow-sm mx-1">
-        <div class="col-md-5">
-          <label class="form-label fw-semibold text-secondary small" for="jobSearch">Keywords</label>
-          <input id="jobSearch" type="search" class="form-control border-secondary-subtle" placeholder="Search jobs, companies or skills">
-        </div>
-        <div class="col-md-3">
-          <label class="form-label fw-semibold text-secondary small" for="jobDepartment">Department filter</label>
-          <select id="jobDepartment" class="form-select border-secondary-subtle">
-            <option selected>All Departments</option>
-            <option>CSE</option>
-            <option>EEE</option>
-            <option>ME</option>
-            <option>Civil</option>
-          </select>
-        </div>
-        <div class="col-md-2">
-          <label class="form-label fw-semibold text-secondary small" for="jobType">Job Category</label>
-          <select id="jobType" class="form-select border-secondary-subtle">
-            <option selected>All Types</option>
-            <option>Full-time</option>
-            <option>Internship</option>
-            <option>Part-time</option>
-          </select>
-        </div>
-        <div class="col-md-2 d-grid">
-          <button id="jobSearchBtn" type="button" class="btn text-white fw-semibold" style="background: var(--bcc-primary);"><i class="bi bi-search me-1"></i> Find Jobs</button>
-        </div>
-      </div>
-
-      <div class="row g-4">
-        <div class="col-md-6 col-lg-4">
-          <article class="job-card p-4 h-100 d-flex flex-column" data-department="CSE" data-type="Internship">
-            <div class="d-flex align-items-start justify-content-between mb-3">
-              <div>
-                <h5 class="mb-1" style="font-size:1.15rem;">Software Engineer Intern</h5>
-                <p class="mb-0 text-muted small fw-semibold">TechNova Solutions</p>
-              </div>
-              <span class="badge rounded px-2 py-1 bg-info-soft fw-bold" style="font-size:0.75rem;">Internship</span>
-            </div>
-            <p class="text-muted small mb-4 flex-grow-1">Work on web apps, automation tools, and data pipelines with a dynamic product team.</p>
-            <ul class="list-unstyled text-muted small mb-4 border-top pt-3">
-              <li class="mb-1"><i class="bi bi-building me-2 text-secondary"></i>Department: CSE</li>
-              <li class="mb-1"><i class="bi bi-geo-alt me-2 text-secondary"></i>Location: Dhaka</li>
-              <li><i class="bi bi-calendar-event me-2 text-secondary"></i>Apply by: Jun 10</li>
-            </ul>
-            <a href="jobs.aspx" class="btn btn-outline-secondary w-100 btn-sm fw-semibold mt-auto">View Details</a>
-          </article>
-        </div>
-
-        <div class="col-md-6 col-lg-4">
-          <article class="job-card p-4 h-100 d-flex flex-column" data-department="EEE" data-type="Full-time">
-            <div class="d-flex align-items-start justify-content-between mb-3">
-              <div>
-                <h5 class="mb-1" style="font-size:1.15rem;">Electrical Design Engineer</h5>
-                <p class="mb-0 text-muted small fw-semibold">GreenGrid Engineering</p>
-              </div>
-              <span class="badge rounded px-2 py-1 bg-success-soft fw-bold" style="font-size:0.75rem;">Full-time</span>
-            </div>
-            <p class="text-muted small mb-4 flex-grow-1">Design power systems, support field implementation, and collaborate on sustainable energy projects.</p>
-            <ul class="list-unstyled text-muted small mb-4 border-top pt-3">
-              <li class="mb-1"><i class="bi bi-building me-2 text-secondary"></i>Department: EEE</li>
-              <li class="mb-1"><i class="bi bi-geo-alt me-2 text-secondary"></i>Location: Chittagong</li>
-              <li><i class="bi bi-calendar-event me-2 text-secondary"></i>Apply by: Jun 15</li>
-            </ul>
-            <a href="jobs.aspx" class="btn btn-outline-secondary w-100 btn-sm fw-semibold mt-auto">View Details</a>
-          </article>
-        </div>
-
-        <div class="col-md-6 col-lg-4">
-          <article class="job-card p-4 h-100 d-flex flex-column" data-department="Civil" data-type="Part-time">
-            <div class="d-flex align-items-start justify-content-between mb-3">
-              <div>
-                <h5 class="mb-1" style="font-size:1.15rem;">Project Coordinator</h5>
-                <p class="mb-0 text-muted small fw-semibold">BuildWorks Ltd.</p>
-              </div>
-              <span class="badge rounded px-2 py-1 bg-orange-soft fw-bold" style="font-size:0.75rem;">Part-time</span>
-            </div>
-            <p class="text-muted small mb-4 flex-grow-1">Support infrastructure planning, scheduling, and communication for ongoing construction projects.</p>
-            <ul class="list-unstyled text-muted small mb-4 border-top pt-3">
-              <li class="mb-1"><i class="bi bi-building me-2 text-secondary"></i>Department: Civil</li>
-              <li class="mb-1"><i class="bi bi-geo-alt me-2 text-secondary"></i>Location: Khulna</li>
-              <li><i class="bi bi-calendar-event me-2 text-secondary"></i>Apply by: Jun 12</li>
-            </ul>
-            <a href="jobs.aspx" class="btn btn-outline-secondary w-100 btn-sm fw-semibold mt-auto">View Details</a>
-          </article>
-        </div>
-      </div>
-
-      <div class="row g-3 mt-5 align-items-center text-center justify-content-center border-top pt-5">
-        <div class="col-4 col-md-2 text-uppercase font-monospace text-muted fw-bold small">TechNova</div>
-        <div class="col-4 col-md-2 text-uppercase font-monospace text-muted fw-bold small">GreenGrid</div>
-        <div class="col-4 col-md-2 text-uppercase font-monospace text-muted fw-bold small">BuildWorks</div>
-        <div class="col-4 col-md-2 text-uppercase font-monospace text-muted fw-bold small">NextGen Labs</div>
-      </div>
+<section id="jobs" class="jobs main-content py-5 bg-light border-bottom">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h6 class="eyebrow">Job Board</h6>
+      <h2>Latest Opportunities for KUET Talent</h2>
     </div>
-  </section>
+
+    <div class="row g-4">
+      <asp:Repeater ID="rptJobs" runat="server">
+        <ItemTemplate>
+          <div class="col-md-6 col-lg-4">
+            <article class="job-card p-4 h-100 d-flex flex-column">
+              <div class="d-flex align-items-start justify-content-between mb-3">
+                <div>
+                  <h5 class="mb-1"><%# Eval("JobTitle") %></h5>
+                  <p class="mb-0 text-muted small fw-semibold"><%# Eval("CompanyName") %></p>
+                </div>
+                <span class="badge rounded px-2 py-1 bg-info-soft fw-bold"><%# Eval("JobType") %></span>
+              </div>
+              <p class="text-muted small mb-4 flex-grow-1"><%# Eval("Description") %></p>
+              <a href="#" class="btn btn-outline-secondary w-100 btn-sm fw-semibold mt-auto">View Details</a>
+            </article>
+          </div>
+        </ItemTemplate>
+      </asp:Repeater>
+      <asp:Panel ID="pnlNoJobs" runat="server" CssClass="text-center" Visible="false">
+        <div class="col-12">
+          <div class="p-4 bg-white border rounded-3">
+            <h5 class="mb-2">No job listings available</h5>
+            <p class="text-muted small mb-3">We don't have any active job or internship postings right now. Check the full job board for updates.</p>
+            <a href="jobs.aspx" class="btn btn-outline-secondary btn-sm">Open Job Board</a>
+          </div>
+        </div>
+      </asp:Panel>
+    </div>
+  </div>
+</section>
 
   <section id="events" class="events main-content py-5 bg-white border-bottom reveal-on-scroll">
     <div class="container">

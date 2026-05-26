@@ -48,7 +48,7 @@
         <nav class="d-none d-md-block">
           <ul class="nav align-items-center mb-0">
             <li class="nav-item"><a id="navHome" runat="server" class="nav-link fw-semibold" href="home.aspx">Home</a></li>
-            <li class="nav-item"><a id="navJobs" runat="server" class="nav-link fw-semibold" href="home.aspx#jobs">Jobs</a></li>
+            <li class="nav-item"><a id="navJobs" runat="server" class="nav-link fw-semibold" href="jobs.aspx">Jobs</a></li>
             <li class="nav-item"><a id="navBlogs" runat="server" class="nav-link fw-semibold" href="blogs.aspx">Blogs</a></li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle fw-semibold" href="#" id="portalsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-grid-fill me-1"></i>Portals</a>
@@ -101,7 +101,7 @@
       <div class="offcanvas-body">
         <ul class="nav flex-column gap-2">
             <li class="nav-item"><a id="navHomeMobile" runat="server" class="nav-link fw-semibold" href="home.aspx">Home</a></li>
-          <li class="nav-item"><a id="navJobsMobile" runat="server" class="nav-link fw-semibold" href="home.aspx#jobs">Jobs</a></li>
+          <li class="nav-item"><a id="navJobsMobile" runat="server" class="nav-link fw-semibold" href="jobs.aspx">Jobs</a></li>
           <li class="nav-item"><a id="navBlogsMobile" runat="server" class="nav-link fw-semibold" href="blogs.aspx">Blogs</a></li>
           <li class="nav-item">
             <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#portalSubmenu" role="button" aria-expanded="false" aria-controls="portalSubmenu">Portals <i class="bi bi-caret-down-fill"></i></a>
