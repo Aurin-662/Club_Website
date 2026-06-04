@@ -9,13 +9,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* Page-specific overrides from original home.html to keep exact UI */
     :root {
-      --bcc-primary: #8B2D31; /* Signature Deep Dark Red Accent */
+      /* primary color unified with style.css --brand */
+      --bcc-primary: var(--brand);
       --bcc-dark: #1A202C;
       --bcc-muted: #4A5568;
     }
-    .notice-marquee-container { background: #fff5f5; border-bottom: 1.5px solid #feb2b2; overflow: hidden; }
+    .notice-marquee-container { background: #f0f7ff; border-bottom: 1.5px solid rgba(0,86,162,0.08); overflow: hidden; }
     .notice-badge { background: var(--bcc-primary); color: white; font-weight: 700; padding: 6px 16px; z-index: 10; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
     .marquee-text a { color: var(--bcc-dark); font-weight: 500; text-decoration: none; transition: color 0.2s; }
     .marquee-text a:hover { color: var(--bcc-primary); }
@@ -31,11 +31,14 @@
     .eyebrow { color: var(--bcc-primary); font-weight:700; text-transform:uppercase; letter-spacing:1px; font-size:0.85rem; }
   </style>
   <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
+  <meta property="og:site_name" content="KUET Career Club" />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="<%= Request.Url.GetLeftPart(UriPartial.Authority) + Request.ApplicationPath.TrimEnd('/') + '/' %>" />
 </head>
 <body class="bg-light">
   <form id="form1" runat="server">
     
-    <header class="site-header">
+    <header class="site-header shadow-sm bg-white">
       <div class="container py-2 d-flex align-items-center justify-content-between">
         <a class="brand" href="home.aspx">
           <img src="images/logo.jpg" alt="KUET Career Club logo" class="log" />
@@ -82,9 +85,18 @@
           </ul>
         </nav>
 
-        <div class="d-none d-md-flex gap-2 header-actions">
-          <a href="login.aspx" class="btn btn-outline-custom">Sign In</a>
-          <a href="register.aspx" class="btn btn-primary-custom">Register</a>
+        <div class="d-none d-md-flex gap-2 header-actions align-items-center">
+          <asp:PlaceHolder ID="phAnonymous" runat="server">
+             <a href="login.aspx" class="btn btn-outline-custom fw-semibold">Sign In</a>
+             <a href="register.aspx" class="btn btn-primary-custom text-white fw-semibold">Register</a>
+          </asp:PlaceHolder>
+          <asp:PlaceHolder ID="phLoggedIn" runat="server" Visible="false">
+             <span class="text-dark fw-semibold me-2 small">
+                 <i class="bi bi-person-circle text-primary me-1"></i>Welcome, 
+                 <asp:Label ID="lblUserName" runat="server" CssClass="text-primary"></asp:Label>
+             </span>
+             <asp:Button ID="btnLogout" runat="server" Text="Logout" CssClass="btn btn-sm btn-outline-danger px-3 fw-semibold" OnClick="BtnLogout_Click" OnClientClick="window.location='logout.aspx'; return false;" />
+          </asp:PlaceHolder>
         </div>
 
         <div class="d-md-none">
@@ -100,7 +112,7 @@
       </div>
       <div class="offcanvas-body">
         <ul class="nav flex-column gap-2">
-            <li class="nav-item"><a id="navHomeMobile" runat="server" class="nav-link fw-semibold" href="home.aspx">Home</a></li>
+          <li class="nav-item"><a id="navHomeMobile" runat="server" class="nav-link fw-semibold" href="home.aspx">Home</a></li>
           <li class="nav-item"><a id="navJobsMobile" runat="server" class="nav-link fw-semibold" href="jobs.aspx">Jobs</a></li>
           <li class="nav-item"><a id="navBlogsMobile" runat="server" class="nav-link fw-semibold" href="blogs.aspx">Blogs</a></li>
           <li class="nav-item">
@@ -137,9 +149,23 @@
             </div>
           </li>
         </ul>
-        <div class="mt-4 d-flex gap-2">
-          <a href="login.aspx" class="btn btn-outline-secondary w-100 btn-sm">Sign In</a>
-          <a href="register.aspx" class="btn text-white w-100 btn-sm" style="background: #8B2D31;">Register</a>
+
+        <div class="mt-4">
+                 <asp:PlaceHolder ID="phAnonymousMobile" runat="server">
+             <div class="d-flex gap-2">
+                 <a href="login.aspx" class="btn btn-outline-secondary w-100 btn-sm fw-semibold">Sign In</a>
+                 <a href="register.aspx" class="btn btn-primary-custom text-white w-100 btn-sm fw-semibold">Register</a>
+             </div>
+          </asp:PlaceHolder>
+          <asp:PlaceHolder ID="phLoggedInMobile" runat="server" Visible="false">
+             <div class="text-center p-2 border rounded bg-light mb-2">
+                 <span class="text-dark fw-semibold small d-block">
+                     <i class="bi bi-person-circle text-primary me-1"></i>Welcome, 
+                     <asp:Label ID="lblUserNameMobile" runat="server" CssClass="text-primary"></asp:Label>
+                 </span>
+             </div>
+             <asp:Button ID="btnLogoutMobile" runat="server" Text="Logout" CssClass="btn btn-sm btn-danger w-100 fw-semibold" OnClick="BtnLogout_Click" OnClientClick="window.location='logout.aspx'; return false;" />
+          </asp:PlaceHolder>
         </div>
       </div>
     </div>
@@ -151,10 +177,9 @@
     <footer class="site-footer pt-5 pb-3 border-top bg-white mt-5">
       <div class="container">
         <div class="row gy-4">
-
           <div class="col-lg-4 col-md-6">
             <div class="footer-brand d-flex align-items-center mb-3">
-              <img src="images/logo.jpg" alt="BUET Career Center Logo" class="footer-logo" style="height: 45px;" />
+              <img src="images/logo.jpg" alt="KUET Career Center Logo" class="footer-logo" style="height: 45px;" />
               <div class="logo-text ms-2">
                 <div class="footer-site-title fw-bold text-dark" style="font-size: 1.15rem; font-weight: 800;">KUET Career Club</div>
                 <small class="text-muted d-block" style="font-size: 0.75rem;">Prepare • Connect • Succeed</small>
@@ -202,7 +227,6 @@
               </li>
             </ul>
           </div>
-
         </div>
 
         <div class="footer-bottom border-top mt-4 pt-3 text-center">

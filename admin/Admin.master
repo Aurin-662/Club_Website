@@ -1,0 +1,56 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Admin.master.cs" Inherits="AdminMaster" %>
+<!doctype html>
+<html lang="en">
+<head runat="server">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin - <asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+  <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
+</head>
+<body class="bg-light">
+  <form id="form1" runat="server">
+    <div class="d-flex" style="min-height:100vh;">
+      <aside class="bg-white border-end" style="width:260px;">
+        <div class="p-3">
+          <a class="d-flex align-items-center text-decoration-none mb-3" href="/admin/dashboard.aspx">
+            <img src="/images/logo.jpg" alt="logo" style="width:36px;height:36px;border-radius:6px;object-fit:cover;" />
+            <div class="ms-2">
+              <div class="fw-bold">Admin Console</div>
+              <small class="text-muted">KUET Career Club</small>
+            </div>
+          </a>
+          <nav class="nav flex-column gap-1">
+            <a class="nav-link" href="dashboard.aspx">Dashboard</a>
+            <a class="nav-link" href="pending-jobs.aspx">Pending Jobs</a>
+            <a class="nav-link" href="queued-emails.aspx">Queued Emails</a>
+            <a class="nav-link" href="pending-jobs.aspx">Manage Jobs</a>
+            <asp:PlaceHolder runat="server" ID="phSignIn">
+              <a class="nav-link text-danger" href="admin-login.aspx">Admin Sign In</a>
+            </asp:PlaceHolder>
+            <asp:PlaceHolder runat="server" ID="phUserSignIn">
+              <a class="nav-link" href="/login.aspx">User Sign In</a>
+            </asp:PlaceHolder>
+            <asp:PlaceHolder runat="server" ID="phUserSignOut">
+              <a class="nav-link text-danger" href="javascript:void(0);" onclick="document.getElementById('<%= btnAdminLogout.ClientID %>').click();">Sign out</a>
+            </asp:PlaceHolder>
+          </nav>
+        </div>
+      </aside>
+      <main class="flex-fill p-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="mb-0"><asp:ContentPlaceHolder ID="PageTitle" runat="server" /></h4>
+          <div>
+            <asp:Label ID="lblAdminUser" runat="server" CssClass="me-2 text-muted"></asp:Label>
+            <asp:Button ID="btnAdminLogout" runat="server" CssClass="btn btn-sm btn-outline-secondary" Text="Logout" OnClick="BtnAdminLogout_Click" />
+          </div>
+        </div>
+
+        <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+      </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </form>
+</body>
+</html>

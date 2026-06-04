@@ -1,0 +1,15 @@
+2026-05-31T15:01:20.7889376Z Attempt login: admin
+2026-05-31T15:01:20.8147906Z DB admin found: hash=yes salt=yes
+2026-05-31T15:01:20.8666842Z Password mismatch for DB admin
+2026-05-31T15:01:20.8696832Z Login success: admin
+2026-05-31T15:01:31.3441059Z Attempt login: admin
+2026-05-31T15:01:31.3816511Z DB admin found: hash=yes salt=yes
+2026-05-31T15:01:31.4065705Z Password mismatch for DB admin
+2026-05-31T15:01:31.4065705Z Login success: admin
+2026-05-31T15:01:37.5696215Z Attempt login: 
+2026-05-31T15:01:37.5793273Z No DB admin row for user
+2026-05-31T15:01:37.5812784Z Login failed for: 
+2026-05-31T15:03:16.9703094Z Attempt login: admin
+2026-05-31T15:03:17.2101681Z DB admin found: hash=yes salt=yes
+2026-05-31T15:03:17.3079727Z Password mismatch for DB admin
+2026-05-31T15:03:17.3079727Z Redirecting via FormsAuthentication for: admin

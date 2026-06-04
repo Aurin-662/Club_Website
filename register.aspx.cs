@@ -21,7 +21,7 @@ public partial class register : Page
         if (!chkTerms.Checked)
         {
             lblMessage.Text = "Please agree to the constitution and code of conduct.";
-            lblMessage.ForeColor = System.Drawing.Color.Red;
+            lblMessage.ForeColor = System.Drawing.Color.Blue;
             return;
         }
 
@@ -51,14 +51,14 @@ public partial class register : Page
                 else
                 {
                     lblMessage.Text = "Only .jpg, .jpeg or .png images are allowed.";
-                    lblMessage.ForeColor = System.Drawing.Color.Red;
+                    lblMessage.ForeColor = System.Drawing.Color.Blue;
                     return;
                 }
             }
             catch (Exception ex)
             {
                 lblMessage.Text = "Image upload failed: " + ex.Message;
-                lblMessage.ForeColor = System.Drawing.Color.Red;
+                lblMessage.ForeColor = System.Drawing.Color.Blue;
                 return;
             }
         }
@@ -66,34 +66,69 @@ public partial class register : Page
         // Web.config থেকে ডাটাবেজ কানেকশন স্ট্রিং নিয়ে আসা
         string connString = ConfigurationManager.ConnectionStrings["MyDbConnection"].ConnectionString;
 
-        // ADO.NET ব্যবহার করে ডাটাবেজে ইনসার্ট করা (স্যারের ল্যাব মেথড)
+        // ADO.NET ব্যবহার করে ডাটাবেজে ইনসার্ট করা (hashed password if supported)
         using (SqlConnection con = new SqlConnection(connString))
         {
-            string query = "INSERT INTO Users (FullName, StudentID, Department, Batch, Email, Password, ProfilePicture) " +
-                           "VALUES (@FullName, @StudentID, @Department, @Batch, @Email, @Password, @ProfilePicture)";
+            // we'll attempt to insert PasswordHash and PasswordSalt if the columns exist, otherwise fall back to Password
+            string hash, salt;
+            PasswordHelper.CreateHash(txtPassword.Text.Trim(), out hash, out salt);
 
-            using (SqlCommand cmd = new SqlCommand(query, con))
+            // Attempt insert with PasswordHash/PasswordSalt columns
+            string insertWithHash = "INSERT INTO Users (FullName, StudentID, Department, Batch, Email, PasswordHash, PasswordSalt, ProfilePicture) " +
+                                    "VALUES (@FullName, @StudentID, @Department, @Batch, @Email, @PasswordHash, @PasswordSalt, @ProfilePicture)";
+
+            using (SqlCommand cmd = new SqlCommand(insertWithHash, con))
             {
-                // SQL Injection সুরক্ষার জন্য প্যারামিটার ব্যবহার (স্যারের ২য় স্ক্রিনশটের নিয়ম)
                 cmd.Parameters.AddWithValue("@FullName", txtFullName.Text.Trim());
                 cmd.Parameters.AddWithValue("@StudentID", txtStudentId.Text.Trim());
                 cmd.Parameters.AddWithValue("@Department", ddlDepartment.SelectedValue);
                 cmd.Parameters.AddWithValue("@Batch", Convert.ToInt32(txtBatch.Text.Trim()));
                 cmd.Parameters.AddWithValue("@Email", txtEmail.Text.Trim());
-                cmd.Parameters.AddWithValue("@Password", txtPassword.Text.Trim()); // ল্যাব ডেমোর জন্য প্লেইন টেক্সট
+                cmd.Parameters.AddWithValue("@PasswordHash", hash);
+                cmd.Parameters.AddWithValue("@PasswordSalt", salt);
                 cmd.Parameters.AddWithValue("@ProfilePicture", string.IsNullOrEmpty(imagePath) ? (object)DBNull.Value : imagePath);
 
                 try
                 {
                     con.Open();
-                    int rowsAffected = cmd.ExecuteNonQuery(); // কুয়েরি এক্সিকিউট করা
+                    int rowsAffected = 0;
+                    try
+                    {
+                        rowsAffected = cmd.ExecuteNonQuery();
+                    }
+                    catch (SqlException ex)
+                    {
+                        // If columns don't exist (older schema), fall back to legacy insert
+                        if (ex.Message.Contains("Invalid column name") || ex.Message.Contains("Could not find column"))
+                        {
+                            con.Close();
+                            string fallback = "INSERT INTO Users (FullName, StudentID, Department, Batch, Email, Password, ProfilePicture) " +
+                                              "VALUES (@FullName, @StudentID, @Department, @Batch, @Email, @Password, @ProfilePicture)";
+                            using (var fb = new SqlCommand(fallback, con))
+                            {
+                                fb.Parameters.AddWithValue("@FullName", txtFullName.Text.Trim());
+                                fb.Parameters.AddWithValue("@StudentID", txtStudentId.Text.Trim());
+                                fb.Parameters.AddWithValue("@Department", ddlDepartment.SelectedValue);
+                                fb.Parameters.AddWithValue("@Batch", Convert.ToInt32(txtBatch.Text.Trim()));
+                                fb.Parameters.AddWithValue("@Email", txtEmail.Text.Trim());
+                                fb.Parameters.AddWithValue("@Password", txtPassword.Text.Trim());
+                                fb.Parameters.AddWithValue("@ProfilePicture", string.IsNullOrEmpty(imagePath) ? (object)DBNull.Value : imagePath);
+                                con.Open();
+                                rowsAffected = fb.ExecuteNonQuery();
+                            }
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
 
                     if (rowsAffected > 0)
                     {
                         lblMessage.Text = "Registration Successful! Redirecting to login page...";
                         lblMessage.ForeColor = System.Drawing.Color.Green;
 
-                        // ফর্ম ক্লিয়ার করা
+                        // clear form
                         txtFullName.Text = "";
                         txtStudentId.Text = "";
                         txtBatch.Text = "";
@@ -101,26 +136,29 @@ public partial class register : Page
                         ddlDepartment.SelectedIndex = 0;
                         chkTerms.Checked = false;
 
-                        // ৩ সেকেন্ড পর লগইন পেজে অটোমেটিক রিডাইরেক্ট হবে
                         Response.AppendHeader("Refresh", "3;url=login.aspx");
                     }
                     else
                     {
                         lblMessage.Text = "Registration failed. Please try again.";
-                        lblMessage.ForeColor = System.Drawing.Color.Red;
+                        lblMessage.ForeColor = System.Drawing.Color.Blue;
                     }
                 }
-                catch (Exception ex)
+                catch (SqlException ex)
                 {
-                    // ইমেইল ডুপ্লিকেট হলে বা অন্য কোনো ডাটাবেজ এরর আসলে তা হ্যান্ডেল করবে
-                    if (ex.Message.Contains("UNIQUE KEY"))
+                    if (ex.Message.Contains("UNIQUE KEY") || ex.Message.Contains("Violation of UNIQUE KEY"))
                     {
                         lblMessage.Text = "This Email Address is already registered!";
                     }
                     else
                     {
-                        lblMessage.Text = "Database Error: " + ex.Message;
+                        lblMessage.Text = "An error occurred while creating your account. Please try again later.";
                     }
+                    lblMessage.ForeColor = System.Drawing.Color.Blue;
+                }
+                catch (Exception)
+                {
+                    lblMessage.Text = "An unexpected error occurred. Please try again later.";
                     lblMessage.ForeColor = System.Drawing.Color.Red;
                 }
             }

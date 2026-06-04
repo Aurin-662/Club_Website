@@ -1,0 +1,14 @@
+To: hr@technova.com
+Subject: New application for job #6 from aurin
+
+Applicant Name: aurin
+Applicant Email: farzana2207107@stud.kuet.ac.bd
+
+Cover Letter:
+abc
+
+-- Error while sending:
+System.InvalidOperationException: The SMTP host was not specified.
+   at System.Net.Mail.SmtpClient.CheckHostAndPort()
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at apply.btnApply_Click(Object sender, EventArgs e) in e:\3-1 all\web_assignment\apply.aspx.cs:line 147

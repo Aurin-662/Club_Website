@@ -44,6 +44,10 @@
                   <div class="col-12 text-center auth-form-footer mt-2">
                     <span>New to KUET Career Club? <a href="register.aspx">Create an account</a></span>
                   </div>
+                  <!-- Admin sign-in shortcut for testing -->
+                  <div class="col-12 text-center mt-2">
+                    <a href="admin/admin-login.aspx" class="small text-decoration-none">Sign in as admin</a>
+                  </div>
                 </div>
                 
                 <div class="text-center mt-3">

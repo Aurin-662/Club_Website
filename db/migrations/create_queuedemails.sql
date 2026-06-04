@@ -1,0 +1,14 @@
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID('dbo.QueuedEmails') AND type = 'U')
+BEGIN
+	CREATE TABLE dbo.QueuedEmails (
+		QueuedID INT IDENTITY(1,1) PRIMARY KEY,
+		ToAddress NVARCHAR(500) NOT NULL,
+		Subject NVARCHAR(1000) NULL,
+		Body NVARCHAR(MAX) NULL,
+		ResumePath NVARCHAR(500) NULL,
+		Attempts INT NOT NULL DEFAULT(0),
+		LastAttemptAt DATETIME NULL,
+		CreatedAt DATETIME NOT NULL DEFAULT(GETDATE()),
+		Status NVARCHAR(50) NOT NULL DEFAULT('Pending')
+	);
+END
