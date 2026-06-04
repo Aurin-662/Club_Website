@@ -9,7 +9,7 @@
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
   <div class="notice-marquee-container d-flex align-items-center">
-    <div class="notice-badge d-flex align-items-center shadow-sm">
+    <div class="notice-badge d-flex align-items-center shadow-sm pulse">
       <i class="bi bi-megaphone-fill me-2"></i> Notice
     </div>
     <div class="flex-grow-1 py-2">
@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  <section class="banner main-content py-5 bg-white border-bottom reveal-on-scroll">
+  <section class="banner main-content py-5 bg-white border-bottom reveal-on-scroll hero-animated">
     <div class="container py-4">
       <div class="row align-items-center gy-4">
         <div class="col-lg-6">
@@ -29,8 +29,8 @@
             <h1 class="display-5 mb-3">Ready to Join the <span style="color: var(--bcc-primary);">KUET Network?</span></h1>
             <p class="text-muted fs-5 mb-4">Connect with 25,000+ KUETians, discover exclusive opportunities, and accelerate your engineering career with Bangladesh's most prestigious corporate-academic network.</p>
             <div class="d-flex gap-2">
-              <a href="register.aspx" class="btn text-white px-4 py-2 fw-semibold shadow-sm" style="background: var(--bcc-primary);">Join KUET Network</a>
-              <a href="login.aspx" class="btn btn-outline-secondary px-4 py-2 fw-semibold">Sign In</a>
+              <a href="register.aspx" class="btn btn-primary-custom px-4 py-2 fw-semibold shadow-sm">Join KUET Network</a>
+              <a href="login.aspx" class="btn btn-outline-custom px-4 py-2 fw-semibold">Sign In</a>
             </div>
           </div>
         </div>
@@ -51,25 +51,25 @@
       <div class="row text-center g-4">
         <div class="col-6 col-md-3">
           <div class="p-3 border rounded-3 bg-light">
-            <h3 class="display-6 mb-1" style="color: var(--bcc-primary);">1000+</h3>
+            <h3 class="display-6 mb-1" style="color: var(--bcc-primary);"><span class="stat-number" data-target="1200">1000+</span></h3>
             <p class="text-muted mb-0 fw-medium">Active Students</p>
           </div>
         </div>
         <div class="col-6 col-md-3">
           <div class="p-3 border rounded-3 bg-light">
-            <h3 class="display-6 mb-1" style="color: var(--bcc-primary);">500+</h3>
+            <h3 class="display-6 mb-1" style="color: var(--bcc-primary);"><span class="stat-number" data-target="540">500+</span></h3>
             <p class="text-muted mb-0 fw-medium">Global Alumni</p>
           </div>
         </div>
         <div class="col-6 col-md-3">
           <div class="p-3 border rounded-3 bg-light">
-            <h3 class="display-6 mb-1" style="color: var(--bcc-primary);">50+</h3>
+            <h3 class="display-6 mb-1" style="color: var(--bcc-primary);"><span class="stat-number" data-target="62">50+</span></h3>
             <p class="text-muted mb-0 fw-medium">Live Openings</p>
           </div>
         </div>
         <div class="col-6 col-md-3">
           <div class="p-3 border rounded-3 bg-light">
-            <h3 class="display-6 mb-1" style="color: var(--bcc-primary);">20+</h3>
+            <h3 class="display-6 mb-1" style="color: var(--bcc-primary);"><span class="stat-number" data-target="26">20+</span></h3>
             <p class="text-muted mb-0 fw-medium">Annual Events</p>
           </div>
         </div>
@@ -82,13 +82,15 @@
     <div class="text-center mb-5">
       <h6 class="eyebrow">Job Board</h6>
       <h2>Latest Opportunities for KUET Talent</h2>
+      <p class="text-muted mx-auto" style="max-width:70ch;">Explore the latest internships, part-time roles, and full-time positions posted by employers across technology, industry, and research. Filter listings by role type, department, or company to find opportunities that match your goals.</p>
+      <p class="text-muted small mx-auto" style="max-width:70ch;">Are you an employer or alumni wanting to share an opportunity? Post jobs and internships to reach KUET students and graduates <a href="post-job.aspx">here</a>.</p>
     </div>
 
     <div class="row g-4">
       <asp:Repeater ID="rptJobs" runat="server">
         <ItemTemplate>
           <div class="col-md-6 col-lg-4">
-            <article class="job-card p-4 h-100 d-flex flex-column">
+            <article class="job-card p-4 h-100 d-flex flex-column" data-type='<%# Eval("JobType") %>' data-department='<%# Eval("CompanyName") %>'>
               <div class="d-flex align-items-start justify-content-between mb-3">
                 <div>
                   <h5 class="mb-1"><%# Eval("JobTitle") %></h5>
@@ -97,11 +99,14 @@
                 <span class="badge rounded px-2 py-1 bg-info-soft fw-bold"><%# Eval("JobType") %></span>
               </div>
               <p class="text-muted small mb-4 flex-grow-1"><%# Eval("Description") %></p>
-              <a href="#" class="btn btn-outline-secondary w-100 btn-sm fw-semibold mt-auto">View Details</a>
+              <div class="mt-auto"><small class="text-muted">Posted by <%# Eval("CompanyName") %> • <%# Eval("JobType") %></small></div>
             </article>
           </div>
         </ItemTemplate>
       </asp:Repeater>
+      <div class="col-12 text-center mt-4">
+        <a href="jobs.aspx" class="btn btn-primary-custom btn-lg">View All Jobs</a>
+      </div>
       <asp:Panel ID="pnlNoJobs" runat="server" CssClass="text-center" Visible="false">
         <div class="col-12">
           <div class="p-4 bg-white border rounded-3">
@@ -199,7 +204,7 @@
             </div>
             <p class="text-muted small mb-4 flex-grow-1">Practical sessions on resume writing, interview prep, and networking with KUET industry partners.</p>
             <ul class="list-unstyled text-muted small mb-4 border-top pt-3">
-              <li class="mb-1"><i class="bi bi-clock me-2"></i>10:00 AM – 1:00 PM</li>
+              <li class="mb-1"><i class="bi bi-clock me-2"></i>10:00 AM &ndash; 1:00 PM</li>
               <li class="mb-1"><i class="bi bi-geo-alt me-2"></i>KUET Main Campus</li>
             </ul>
             <button type="button" class="btn btn-outline-secondary w-100 btn-sm fw-semibold mt-auto event-register-btn" data-event="bootcamp">Register</button>
@@ -216,7 +221,7 @@
             </div>
             <p class="text-muted small mb-4 flex-grow-1">Hear from hiring managers about current roles and career pathways for KUET graduates.</p>
             <ul class="list-unstyled text-muted small mb-4 border-top pt-3">
-              <li class="mb-1"><i class="bi bi-clock me-2"></i>2:00 PM – 5:00 PM</li>
+              <li class="mb-1"><i class="bi bi-clock me-2"></i>2:00 PM &ndash; 5:00 PM</li>
               <li class="mb-1"><i class="bi bi-geo-alt me-2"></i>Innovation Hub</li>
             </ul>
             <button type="button" class="btn btn-outline-secondary w-100 btn-sm fw-semibold mt-auto event-register-btn" data-event="panel">Register</button>
@@ -233,7 +238,7 @@
             </div>
             <p class="text-muted small mb-4 flex-grow-1">One-on-one feedback sessions for CVs, cover letters, and mock interviews.</p>
             <ul class="list-unstyled text-muted small mb-4 border-top pt-3">
-              <li class="mb-1"><i class="bi bi-clock me-2"></i>11:00 AM – 2:00 PM</li>
+              <li class="mb-1"><i class="bi bi-clock me-2"></i>11:00 AM &ndash; 2:00 PM</li>
               <li class="mb-1"><i class="bi bi-geo-alt me-2"></i>Career Lab</li>
             </ul>
             <button type="button" class="btn btn-outline-secondary w-100 btn-sm fw-semibold mt-auto event-register-btn" data-event="clinic">Register</button>
@@ -318,9 +323,9 @@
   <section class="journey-cta py-5 text-white reveal-on-scroll">
     <div class="container text-center">
       <h2 class="mb-3">Ready to Start Your Journey?</h2>
-      <p class="mb-4 text-white-50">Join KUET Career Club today — connect with mentors, access exclusive jobs, and build your future.</p>
-      <a href="register.aspx" class="btn btn-bcc-cta btn-bcc-cta-primary btn-bcc-cta-lg me-2">Get Started</a>
-      <a href="blogs.aspx" class="btn btn-outline-light">Explore Resources</a>
+      <p class="mb-4 text-white-50">Join KUET Career Club today &mdash; connect with mentors, access exclusive jobs, and build your future.</p>
+      <a href="register.aspx" class="btn btn-primary-custom btn-bcc-cta btn-bcc-cta-lg me-2">Get Started</a>
+      <a href="blogs.aspx" class="btn btn-outline-custom">Explore Resources</a>
     </div>
   </section>
 
@@ -388,38 +393,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      var jobCards = document.querySelectorAll('.job-card');
-      var jobSearchInput = document.getElementById('jobSearch');
-      var jobDepartment = document.getElementById('jobDepartment');
-      var jobType = document.getElementById('jobType');
-      var jobSearchBtn = document.getElementById('jobSearchBtn');
-
-      function filterJobs() {
-        var query = jobSearchInput.value.trim().toLowerCase();
-        var departmentValue = jobDepartment.value;
-        var typeValue = jobType.value;
-
-        jobCards.forEach(function (card) {
-          var title = card.querySelector('h5').textContent.toLowerCase();
-          var company = card.querySelector('.text-muted').textContent.toLowerCase();
-          var matchesQuery = query === '' || title.includes(query) || company.includes(query);
-          var matchesDepartment = departmentValue === 'All Departments' || card.dataset.department === departmentValue;
-          var matchesType = typeValue === 'All Types' || card.dataset.type === typeValue;
-
-          if (matchesQuery && matchesDepartment && matchesType) {
-            card.closest('.col-md-6').style.display = '';
-          } else {
-            card.closest('.col-md-6').style.display = 'none';
-          }
-        });
-      }
-
-      if (jobSearchInput && jobDepartment && jobType && jobSearchBtn) {
-        jobSearchInput.addEventListener('input', filterJobs);
-        jobDepartment.addEventListener('change', filterJobs);
-        jobType.addEventListener('change', filterJobs);
-        jobSearchBtn.addEventListener('click', filterJobs);
-      }
+      // Job filter controls removed to avoid console errors when search inputs are not present.
 
       var bookForm = document.getElementById('bookForm');
       var planForm = document.getElementById('planForm');
@@ -474,6 +448,16 @@
           document.getElementById('jobModalCompany').textContent = company;
           document.getElementById('jobModalBody').textContent = desc;
           document.getElementById('jobModalList').innerHTML = list;
+          // attempt to set Apply link in modal to point to apply.aspx?job={id}
+          try {
+            var rawHref = btn.getAttribute('href') || '';
+            var jobId = null;
+            try { jobId = (new URL(rawHref, location.origin)).searchParams.get('job'); } catch(e) { jobId = null; }
+            var applyBtn = document.querySelector('#jobModal .modal-footer a.btn-primary');
+            if (applyBtn) {
+              if (jobId) applyBtn.setAttribute('href', 'apply.aspx?job=' + encodeURIComponent(jobId)); else applyBtn.setAttribute('href', 'register.aspx');
+            }
+          } catch(e) {}
           jobModal.show();
         });
       });
@@ -560,6 +544,46 @@
           eventForm.reset();
         });
       }
+
+    // Count-up animation for stat numbers and reveal-on-scroll
+    function animateCount(el, target) {
+      var start = 0;
+      var duration = 1400;
+      var startTime = null;
+
+      function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        var progress = Math.min((timestamp - startTime) / duration, 1);
+        var value = Math.floor(progress * (target - start) + start);
+        el.textContent = value + (target >= 100 ? '+' : '');
+        if (progress < 1) window.requestAnimationFrame(step);
+      }
+      window.requestAnimationFrame(step);
+    }
+
+    var statEls = document.querySelectorAll('.stat-number');
+    var statsAnimated = false;
+    function checkStats() {
+      if (statsAnimated) return;
+      var rect = document.querySelector('.stats').getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100) {
+        statEls.forEach(function(el){
+          var t = parseInt(el.dataset.target || el.textContent.replace(/\D/g,''),10) || 0;
+          animateCount(el, t);
+        });
+        statsAnimated = true;
+      }
+    }
+
+    function revealOnScroll() {
+      document.querySelectorAll('.reveal-on-scroll').forEach(function(el){
+        var rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 80) el.classList.add('is-visible');
+      });
+    }
+
+    window.addEventListener('scroll', function(){ revealOnScroll(); checkStats(); });
+    window.addEventListener('load', function(){ revealOnScroll(); checkStats(); });
     });
   </script>
 

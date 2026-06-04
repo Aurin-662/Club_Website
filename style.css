@@ -4,13 +4,14 @@
 
 :root{
   --container:1100px;
-  --brand:#004080;
-  --accent:#ffcc00;
+  /* Primary brand changed to a warm maroon to match the example site */
+  --brand:#8B2D31;
+  --accent:#FFC857;
   --muted:#6b7280;
   --muted-dark:#475569;
-  --bg-dark:#465c75;
-  --surface:#f8fbff;
-  --surface-alt:#eef6ff;
+  --bg-dark:#3b1f1f;
+  --surface:#fff9f8;
+  --surface-alt:#fff3f2;
   --card-bg: #ffffff;
   --radius:16px;
   font-family: 'Segoe UI', system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
@@ -23,6 +24,82 @@
 .float-on-scroll { transition: transform 0.9s ease; will-change: transform; }
 .float-slow { animation: floaty 6s ease-in-out infinite; }
 @keyframes floaty { 0% { transform: translateY(0px); } 50% { transform: translateY(-8px); } 100% { transform: translateY(0px); } }
+
+/* Colorful animated gradient used for hero overlays */
+@keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+/* Subtle moving gradient overlay on hero */
+.banner.hero-animated { position: relative; overflow: hidden; }
+.banner.hero-animated > .container { position: relative; z-index: 2; }
+.banner.hero-animated::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(270deg, rgba(139,45,49,0.06), rgba(255,200,87,0.04), rgba(56,189,248,0.03));
+  background-size: 800% 800%;
+  filter: blur(28px);
+  opacity: 0.95;
+  animation: gradientShift 12s ease infinite;
+  pointer-events: none;
+}
+
+/* Eyebrow underline animation for section preludes */
+.eyebrow { position: relative; display: inline-block; }
+.eyebrow::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -10px;
+  width: 56px;
+  height: 5px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--brand), var(--accent), #f59e0b);
+  box-shadow: 0 6px 18px rgba(139,45,49,0.08);
+  animation: slideWidth 2.8s ease-in-out infinite;
+}
+@keyframes slideWidth { 0% { transform: translateX(-50%) scaleX(0.6); opacity: 0.6; } 50% { transform: translateX(-50%) scaleX(1.03); opacity: 1; } 100% { transform: translateX(-50%) scaleX(0.9); opacity: 0.7; } }
+
+/* Notice badge pulse for attention */
+.notice-badge.pulse { animation: pulseBadge 2.2s infinite; }
+@keyframes pulseBadge { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(139,45,49,0.12); } 70% { transform: scale(1.03); box-shadow: 0 12px 28px 6px rgba(139,45,49,0.06); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(139,45,49,0); } }
+
+/* Shiny animated sheen on primary buttons */
+.btn-primary-custom { position: relative; overflow: hidden; }
+.btn-primary-custom::before {
+  content: "";
+  position: absolute;
+  left: -40%;
+  top: -60%;
+  width: 40%;
+  height: 220%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.12), rgba(255,255,255,0.28), rgba(255,255,255,0.12));
+  transform: rotate(25deg) translateX(0);
+  transition: transform 0.9s cubic-bezier(.2,.9,.2,1);
+  opacity: 0.9;
+}
+.btn-primary-custom:hover::before,
+.btn-primary-custom:focus::before {
+  transform: rotate(25deg) translateX(220%);
+}
+
+/* Subtle animated gradient on job and feature cards on hover */
+.job-card, .card-feature { position: relative; overflow: hidden; }
+.job-card::before, .card-feature::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  z-index: 0;
+  background: linear-gradient(120deg, rgba(255,200,87,0.06), rgba(139,45,49,0.04), rgba(56,189,248,0.03));
+  transform: scale(.95);
+  opacity: 0;
+  transition: transform .6s ease, opacity .6s ease;
+}
+.job-card:hover::before, .card-feature:hover::before { transform: scale(1); opacity: 1; }
+
+/* Stat number styling for animated counters */
+.stat-number { display: inline-block; min-width: 48px; text-align: right; }
 
 /* Subtle focus-visible outlines for accessibility */
 :focus-visible { outline: 3px solid rgba(0,64,128,0.14); outline-offset: 2px; }
@@ -135,20 +212,20 @@ header.site-header {
 /* Action buttons (Sign In / Register) */
 .header-actions { display:flex; gap:10px; align-items:center; }
 .btn-primary-custom {
-  background: linear-gradient(135deg, #00366f 0%, #0058a2 100%);
+  background: linear-gradient(135deg, #8B2D31 0%, #6A2023 100%);
   color:#fff;
   border:0;
   padding:10px 16px;
   border-radius:12px;
   font-weight:700;
-  box-shadow: 0 14px 30px rgba(0,54,112,0.16);
+  box-shadow: 0 14px 30px rgba(139,45,49,0.14);
   transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
 }
 .btn-primary-custom:hover,
 .btn-primary-custom:focus {
-  background: linear-gradient(135deg, #002a57 0%, #004b8c 100%);
+  background: linear-gradient(135deg, #6A2023 0%, #4a1416 100%);
   transform: translateY(-1px);
-  box-shadow: 0 16px 34px rgba(0,50,98,0.2);
+  box-shadow: 0 16px 34px rgba(106,32,35,0.22);
 }
 .btn-outline-custom {
   background:rgba(255,255,255,0.95);
@@ -177,7 +254,7 @@ header.site-header {
 /* Banner / Hero */
 .banner {
   padding:64px 0;
-  background: linear-gradient(180deg, rgba(0,64,128,0.04), #fff 30%);
+  background: linear-gradient(180deg, rgba(139,45,49,0.04), #fff 30%);
   color: #0b1220;
 }
 .hero-copy h1 {
@@ -416,8 +493,8 @@ header.site-header {
   --bcc-muted: var(--muted);
 }
 .notice-marquee-container {
-  background: #fff5f5;
-  border-bottom: 1.5px solid #feb2b2;
+  background: linear-gradient(90deg, rgba(139,45,49,0.06), rgba(255,200,87,0.03));
+  border-bottom: 1.5px solid rgba(139,45,49,0.12);
   overflow: hidden;
 }
 .notice-badge {

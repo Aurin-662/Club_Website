@@ -19,7 +19,7 @@ public partial class home : Page
         string connString = ConfigurationManager.ConnectionStrings["MyDbConnection"].ConnectionString;
         using (SqlConnection con = new SqlConnection(connString))
         {
-            string query = "SELECT JobTitle, CompanyName, JobType, Description FROM Jobs ORDER BY CreatedAt DESC";
+            string query = "SELECT JobID, JobTitle, CompanyName, JobType, Description FROM Jobs ORDER BY CreatedAt DESC";
             using (SqlCommand cmd = new SqlCommand(query, con))
             {
                 using (SqlDataAdapter sda = new SqlDataAdapter(cmd))

@@ -1,6 +1,7 @@
 using System;
 using System.Web;
 using System.Web.UI;
+using System.Collections.Generic;
 
 public partial class SiteMaster : MasterPage
 {
@@ -43,27 +44,46 @@ public partial class SiteMaster : MasterPage
             Action<System.Web.UI.HtmlControls.HtmlAnchor, string> apply = (anchor, href) =>
             {
                 if (anchor == null) return;
-                anchor.Attributes.Remove("class");
-                anchor.Attributes.Add("class", "nav-link fw-semibold");
+                // preserve any existing nav-* token (like nav-home, nav-job) so client-side selectors continue to work
+                var existing = anchor.Attributes["class"] ?? string.Empty;
+                var parts = new List<string>(existing.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
+                if (!parts.Contains("nav-link")) parts.Insert(0, "nav-link");
+                if (!parts.Contains("fw-semibold")) parts.Add("fw-semibold");
                 if (!string.IsNullOrEmpty(href) && path.EndsWith(href.ToLowerInvariant()))
                 {
-                    anchor.Attributes.Add("class", "nav-link active fw-semibold");
+                    if (!parts.Contains("active")) parts.Add("active");
                 }
+                anchor.Attributes["class"] = string.Join(" ", parts);
             };
 
             apply(navHome, "home.aspx");
-            apply(navJobs, "home.aspx");
+            apply(navJobs, "jobs.aspx");
             apply(navBlogs, "blogs.aspx");
 
             apply(navHomeMobile, "home.aspx");
-            apply(navJobsMobile, "home.aspx");
+            apply(navJobsMobile, "jobs.aspx");
             apply(navBlogsMobile, "blogs.aspx");
+
+            // Ensure Home appears active when the request is at the site root or default page
+            try
+            {
+                var appPath = (Request.ApplicationPath ?? "").ToLowerInvariant();
+                if (path == "/" || string.IsNullOrEmpty(path) || path.EndsWith("/default.aspx") || path == appPath || path == appPath + "/")
+                {
+                    try { navHome.Attributes.Add("class", "nav-link active fw-semibold"); } catch { }
+                    try { navHomeMobile.Attributes.Add("class", "nav-link active fw-semibold"); } catch { }
+                }
+            }
+            catch { }
+
+            // Keep top-level dropdown anchors static; highlight is handled client-side for dropdown items when needed.
 
             if (path.EndsWith("jobs.aspx") || path.Contains("/jobs"))
             {
                 try { navJobs.Attributes.Add("class", "nav-link active fw-semibold"); } catch { }
                 try { navJobsMobile.Attributes.Add("class", "nav-link active fw-semibold"); } catch { }
             }
+            // No further server-side activation for dropdown toggles; client-side script will mark the correct link active when the page has a matching link
         }
         catch { }
     }
