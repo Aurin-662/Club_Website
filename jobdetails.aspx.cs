@@ -9,13 +9,7 @@ public partial class jobdetails : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            // require signin to view details/apply
-            if (Session["UserName"] == null)
-            {
-                string returnUrl = Server.UrlEncode(Request.RawUrl ?? Request.Url.PathAndQuery);
-                Response.Redirect("~/login.aspx?returnUrl=" + returnUrl);
-                return;
-            }
+            // allow anonymous users to view job details; require signin only when applying
             int id;
             if (int.TryParse(Request.QueryString["id"], out id))
             {
@@ -57,7 +51,16 @@ public partial class jobdetails : System.Web.UI.Page
                     lblType.Text = row["JobType"].ToString();
                     lblDescription.InnerText = row["Description"].ToString();
 
-                    applyLink.HRef = "apply.aspx?job=" + id;
+                    // If user is not signed in, point Apply button to login with returnUrl back to this job details
+                    if (Session["UserName"] == null)
+                    {
+                        var returnUrl = Server.UrlEncode("/jobdetails.aspx?id=" + id + "#apply");
+                        applyLink.HRef = ResolveUrl("~/login.aspx?returnUrl=" + returnUrl);
+                    }
+                    else
+                    {
+                        applyLink.HRef = "apply.aspx?job=" + id;
+                    }
 
                     pnlDetails.Visible = true;
                 }

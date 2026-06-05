@@ -1,7 +1,7 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="pending-jobs.aspx.cs" Inherits="admin_pending_jobs" MasterPageFile="~/admin/Admin.master" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="manage-jobs.aspx.cs" Inherits="admin_manage_jobs" MasterPageFile="~/admin/Admin.master" %>
 
 <asp:Content ID="TitleContent" ContentPlaceHolderID="TitleContent" runat="server">
-    Pending Job Submissions (Admin)
+    Manage Jobs (Admin)
 </asp:Content>
 
 <asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
@@ -13,14 +13,14 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-10 mx-auto">
-          <h3>Pending Job Submissions</h3>
-          <p class="text-muted">Jobs submitted by companies appear here for review. Approve to publish on Jobs page.</p>
+          <h3>Manage Published Jobs</h3>
+          <p class="text-muted">View and remove published job listings.</p>
 
           <div class="d-flex gap-2 mb-3">
-            <a href="manage-jobs.aspx" class="btn btn-sm btn-outline-secondary">Manage Jobs</a>
+            <a href="pending-jobs.aspx" class="btn btn-sm btn-outline-secondary">Pending Jobs</a>
           </div>
 
-          <asp:Repeater ID="rptPending" runat="server" OnItemCommand="rptPending_ItemCommand">
+          <asp:Repeater ID="rptManage" runat="server" OnItemCommand="rptManage_ItemCommand">
             <HeaderTemplate>
               <div class="list-group">
             </HeaderTemplate>
@@ -30,13 +30,11 @@
                   <div>
                     <div class="fw-bold"><%# Eval("JobTitle") %> <small class="text-muted">- <%# Eval("CompanyName") %></small></div>
                     <div class="small text-muted mb-2"><%# Eval("Department") %> • <%# Eval("JobType") %></div>
-                    <div class="small text-muted mb-2">Contact: <%# Eval("ContactEmail") %> <%# Eval("CompanyWebsite") != null && Eval("CompanyWebsite").ToString() != "" ? ("• " + Eval("CompanyWebsite")) : "" %></div>
                     <div class="mb-2"><%# Eval("Description") %></div>
                   </div>
                   <div class="text-end">
-                    <asp:Button runat="server" CssClass="btn btn-sm btn-outline-secondary me-2" CommandName="view" CommandArgument='<%# Eval("Path") %>' Text="View" />
-                    <asp:Button runat="server" CssClass="btn btn-sm btn-success me-2" CommandName="approve" CommandArgument='<%# Eval("Path") %>' Text="Approve" />
-                    <asp:Button runat="server" CssClass="btn btn-sm btn-danger" CommandName="decline" CommandArgument='<%# Eval("Path") %>' Text="Decline" />
+                    <asp:Button runat="server" CssClass="btn btn-sm btn-outline-secondary me-2" CommandName="view" CommandArgument='<%# Eval("JobID") %>' Text="View" />
+                    <asp:Button runat="server" CssClass="btn btn-sm btn-danger" CommandName="delete" CommandArgument='<%# Eval("JobID") %>' Text="Delete" />
                   </div>
                 </div>
               </div>
@@ -46,7 +44,7 @@
             </FooterTemplate>
           </asp:Repeater>
 
-          <asp:Literal ID="litPendingStatus" runat="server" />
+          <asp:Literal ID="litManageStatus" runat="server" />
         </div>
       </div>
     </div>

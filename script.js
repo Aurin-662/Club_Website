@@ -32,3 +32,27 @@
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
+
+// Defensive handler: ensure job details links navigate even if other scripts call preventDefault
+(function(){
+  function onDocClick(e){
+    try{
+      var t = e.target;
+      var a = t.closest && t.closest('a');
+      if(!a) return;
+      var href = a.getAttribute('href') || a.getAttribute('data-href') || '';
+      if(!href) return;
+      var low = href.toLowerCase();
+      if(low.indexOf('jobdetails.aspx') !== -1){
+        console.log('jobdetails click:', href, a.href);
+        // allow normal click if navigation already in progress, otherwise force it
+        // small timeout to allow other listeners to run; then enforce navigation
+        setTimeout(function(){
+          try{ window.location.href = a.href; }catch(_){}
+        }, 10);
+      }
+    }catch(err){ console.error('click guard', err); }
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function(){ document.addEventListener('click', onDocClick); }); else document.addEventListener('click', onDocClick);
+})();

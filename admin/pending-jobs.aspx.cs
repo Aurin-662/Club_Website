@@ -21,6 +21,8 @@ public partial class admin_pending_jobs : Page
         if (!IsPostBack) LoadPending();
     }
 
+    // Initialize DB button removed; table creation handled when inserting pending jobs or via migrations.
+
     private string GetConnectionString()
     {
         var setting = ConfigurationManager.ConnectionStrings["DbConnect"];
@@ -158,14 +160,18 @@ public partial class admin_pending_jobs : Page
                                 string d = Convert.ToString(rdr["Department"]);
                                 string type = Convert.ToString(rdr["JobType"]);
                                 string desc = Convert.ToString(rdr["Description"]);
+                                string contact = Convert.ToString(rdr["ContactEmail"]);
+                                string website = Convert.ToString(rdr["CompanyWebsite"]);
                                 rdr.Close();
-                                using (var ins = new SqlCommand("INSERT INTO Jobs (JobTitle, CompanyName, Department, JobType, Description) VALUES (@t,@c,@d,@type,@desc)", conn))
+                                using (var ins = new SqlCommand("INSERT INTO Jobs (JobTitle, CompanyName, Department, JobType, Description, CompanyEmail, CompanyWebsite) VALUES (@t,@c,@d,@type,@desc,@ce,@cw)", conn))
                                 {
                                     ins.Parameters.AddWithValue("@t", t);
                                     ins.Parameters.AddWithValue("@c", c);
                                     ins.Parameters.AddWithValue("@d", d);
                                     ins.Parameters.AddWithValue("@type", type);
                                     ins.Parameters.AddWithValue("@desc", desc);
+                                    ins.Parameters.AddWithValue("@ce", string.IsNullOrEmpty(contact) ? (object)DBNull.Value : contact);
+                                    ins.Parameters.AddWithValue("@cw", string.IsNullOrEmpty(website) ? (object)DBNull.Value : website);
                                     ins.ExecuteNonQuery();
                                 }
                                 using (var del = new SqlCommand("DELETE FROM PendingJobs WHERE PendingID = @id", conn)) { del.Parameters.AddWithValue("@id", id); del.ExecuteNonQuery(); }

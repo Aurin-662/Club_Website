@@ -21,11 +21,11 @@
               <small class="text-muted">KUET Career Club</small>
             </div>
           </a>
-          <nav class="nav flex-column gap-1">
+            <nav class="nav flex-column gap-1">
             <a class="nav-link" href="dashboard.aspx">Dashboard</a>
             <a class="nav-link" href="pending-jobs.aspx">Pending Jobs</a>
             <a class="nav-link" href="queued-emails.aspx">Queued Emails</a>
-            <a class="nav-link" href="pending-jobs.aspx">Manage Jobs</a>
+            <a class="nav-link" href="manage-jobs.aspx">Manage Jobs</a>
             <asp:PlaceHolder runat="server" ID="phSignIn">
               <a class="nav-link text-danger" href="admin-login.aspx">Admin Sign In</a>
             </asp:PlaceHolder>

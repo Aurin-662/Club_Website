@@ -87,7 +87,9 @@
                     </p>
                     <div class="d-flex justify-content-between align-items-center mt-auto pt-2 border-top">
                         <span class="small text-muted"><strong>Dept:</strong> <%# Eval("Department") %></span>
-                        <asp:HyperLink ID="hlDetails" runat="server" NavigateUrl='<%# Eval("JobID", "jobdetails.aspx?id={0}") %>' CssClass="btn btn-outline-custom btn-sm fw-semibold">View Details</asp:HyperLink>
+                        <a href='<%# Eval("JobID", "/jobdetails.aspx?id={0}") %>' class="btn btn-outline-custom btn-sm fw-semibold">
+                          <i class="bi bi-eye me-1" aria-hidden="true"></i> View Details
+                        </a>
                     </div>
                   </article>
                 </div>
