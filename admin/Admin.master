@@ -27,6 +27,7 @@
             <a class="nav-link" href="queued-emails.aspx">Queued Emails</a>
             <a class="nav-link" href="manage-jobs.aspx">Manage Jobs</a>
             <a class="nav-link" href="manage-students.aspx">Manage Students</a>
+            <a id="lnkCompanies" runat="server" class="nav-link" href="manage-companies.aspx">Manage Companies</a>
             <a class="nav-link" href="manage-alumni.aspx">Manage Alumni</a>
             <a class="nav-link" href="manage-blogs.aspx">Manage Blogs</a>
             <asp:PlaceHolder runat="server" ID="phSignIn">
@@ -36,14 +37,18 @@
               <a class="nav-link" href="/login.aspx">User Sign In</a>
             </asp:PlaceHolder>
             <asp:PlaceHolder runat="server" ID="phUserSignOut">
-              <a class="nav-link text-danger" href="javascript:void(0);" onclick="document.getElementById('<%= btnAdminLogout.ClientID %>').click();">Sign out</a>
+              <a class="nav-link text-danger" href="#" role="button" onclick="document.getElementById('<%= btnAdminLogout.ClientID %>').click();">Sign out</a>
             </asp:PlaceHolder>
           </nav>
         </div>
       </aside>
+      <!-- mobile/admin placeholder link (kept hidden in desktop admin layout) -->
+      <asp:PlaceHolder runat="server" ID="phAdminMobileLinks">
+        <a id="lnkCompaniesMobile" runat="server" class="nav-link d-none" href="manage-companies.aspx">Manage Companies</a>
+      </asp:PlaceHolder>
       <main class="flex-fill p-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
-          <h4 class="mb-0"><asp:ContentPlaceHolder ID="PageTitle" runat="server" /></h4>
+          <h4 class="mb-0"><asp:ContentPlaceHolder ID="PageTitle" runat="server"></asp:ContentPlaceHolder></h4>
           <div>
             <asp:Label ID="lblAdminUser" runat="server" CssClass="me-2 text-muted"></asp:Label>
             <asp:Button ID="btnAdminLogout" runat="server" CssClass="btn btn-sm btn-outline-secondary" Text="Logout" OnClick="BtnAdminLogout_Click" />

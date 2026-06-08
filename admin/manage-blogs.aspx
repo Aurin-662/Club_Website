@@ -1,4 +1,4 @@
-<%@ Page Title="Manage Blogs | Admin" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="manage-blogs.aspx.cs" Inherits="admin_manage_blogs" %>
+<%@ Page Title="Manage Blogs | Admin" Language="C#" MasterPageFile="~/admin/admin.master" AutoEventWireup="true" CodeFile="manage-blogs.aspx.cs" Inherits="admin_manage_blogs" %>
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
 <div class="container py-5">

@@ -9,8 +9,9 @@
     .portal-hero-card { background: #f8fafc; border-left: 4px solid #004080; border-radius: 8px; }
     .btn-outline-custom { border: 1px solid #004080; color: #004080; transition: 0.2s; }
     .btn-outline-custom:hover { background: #004080; color: white; }
-    .btn-primary-custom { background: #ffcc00; color: #111; font-weight: 600; border: none; }
-    .btn-primary-custom:hover { background: #e6b800; }
+    /* Primary buttons use brand blue instead of yellow to avoid yellow appearance */
+    .btn-primary-custom { background: #004080; color: #fff; font-weight: 600; border: none; }
+    .btn-primary-custom:hover { background: #003366; color: #fff; }
   </style>
 </asp:Content>
 

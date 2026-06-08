@@ -1,4 +1,4 @@
-<%@ Page Title="Manage Alumni | Admin" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="manage-alumni.aspx.cs" Inherits="admin_manage_alumni" %>
+<%@ Page Title="Manage Alumni | Admin" Language="C#" MasterPageFile="~/admin/admin.master" AutoEventWireup="true" CodeFile="manage-alumni.aspx.cs" Inherits="admin_manage_alumni" %>
 
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
 <div class="container py-5">

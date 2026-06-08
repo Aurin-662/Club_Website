@@ -64,11 +64,11 @@
               <asp:Repeater ID="rptRecentPending" runat="server">
                 <ItemTemplate>
                   <div class="d-flex justify-content-between align-items-start py-2 border-bottom">
-                    <div>
-                      <div class="fw-bold"><%# Eval("JobTitle") %></div>
-                      <div class="small text-muted"><%# Eval("CompanyName") %> • <%# Eval("Department") %></div>
+                  <div>
+                      <div class="fw-bold"><%# GetField(Container.DataItem, "JobTitle") %></div>
+                      <div class="small text-muted"><%# GetField(Container.DataItem, "CompanyName") %> • <%# GetField(Container.DataItem, "Department") %></div>
                     </div>
-                    <div><a class="btn btn-sm btn-outline-secondary" href='<%# Eval("Path") %>' target="_blank">View</a></div>
+                    <div><a class="btn btn-sm btn-outline-secondary" href='<%# GetField(Container.DataItem, "Path") %>' target="_blank">View</a></div>
                   </div>
                 </ItemTemplate>
               </asp:Repeater>

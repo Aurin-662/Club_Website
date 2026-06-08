@@ -3,9 +3,35 @@ using System.Collections.Generic;
 using System.IO;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Web.UI.HtmlControls;
 
 public partial class admin_dashboard : System.Web.UI.Page
 {
+    // helper used from markup to safely read dataitem fields (handles Dictionary / anonymous / DataRowView)
+    public string GetField(object item, string key)
+    {
+        try
+        {
+            if (item == null) return string.Empty;
+            // DataRowView
+            var drv = item as System.Data.DataRowView;
+            if (drv != null) { return drv.Row.Table.Columns.Contains(key) ? Convert.ToString(drv.Row[key]) : string.Empty; }
+            // IDictionary<string,object>
+            var dict = item as System.Collections.IDictionary;
+            if (dict != null)
+            {
+                if (dict.Contains(key)) return Convert.ToString(dict[key]);
+                // try case-insensitive
+                foreach (var k in dict.Keys) { if (Convert.ToString(k).Equals(key, StringComparison.OrdinalIgnoreCase)) return Convert.ToString(dict[k]); }
+                return string.Empty;
+            }
+            // anonymous objects via reflection
+            var pi = item.GetType().GetProperty(key);
+            if (pi != null) return Convert.ToString(pi.GetValue(item));
+            return Convert.ToString(item);
+        }
+        catch { return string.Empty; }
+    }
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["IsAdmin"] == null || !(Session["IsAdmin"] is bool) || !(bool)Session["IsAdmin"]) 
@@ -37,24 +63,70 @@ public partial class admin_dashboard : System.Web.UI.Page
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = "SELECT COUNT(*) FROM Jobs";
-                    litJobsCount.Text = cmd.ExecuteScalar().ToString();
-                }
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = "SELECT COUNT(*) FROM JobApplications";
-                    // fallback when table not exist
-                    try { litQueuedCount.Text = (cmd.ExecuteScalar() ?? "0").ToString(); } catch { litQueuedCount.Text = "0"; }
+                    try { litJobsCount.Text = (cmd.ExecuteScalar() ?? 0).ToString(); } catch { litJobsCount.Text = "0"; }
                 }
             }
         }
-        catch { litJobsCount.Text = "0"; litQueuedCount.Text = "0"; }
+        catch { litJobsCount.Text = "0"; }
 
-        // pending jobs count from App_Data/pending_jobs
+        // pending jobs: prefer DB-backed PendingJobs when available, fall back to App_Data files
         try
         {
-            string dir = Server.MapPath("~/App_Data/pending_jobs");
-            int pending = Directory.Exists(dir) ? Directory.GetFiles(dir).Length : 0;
-            litPendingCount.Text = pending.ToString();
+            var items = new List<object>();
+            int pendingCount = 0;
+            var setting = ConfigurationManager.ConnectionStrings["DbConnect"];
+            if (setting != null && !string.IsNullOrEmpty(setting.ConnectionString))
+            {
+                try
+                {
+                    using (var conn = new SqlConnection(setting.ConnectionString))
+                    {
+                        conn.Open();
+                        using (var c = new SqlCommand("SELECT COUNT(*) FROM PendingJobs", conn))
+                        {
+                            try { pendingCount = Convert.ToInt32(c.ExecuteScalar() ?? 0); } catch { pendingCount = 0; }
+                        }
+
+                        using (var recent = new SqlCommand("SELECT TOP 5 PendingID, JobTitle, CompanyName FROM PendingJobs ORDER BY SubmittedAt DESC", conn))
+                        using (var rdr = recent.ExecuteReader())
+                        {
+                            while (rdr.Read())
+                            {
+                                items.Add(new { JobTitle = rdr["JobTitle"] == DBNull.Value ? "" : rdr["JobTitle"].ToString(), CompanyName = rdr["CompanyName"] == DBNull.Value ? "" : rdr["CompanyName"].ToString(), Path = "pending-jobs.aspx" });
+                            }
+                        }
+                    }
+                }
+                catch { /* ignore db pending failure and fall back to file-based below */ }
+            }
+
+            // fallback / file-based pending jobs
+            try
+            {
+                string dir = Server.MapPath("~/App_Data/pending_jobs");
+                if (Directory.Exists(dir))
+                {
+                    foreach (var f in Directory.GetFiles(dir))
+                    {
+                        try
+                        {
+                            string json = File.ReadAllText(f);
+                            dynamic parsed = new System.Web.Script.Serialization.JavaScriptSerializer().DeserializeObject(json);
+                            var dict = parsed as System.Collections.Generic.Dictionary<string, object>;
+                            var title = dict != null && dict.ContainsKey("JobTitle") && dict["JobTitle"] != null ? dict["JobTitle"].ToString() : Path.GetFileName(f);
+                            items.Add(new { JobTitle = title, CompanyName = dict != null && dict.ContainsKey("CompanyName") ? dict["CompanyName"] : "", Path = f });
+                        }
+                        catch { }
+                    }
+                    // if pendingCount was zero from DB, reflect file count
+                    if (pendingCount == 0) pendingCount = Directory.GetFiles(dir).Length;
+                }
+            }
+            catch { }
+
+            litPendingCount.Text = pendingCount.ToString();
+            rptRecentPending.DataSource = items;
+            rptRecentPending.DataBind();
         }
         catch { litPendingCount.Text = "0"; }
 
@@ -97,18 +169,20 @@ public partial class admin_dashboard : System.Web.UI.Page
         }
         catch { }
 
-        // queued emails recent
+        // queued emails recent (file-based queue)
         try
         {
             string dir = Server.MapPath("~/App_Data/queued_emails");
             var files = new List<object>();
+            int qcount = 0;
             if (Directory.Exists(dir))
             {
-                foreach (var f in Directory.GetFiles(dir)) files.Add(new { Name = Path.GetFileName(f), Info = File.GetCreationTime(f).ToString() });
+                foreach (var f in Directory.GetFiles(dir)) files.Add(new { Name = Path.GetFileName(f), Info = File.GetCreationTime(f).ToString(), Path = f });
+                qcount = files.Count;
             }
             rptRecentQueued.DataSource = files;
             rptRecentQueued.DataBind();
-            litQueuedCount.Text = files.Count.ToString();
+            litQueuedCount.Text = qcount.ToString();
         }
         catch { litQueuedCount.Text = "0"; }
     }
