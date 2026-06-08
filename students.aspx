@@ -4,379 +4,318 @@
 
 <asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    .student-skills span { display: inline-block; background: #f1f5f9; color: #334155; padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; margin-right: 4px; margin-bottom: 4px; font-weight: 500; }
+    .portal-hero-card { background: #f8fafc; border-left: 4px solid #004080; border-radius: 8px; }
+    .btn-outline-custom { border: 1px solid #004080; color: #004080; transition: 0.2s; }
+    .btn-outline-custom:hover { background: #004080; color: white; }
+    .btn-primary-custom { background: #ffcc00; color: #111; font-weight: 600; border: none; }
+    .btn-primary-custom:hover { background: #e6b800; }
+  </style>
 </asp:Content>
 
-
-
-
-
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
-
-    <!-- header/offcanvas provided by Site.master -->
-
-    <section class="portal-hero py-5">
+    <section class="portal-hero py-5" style="background: linear-gradient(135deg, #f8fafc 0%, #eef6ff 100%);">
       <div class="container">
         <div class="row align-items-center gy-4">
           <div class="col-lg-7">
-            <h1>Student Portal</h1>
-            <p class="lead mb-4">Browse current KUET student profiles, connect with talent, and discover academic strengths and skills across departments.</p>
+            <h1 class="fw-bold">Student Portal</h1>
+            <p class="lead text-muted mb-4">Browse current KUET student profiles, connect with talent, and discover academic strengths and skills across departments.</p>
           </div>
           <div class="col-lg-5">
-            <div class="portal-hero-card p-4">
-              <h5>Looking for students?</h5>
-              <p>Use search and filters to narrow down candidates by department, year, and skillsets.</p>
+            <div class="portal-hero-card p-4 shadow-sm bg-white">
+              <h5 class="fw-bold"><i class="bi bi-search-heart text-primary me-2"></i>Looking for students?</h5>
+              <p class="text-muted small mb-0">Use search and filters to narrow down candidates by department, year, and skillsets instantly.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="portal-search-section py-5 bg-white">
+    <section class="portal-search-section py-4 bg-white border-bottom">
       <div class="container">
         <div class="row g-3 align-items-end">
           <div class="col-md-5">
-            <input id="studentSearch" type="search" class="form-control" placeholder="Search by name, ID or skill">
+            <label class="form-label small fw-bold text-muted">Keyword Search</label>
+            <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Search by name, ID or skill..." AutoPostBack="true" OnTextChanged="Filter_Changed"></asp:TextBox>
           </div>
           <div class="col-md-2">
-            <select id="departmentFilter" class="form-select">
-              <option value="all">All Departments</option>
-              <option value="CSE">CSE</option>
-              <option value="EEE">EEE</option>
-              <option value="ME">ME</option>
-              <option value="CE">CE</option>
-              <option value="IPE">IPE</option>
-            </select>
+            <label class="form-label small fw-bold text-muted">Department</label>
+            <asp:DropDownList ID="ddlDepartment" runat="server" CssClass="form-select" AutoPostBack="true" OnSelectedIndexChanged="Filter_Changed">
+              <asp:ListItem Value="all">All Departments</asp:ListItem>
+              <asp:ListItem Value="CSE">CSE</asp:ListItem>
+              <asp:ListItem Value="EEE">EEE</asp:ListItem>
+              <asp:ListItem Value="ME">ME</asp:ListItem>
+              <asp:ListItem Value="CE">CE</asp:ListItem>
+              <asp:ListItem Value="IPE">IPE</asp:ListItem>
+            </asp:DropDownList>
           </div>
           <div class="col-md-2">
-            <select id="yearFilter" class="form-select">
-              <option value="all">All Years</option>
-              <option value="Level 2">Level 2</option>
-              <option value="Level 3">Level 3</option>
-              <option value="Level 4">Level 4</option>
-              <option value="Final">Final</option>
-            </select>
+            <label class="form-label small fw-bold text-muted">Level/Year</label>
+            <asp:DropDownList ID="ddlYear" runat="server" CssClass="form-select" AutoPostBack="true" OnSelectedIndexChanged="Filter_Changed">
+              <asp:ListItem Value="all">All Years</asp:ListItem>
+              <asp:ListItem Value="Level 2">Level 2</asp:ListItem>
+              <asp:ListItem Value="Level 3">Level 3</asp:ListItem>
+              <asp:ListItem Value="Level 4">Level 4</asp:ListItem>
+              <asp:ListItem Value="Final">Final</asp:ListItem>
+            </asp:DropDownList>
           </div>
           <div class="col-md-2">
-            <select id="sortFilter" class="form-select">
-              <option value="name">Sort by Name</option>
-              <option value="department">Sort by Department</option>
-              <option value="year">Sort by Year</option>
-            </select>
+            <label class="form-label small fw-bold text-muted">Sort By</label>
+            <asp:DropDownList ID="ddlSort" runat="server" CssClass="form-select" AutoPostBack="true" OnSelectedIndexChanged="Filter_Changed">
+              <asp:ListItem Value="FullName">Sort by Name</asp:ListItem>
+              <asp:ListItem Value="Department">Sort by Dept</asp:ListItem>
+              <asp:ListItem Value="StudyLevel">Sort by Level</asp:ListItem>
+            </asp:DropDownList>
           </div>
           <div class="col-md-1 d-grid">
-            <button type="button" id="clearStudentFilters" class="btn btn-outline-custom btn-sm">Clear</button>
+            <asp:Button ID="btnClear" runat="server" Text="Reset" CssClass="btn btn-outline-secondary btn-sm" OnClick="btnClear_Click" />
           </div>
         </div>
         <div class="row mt-3">
-          <div class="col-12 d-flex justify-content-between align-items-center">
-            <p class="text-muted small mb-0">Showing <strong id="resultCount">6</strong> students</p>
+          <div class="col-12">
+            <p class="text-muted small mb-0">Showing <strong class="text-dark"><asp:Literal ID="litCount" runat="server">0</asp:Literal></strong> students found</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="portal-listing py-5">
+    <section class="portal-listing py-5 bg-light">
       <div class="container">
-        <div class="row g-4" id="studentGrid">
-          <div class="col-md-6 col-lg-4 student-card" data-name="Riasad Sanvi" data-id="2310102ME20232027" data-department="ME" data-year="Level 2" data-skills="AutoCAD LaTeX SAP2000" data-bio="Enthusiastic about robotics, embedded systems, and design automation." data-experience="Robotics Club Member • CAD Designer Intern at Tech Solutions • Project Lead for Autonomous Vehicle Design" data-projects="Autonomous Vehicle Design, Structural Analysis using SAP2000" data-email="riasad.sanvi@kuet.ac.bd" data-phone="+880-XXX-XXXXXX" data-resume="resumes/riasad-sanvi.pdf">
-            <div class="card p-4 h-100">
-              <div class="d-flex justify-content-between align-items-start mb-3">
-                <div>
-                  <h5>Riasad Sanvi</h5>
-                  <p class="text-muted small mb-0">2310102ME20232027 • Level 2</p>
+        <div class="row g-4">
+          <asp:Repeater ID="rptStudents" runat="server">
+            <ItemTemplate>
+              <div class="col-md-6 col-lg-4 student-card" 
+                   data-name='<%# HttpUtility.HtmlAttributeEncode(Eval("FullName").ToString()) %>' 
+                   data-id='<%# HttpUtility.HtmlAttributeEncode(Eval("RollID").ToString()) %>'
+                   data-department='<%# HttpUtility.HtmlAttributeEncode(Eval("Department").ToString()) %>' 
+                   data-year='<%# HttpUtility.HtmlAttributeEncode(Eval("StudyLevel").ToString()) %>' 
+                   data-skills='<%# HttpUtility.HtmlAttributeEncode(Eval("Skills").ToString()) %>' 
+                   data-bio='<%# HttpUtility.HtmlAttributeEncode(Eval("Bio").ToString()) %>' 
+                   data-experience='<%# HttpUtility.HtmlAttributeEncode(Eval("Experience").ToString()) %>' 
+                   data-projects='<%# HttpUtility.HtmlAttributeEncode(Eval("Projects").ToString()) %>' 
+                   data-email='<%# HttpUtility.HtmlAttributeEncode(Eval("Email").ToString()) %>' 
+                   data-phone='<%# HttpUtility.HtmlAttributeEncode(Eval("Phone").ToString()) %>' 
+                   data-resume='<%# HttpUtility.HtmlAttributeEncode(Eval("ResumePath").ToString()) %>'>
+                <div class="card p-4 h-100 shadow-sm border-0">
+                  <div class="d-flex justify-content-between align-items-start mb-3">
+                    <div>
+                      <h5 class="fw-bold mb-1 text-dark"><%# Eval("FullName") %></h5>
+                      <p class="text-muted small mb-0"><%# Eval("RollID") %> • <%# Eval("StudyLevel") %></p>
+                    </div>
+                    <span class="badge bg-primary px-2.5 py-1.5"><%# Eval("Department") %></span>
+                  </div>
+                  <p class="text-secondary small mb-3 flex-grow-1"><%# Eval("Bio") %></p>
+                  <div class="student-skills mb-4">
+                        <%# RenderSkills(Eval("Skills").ToString()) %>
+                  </div>
+                  <div class="d-flex gap-2 mt-auto">
+                    <a href="#" class="btn btn-outline-custom btn-sm btn-view-profile flex-grow-1 fw-bold">View Profile</a>
+                    <button type="button" class="btn btn-primary-custom btn-sm btn-connect-card px-3 fw-bold">Connect</button>
+                  </div>
                 </div>
-                <span class="badge bg-primary">ME</span>
               </div>
-              <p class="text-muted mb-3">Enthusiastic about robotics, embedded systems, and design automation.</p>
-              <div class="student-skills mb-3">
-                <span>AutoCAD</span>
-                <span>LaTeX</span>
-                <span>SAP2000</span>
-              </div>
-              <div class="d-flex gap-2">
-                <a href="#" class="btn btn-outline-custom btn-sm btn-view-profile flex-grow-1">View Profile</a>
-                <button type="button" class="btn btn-primary-custom btn-sm btn-connect-card">Connect</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4 student-card" data-name="Muhammad Sazid" data-id="2310103ME23" data-department="ME" data-year="Level 3" data-skills="CAD Matlab" data-bio="Focused on mechanical design, modeling, and sustainable systems." data-experience="Thermal Analysis Project • Manufacturing Systems Research • Design Competition Winner 2023" data-projects="Sustainable Energy Device Design, Thermal Management System" data-email="sazid.mech@kuet.ac.bd" data-phone="+880-XXX-XXXXXX" data-resume="resumes/muhammad-sazid.pdf">
-            <div class="card p-4 h-100">
-              <div class="d-flex justify-content-between align-items-start mb-3">
-                <div>
-                  <h5>Muhammad Sazid</h5>
-                  <p class="text-muted small mb-0">2310103ME23 • Level 3</p>
-                </div>
-                <span class="badge bg-primary">ME</span>
-              </div>
-              <p class="text-muted mb-3">Focused on mechanical design, modeling, and sustainable systems.</p>
-              <div class="student-skills mb-3">
-                <span>CAD</span>
-                <span>Matlab</span>
-              </div>
-              <div class="d-flex gap-2">
-                <a href="#" class="btn btn-outline-custom btn-sm btn-view-profile flex-grow-1">View Profile</a>
-                <button type="button" class="btn btn-primary-custom btn-sm btn-connect-card">Connect</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4 student-card" data-name="Fahmid Yamin" data-id="2204008CE22" data-department="CE" data-year="Level 2" data-skills="Networking JavaScript" data-bio="Working toward expertise in web development and network systems." data-experience="Web Development Intern at WebCraft Solutions • Network Infrastructure Project • Frontend Developer at Campus Tech Club" data-projects="Campus Network Portal, E-Learning Platform" data-email="fahmid.yamin@kuet.ac.bd" data-phone="+880-XXX-XXXXXX" data-resume="resumes/fahmid-yamin.pdf">
-            <div class="card p-4 h-100">
-              <div class="d-flex justify-content-between align-items-start mb-3">
-                <div>
-                  <h5>Fahmid Yamin</h5>
-                  <p class="text-muted small mb-0">2204008CE22 • Level 2</p>
-                </div>
-                <span class="badge bg-info">CE</span>
-              </div>
-              <p class="text-muted mb-3">Working toward expertise in web development and network systems.</p>
-              <div class="student-skills mb-3">
-                <span>Networking</span>
-                <span>JavaScript</span>
-              </div>
-              <div class="d-flex gap-2">
-                <a href="#" class="btn btn-outline-custom btn-sm btn-view-profile flex-grow-1">View Profile</a>
-                <button type="button" class="btn btn-primary-custom btn-sm btn-connect-card">Connect</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4 student-card" data-name="Samir Ahammad" data-id="2018002CSE20" data-department="CSE" data-year="Level 4" data-skills="React Node.js" data-bio="Experienced in full-stack engineering, product development, and leadership." data-experience="Full-Stack Developer at TechVision Inc. (2 years) • Team Lead at Campus Dev Community • Mentored 15+ junior developers" data-projects="E-Commerce Platform, Mobile App API, Cloud Migration Project" data-email="samir.ahammad@kuet.ac.bd" data-phone="+880-XXX-XXXXXX" data-resume="resumes/samir-ahammad.pdf">
-            <div class="card p-4 h-100">
-              <div class="d-flex justify-content-between align-items-start mb-3">
-                <div>
-                  <h5>Samir Ahammad</h5>
-                  <p class="text-muted small mb-0">2018002CSE20 • Level 4</p>
-                </div>
-                <span class="badge bg-success">CSE</span>
-              </div>
-              <p class="text-muted mb-3">Experienced in full-stack engineering, product development, and leadership.</p>
-              <div class="student-skills mb-3">
-                <span>React</span>
-                <span>Node.js</span>
-              </div>
-              <div class="d-flex gap-2">
-                <a href="#" class="btn btn-outline-custom btn-sm btn-view-profile flex-grow-1">View Profile</a>
-                <button type="button" class="btn btn-primary-custom btn-sm btn-connect-card">Connect</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4 student-card" data-name="Ratul Hayat Sisir" data-id="2308007IPE23" data-department="IPE" data-year="Level 2" data-skills="SPSS Data Analysis" data-bio="Developing skills in analytics, research, and operations." data-experience="Operations Research Analyst Intern • Data Analytics Project at Manufacturing Firm • Research Assistant on Supply Chain Study" data-projects="Supply Chain Optimization Analysis, Production Planning Model" data-email="ratul.sisir@kuet.ac.bd" data-phone="+880-XXX-XXXXXX" data-resume="resumes/ratul-hayat-sisir.pdf">
-            <div class="card p-4 h-100">
-              <div class="d-flex justify-content-between align-items-start mb-3">
-                <div>
-                  <h5>Ratul Hayat Sisir</h5>
-                  <p class="text-muted small mb-0">2308007IPE23 • Level 2</p>
-                </div>
-                <span class="badge bg-warning text-dark">IPE</span>
-              </div>
-              <p class="text-muted mb-3">Developing skills in analytics, research, and operations.</p>
-              <div class="student-skills mb-3">
-                <span>SPSS</span>
-                <span>Data Analysis</span>
-              </div>
-              <div class="d-flex gap-2">
-                <a href="#" class="btn btn-outline-custom btn-sm btn-view-profile flex-grow-1">View Profile</a>
-                <button type="button" class="btn btn-primary-custom btn-sm btn-connect-card">Connect</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4 student-card" data-name="Md. Al Nazmus Sakib" data-id="2004035CE202026" data-department="CE" data-year="Level 4" data-skills="Instrumentation PLC" data-bio="Instrumentation student with a focus on automation and control systems." data-experience="Automation Engineer at Industrial Solutions Ltd (1.5 years) • PLC Programming Specialist • Control System Design Project" data-projects="Industrial Process Automation, Safety System Implementation" data-email="sakib.nazmus@kuet.ac.bd" data-phone="+880-XXX-XXXXXX" data-resume="resumes/almad-nazmus-sakib.pdf">
-            <div class="card p-4 h-100">
-              <div class="d-flex justify-content-between align-items-start mb-3">
-                <div>
-                  <h5>Md. Al Nazmus Sakib</h5>
-                  <p class="text-muted small mb-0">2004035CE202026 • Level 4</p>
-                </div>
-                <span class="badge bg-info">CE</span>
-              </div>
-              <p class="text-muted mb-3">Instrumentation student with a focus on automation and control systems.</p>
-              <div class="student-skills mb-3">
-                <span>Instrumentation</span>
-                <span>PLC</span>
-              </div>
-              <div class="d-flex gap-2">
-                <a href="#" class="btn btn-outline-custom btn-sm btn-view-profile flex-grow-1">View Profile</a>
-                <button type="button" class="btn btn-primary-custom btn-sm btn-connect-card">Connect</button>
-              </div>
-            </div>
-          </div>
+            </ItemTemplate>
+          </asp:Repeater>
         </div>
       </div>
     </section>
 
-    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header bg-light">
-            <div>
-              <h5 class="modal-title" id="profileModalLabel"></h5>
-              <p class="text-muted small mb-0 mt-1" id="profileId"></p>
-            </div>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="row mb-4">
-              <div class="col-md-8">
-                <h6 class="text-uppercase text-muted small fw-bold mb-2">About</h6>
-                <p id="profileBio" class="mb-4"></p>
-                <h6 class="text-uppercase text-muted small fw-bold mb-2">Experience & Achievements</h6>
-                <p id="profileExperience" class="mb-4"></p>
-                <h6 class="text-uppercase text-muted small fw-bold mb-2">Projects</h6>
-                <p id="profileProjects"></p>
-              </div>
-              <div class="col-md-4">
-                <div class="p-3 rounded bg-light">
-                  <h6 class="text-uppercase text-muted small fw-bold mb-3">Skills</h6>
-                  <div id="profileSkills" class="mb-4"></div>
-                  <h6 class="text-uppercase text-muted small fw-bold mb-3">Contact</h6>
-                  <p class="small mb-2"><strong>Email:</strong><br><span id="profileEmail"></span></p>
-                  <p class="small"><strong>Phone:</strong><br><span id="profilePhone"></span></p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-outline-custom" data-bs-dismiss="modal">Close</button>
-            <a href="#" id="downloadResume" class="btn btn-outline-custom" download><i class="bi bi-download me-2"></i>Download CV</a>
-            <button type="button" class="btn btn-primary-custom" id="connectStudentBtn"><i class="bi bi-envelope me-2"></i>Send Message</button>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
+    <!-- Profile Modal -->
+    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="contactModalLabel">Send Message</h5>
+            <h5 class="modal-title" id="profileModalLabel">Profile</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <p class="text-muted mb-3">Sending message to <strong id="contactStudentName"></strong></p>
-            <div class="mb-3">
-              <label for="contactEmail" class="form-label">Your Email</label>
-              <input type="email" class="form-control" id="contactEmail" required>
-            </div>
-            <div class="mb-3">
-              <label for="contactSubject" class="form-label">Subject</label>
-              <input type="text" class="form-control" id="contactSubject" placeholder="e.g., Internship Opportunity" required>
-            </div>
-            <div class="mb-3">
-              <label for="contactMessage" class="form-label">Message</label>
-              <textarea class="form-control" id="contactMessage" rows="4" placeholder="Write your message..." required></textarea>
-            </div>
+            <p id="profileId" class="small text-muted"></p>
+            <p id="profileBio" class="mb-2"></p>
+            <p><strong>Experience:</strong> <span id="profileExperience"></span></p>
+            <p><strong>Projects:</strong> <span id="profileProjects"></span></p>
+            <div id="profileSkills" class="mb-2"></div>
+            <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+            <p><strong>Phone:</strong> <span id="profilePhone"></span></p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-outline-custom" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary-custom" id="sendMessageBtn">Send Message</button>
+            <a id="downloadResume" href="#" class="btn btn-outline-secondary btn-sm"><i class="bi bi-download me-1"></i> Download CV</a>
+            <button id="connectStudentBtn" type="button" class="btn btn-primary btn-sm">Message / Connect</button>
           </div>
         </div>
       </div>
     </div>
 
-  <script>
+    <!-- Contact Modal -->
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="contactModalLabel">Contact Student</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Send a networking message to <strong id="contactStudentName"></strong></p>
+            <div class="mb-2"><input id="contactEmail" class="form-control" placeholder="Your email" /></div>
+            <div class="mb-2"><input id="contactSubject" class="form-control" placeholder="Subject" /></div>
+            <div class="mb-2"><textarea id="contactMessage" class="form-control" rows="4" placeholder="Message"></textarea></div>
+          </div>
+          <div class="modal-footer">
+            <button id="sendMessageBtn" type="button" class="btn btn-primary btn-sm">Send Message</button>
+            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
     document.addEventListener('DOMContentLoaded', function () {
-      function findCard(el) { return el.closest('.student-card'); }
+        // প্যারেন্ট কার্ড খোঁজার হেল্পার ফাংশন
+        function findCard(el) { 
+            return el.closest('.student-card'); 
+        }
 
-      document.querySelectorAll('.btn-view-profile').forEach(function (btn) {
-        btn.addEventListener('click', function (e) {
-          e.preventDefault();
-          var card = findCard(btn);
-          if (!card) return;
-          var name = card.dataset.name || '';
-          var id = card.dataset.id || '';
-          var bio = card.dataset.bio || '';
-          var experience = card.dataset.experience || '';
-          var projects = card.dataset.projects || '';
-          var skills = (card.dataset.skills || '').split(' ');
-          var email = card.dataset.email || '';
-          var phone = card.dataset.phone || '';
-          var resume = card.dataset.resume || '#';
+        // ১. View Profile বাটন ফাংশনালিটি (ডাইনামিক ডেলিগেশন দিয়ে হ্যান্ডেল করা হয়েছে)
+        document.addEventListener('click', function (e) {
+            if (e.target && e.target.classList.contains('btn-view-profile')) {
+                e.preventDefault();
+                var btn = e.target;
+                var card = findCard(btn);
+                if (!card) return;
 
-          var profileModal = document.getElementById('profileModal');
-          if (!profileModal) return;
+                // ডাটা রিসিভ করা
+                var name = card.dataset.name || '';
+                var id = card.dataset.id || '';
+                var bio = card.dataset.bio || 'No bio available.';
+                var experience = card.dataset.experience || 'No experience listed.';
+                var projects = card.dataset.projects || 'No projects listed.';
+                var skills = (card.dataset.skills || '').split(/[,\s]+/); // স্পেস বা কমা দিয়ে স্প্লিট
+                var email = card.dataset.email || '';
+                var phone = card.dataset.phone || 'N/A';
+                var resume = card.dataset.resume || '#';
 
-          document.getElementById('profileModalLabel').textContent = name;
-          document.getElementById('profileId').textContent = id;
-          document.getElementById('profileBio').textContent = bio;
-          document.getElementById('profileExperience').textContent = experience;
-          document.getElementById('profileProjects').textContent = projects;
-          var skillsContainer = document.getElementById('profileSkills');
-          skillsContainer.innerHTML = '';
-          skills.filter(Boolean).forEach(function (s) {
-            var span = document.createElement('span');
-            span.className = 'badge bg-light text-dark me-1 mb-1';
-            span.textContent = s;
-            skillsContainer.appendChild(span);
-          });
-          document.getElementById('profileEmail').textContent = email;
-          document.getElementById('profilePhone').textContent = phone;
-          var download = document.getElementById('downloadResume');
-          if (download) { download.href = resume; }
+                var profileModal = document.getElementById('profileModal');
+                if (!profileModal) return;
 
-          var connectBtn = document.getElementById('connectStudentBtn');
-          if (connectBtn) {
-            connectBtn.dataset.targetName = name;
-            connectBtn.dataset.targetEmail = email;
-          }
+                // মোডাল ফিলগুলো ডাটা দিয়ে পপুলেট করা
+                document.getElementById('profileModalLabel').textContent = name;
+                document.getElementById('profileId').textContent = id + " • " + card.dataset.department + " (" + card.dataset.year + ")";
+                document.getElementById('profileBio').textContent = bio;
+                document.getElementById('profileExperience').textContent = experience;
+                document.getElementById('profileProjects').textContent = projects;
 
-          var bsModal = new bootstrap.Modal(profileModal);
-          bsModal.show();
+                // স্কিল ব্যাজ জেনারেট করা
+                var skillsContainer = document.getElementById('profileSkills');
+                skillsContainer.innerHTML = '';
+                skills.filter(Boolean).forEach(function (s) {
+                    var span = document.createElement('span');
+                    span.className = 'badge bg-secondary-subtle text-dark me-1 mb-1 p-2 small';
+                    span.textContent = s;
+                    skillsContainer.appendChild(span);
+                });
+
+                document.getElementById('profileEmail').textContent = email;
+                document.getElementById('profilePhone').textContent = phone;
+
+                var download = document.getElementById('downloadResume');
+                if (download) { 
+                    download.href = resume; 
+                    // যদি কোনো সিভি আপলোড না থাকে
+                    if(resume === '#' || resume === 'resumes/default.pdf') {
+                        download.classList.add('disabled');
+                        download.innerHTML = '<i class="bi bi-file-earmark-lock me-1"></i> No CV';
+                    } else {
+                        download.classList.remove('disabled');
+                        download.innerHTML = '<i class="bi bi-download me-1"></i> Download CV';
+                    }
+                }
+
+                // প্রোফাইল মোডালের ভেতরের কানেক্ট বাটনে ডাটা পাস করা
+                var connectBtn = document.getElementById('connectStudentBtn');
+                if (connectBtn) {
+                    connectBtn.dataset.targetName = name;
+                    connectBtn.dataset.targetEmail = email;
+                }
+
+                var bsModal = new bootstrap.Modal(profileModal);
+                bsModal.show();
+            }
         });
-      });
 
-      document.querySelectorAll('.btn-connect-card').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          var card = findCard(btn);
-          if (!card) return;
-          var name = card.dataset.name || '';
-          var email = card.dataset.email || '';
-          var contactModal = document.getElementById('contactModal');
-          if (!contactModal) return;
-          document.getElementById('contactStudentName').textContent = name;
-          contactModal.dataset.recipientEmail = email;
-          var bsModal = new bootstrap.Modal(contactModal);
-          bsModal.show();
-        });
-      });
+        // ২. কার্ডের ভেতরের ডাইরেক্ট Connect বাটন ফাংশনালিটি
+        document.addEventListener('click', function (e) {
+            if (e.target && e.target.classList.contains('btn-connect-card')) {
+                var btn = e.target;
+                var card = findCard(btn);
+                if (!card) return;
 
-      var connectStudentBtn = document.getElementById('connectStudentBtn');
-      if (connectStudentBtn) {
-        connectStudentBtn.addEventListener('click', function () {
-          var name = connectStudentBtn.dataset.targetName || '';
-          var email = connectStudentBtn.dataset.targetEmail || '';
-          var profileModal = document.getElementById('profileModal');
-          var bsProfile = bootstrap.Modal.getInstance(profileModal);
-          if (bsProfile) bsProfile.hide();
-          var contactModal = document.getElementById('contactModal');
-          if (!contactModal) return;
-          document.getElementById('contactStudentName').textContent = name;
-          contactModal.dataset.recipientEmail = email;
-          var bsContact = new bootstrap.Modal(contactModal);
-          bsContact.show();
+                var name = card.dataset.name || '';
+                var email = card.dataset.email || '';
+                openContactModal(name, email);
+            }
         });
-      }
 
-      var sendMessageBtn = document.getElementById('sendMessageBtn');
-      if (sendMessageBtn) {
-        sendMessageBtn.addEventListener('click', function () {
-          var contactModal = document.getElementById('contactModal');
-          var recipientEmail = contactModal && contactModal.dataset.recipientEmail ? contactModal.dataset.recipientEmail : '';
-          var fromEmail = document.getElementById('contactEmail').value || '';
-          var subject = document.getElementById('contactSubject').value || '';
-          var message = document.getElementById('contactMessage').value || '';
-          var bsContact = bootstrap.Modal.getInstance(contactModal);
-          if (bsContact) bsContact.hide();
-          alert('Message sent to ' + (recipientEmail || 'recipient') + '\nSubject: ' + subject);
-          if (document.getElementById('contactEmail')) document.getElementById('contactEmail').value = '';
-          if (document.getElementById('contactSubject')) document.getElementById('contactSubject').value = '';
-          if (document.getElementById('contactMessage')) document.getElementById('contactMessage').value = '';
-        });
-      }
+        // ৩. প্রোফাইল মোডালের ভেতরের Message/Connect বাটন অ্যাকশন
+        var connectStudentBtn = document.getElementById('connectStudentBtn');
+        if (connectStudentBtn) {
+            connectStudentBtn.addEventListener('click', function () {
+                var name = connectStudentBtn.dataset.targetName || '';
+                var email = connectStudentBtn.dataset.targetEmail || '';
+
+                // প্রোফাইল মোডালটি আগে হাইড করা
+                var profileModal = document.getElementById('profileModal');
+                var bsProfile = bootstrap.Modal.getInstance(profileModal);
+                if (bsProfile) bsProfile.hide();
+
+                // কন্টাক্ট মোডালটি ওপেন করা
+                setTimeout(function() {
+                    openContactModal(name, email);
+                }, 400); // স্মুথ অ্যানিমেশনের জন্য সামান্য ডিলে
+            });
+        }
+
+        // কন্টাক্ট মোডাল পপুলেট ও ওপেন করার কমন ফাংশন
+        function openContactModal(name, email) {
+            var contactModal = document.getElementById('contactModal');
+            if (!contactModal) return;
+
+            document.getElementById('contactStudentName').textContent = name;
+            contactModal.dataset.recipientEmail = email;
+
+            var bsContact = new bootstrap.Modal(contactModal);
+            bsContact.show();
+        }
+
+        // ৪. মেসেজ সাবমিট বাটন অ্যাকশন
+        var sendMessageBtn = document.getElementById('sendMessageBtn');
+        if (sendMessageBtn) {
+            sendMessageBtn.addEventListener('click', function () {
+                var contactModal = document.getElementById('contactModal');
+                var recipientEmail = contactModal ? contactModal.dataset.recipientEmail : '';
+                var fromEmail = document.getElementById('contactEmail').value || '';
+                var subject = document.getElementById('contactSubject').value || '';
+                var message = document.getElementById('contactMessage').value || '';
+
+                if(!fromEmail || !subject || !message) {
+                    alert('Please fill out all the message fields.');
+                    return;
+                }
+
+                var bsContact = bootstrap.Modal.getInstance(contactModal);
+                if (bsContact) bsContact.hide();
+
+                // সফলতার নোটিফিকেশন
+                alert('Success! Your networking message has been routed to: ' + recipientEmail + '\nSubject: ' + subject);
+
+                // ফর্ম রিসেট করা
+                document.getElementById('contactEmail').value = '';
+                document.getElementById('contactSubject').value = '';
+                document.getElementById('contactMessage').value = '';
+            });
+        }
     });
-  </script>
-</asp:Content>
+    </script>
+
+    </asp:Content>

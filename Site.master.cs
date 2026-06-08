@@ -25,6 +25,8 @@ public partial class SiteMaster : MasterPage
                 phAnonymousMobile.Visible = false;
                 phLoggedInMobile.Visible = true;
                 lblUserNameMobile.Text = userName;
+                // Show admin nav if IsAdmin flag present
+                try { if (Session["IsAdmin"] != null && (bool)Session["IsAdmin"]) { phAdminNav.Visible = true; phAdminNavMobile.Visible = true; } } catch { }
             }
             else
             {
