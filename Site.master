@@ -23,12 +23,30 @@
     .job-card:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
     .card-feature, .collab-card { background: #ffffff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 24px; transition: all 0.25s ease; }
     .card-feature:hover, .collab-card:hover { border-color: #cbd5e1; box-shadow: 0 8px 16px rgba(0,0,0,0.04); }
+    /* Ensure interactive controls inside feature cards are on top and receive pointer events
+       (fixes case where pseudo-elements or other overlays intercept clicks) */
+    .card-feature, .collab-card { position: relative; }
+    .card-feature::before, .card-feature::after,
+    .collab-card::before, .collab-card::after { pointer-events: none; }
+    .card-feature a.btn, .collab-card a.btn, .card-feature .btn, .collab-card .btn { position: relative; z-index: 2; pointer-events: auto; }
     .collab-card.active-card { border: 1.5px solid var(--bcc-primary); background: #fffafb; }
     .bg-info-soft { background-color: #ebf8ff; color: #2b6cb0; }
     .bg-success-soft { background-color: #f0fff4; color: #2f855a; }
     .bg-orange-soft { background-color: #fff7ed; color: #c2410c; }
     h1,h2,h3,h5 { color: var(--bcc-dark); font-weight:700 !important; }
     .eyebrow { color: var(--bcc-primary); font-weight:700; text-transform:uppercase; letter-spacing:1px; font-size:0.85rem; }
+    /* Jobs carousel styles */
+    .jobs-carousel-wrapper { overflow: hidden; }
+    .jobs-carousel-viewport { overflow: hidden; }
+    .jobs-carousel-track { display: flex; gap: 20px; transition: transform 450ms cubic-bezier(.22,.9,.29,1); }
+    .job-slide { flex: 0 0 calc((100% - 40px) / 3); box-sizing: border-box; }
+    @media (max-width: 992px) { .job-slide { flex: 0 0 calc((100% - 20px) / 2); } }
+    @media (max-width: 576px) { .job-slide { flex: 0 0 100%; } }
+    .job-card { min-height: 210px; }
+    .jobs-prev, .jobs-next { width: 44px; height: 38px; }
+    /* job slide entrance animation */
+    .job-slide { opacity: 0; transform: translateY(12px); transition: opacity 420ms ease, transform 420ms ease; }
+    .job-slide.is-visible { opacity: 1; transform: translateY(0); }
   </style>
   <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
   <meta property="og:site_name" content="KUET Career Club" />
@@ -37,6 +55,7 @@
 </head>
 <body class="bg-light">
   <form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true" />
     
     <header class="site-header shadow-sm bg-white">
       <div class="container py-2 d-flex align-items-center justify-content-between">

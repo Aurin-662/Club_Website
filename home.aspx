@@ -1,4 +1,4 @@
-<%@ Page Title="KUET Career Club" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" %>
+<%@ Page Title="KUET Career Club" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="home.aspx.cs" Inherits="home" %>
 
 <asp:Content ID="TitleContent" ContentPlaceHolderID="TitleContent" runat="server">
     Home | KUET Career Club
@@ -82,41 +82,50 @@
     <div class="text-center mb-5">
       <h6 class="eyebrow">Job Board</h6>
       <h2>Latest Opportunities for KUET Talent</h2>
-      <p class="text-muted mx-auto" style="max-width:70ch;">Explore the latest internships, part-time roles, and full-time positions posted by employers across technology, industry, and research. Filter listings by role type, department, or company to find opportunities that match your goals.</p>
       <p class="text-muted small mx-auto" style="max-width:70ch;">Are you an employer or alumni wanting to share an opportunity? Post jobs and internships to reach KUET students and graduates <a href="post-job.aspx">here</a>.</p>
     </div>
 
-    <div class="row g-4">
-      <asp:Repeater ID="rptJobs" runat="server">
-        <ItemTemplate>
-          <div class="col-md-6 col-lg-4">
-            <article class="job-card p-4 h-100 d-flex flex-column" data-type='<%# Eval("JobType") %>' data-department='<%# Eval("CompanyName") %>'>
-              <div class="d-flex align-items-start justify-content-between mb-3">
-                <div>
-                  <h5 class="mb-1"><%# Eval("JobTitle") %></h5>
-                  <p class="mb-0 text-muted small fw-semibold"><%# Eval("CompanyName") %></p>
-                </div>
-                <span class="badge rounded px-2 py-1 bg-info-soft fw-bold"><%# Eval("JobType") %></span>
-              </div>
-              <p class="text-muted small mb-4 flex-grow-1"><%# Eval("Description") %></p>
-              <div class="mt-auto"><small class="text-muted">Posted by <%# Eval("CompanyName") %> • <%# Eval("JobType") %></small></div>
-            </article>
-          </div>
-        </ItemTemplate>
-      </asp:Repeater>
-      <div class="col-12 text-center mt-4">
-        <a href="jobs.aspx" class="btn btn-primary-custom btn-lg">View All Jobs</a>
-      </div>
-      <asp:Panel ID="pnlNoJobs" runat="server" CssClass="text-center" Visible="false">
-        <div class="col-12">
-          <div class="p-4 bg-white border rounded-3">
-            <h5 class="mb-2">No job listings available</h5>
-            <p class="text-muted small mb-3">We don't have any active job or internship postings right now. Check the full job board for updates.</p>
-            <a href="jobs.aspx" class="btn btn-outline-secondary btn-sm">Open Job Board</a>
-          </div>
-        </div>
-      </asp:Panel>
+    <div class="d-flex align-items-center justify-content-end mb-3 gap-2">
+      <button type="button" class="btn btn-outline-secondary btn-sm jobs-prev" aria-label="Previous">&lsaquo;</button>
+      <button type="button" class="btn btn-outline-secondary btn-sm jobs-next" aria-label="Next">&rsaquo;</button>
     </div>
+
+    <div class="jobs-carousel-wrapper">
+      <div class="jobs-carousel-viewport">
+        <div class="jobs-carousel-track">
+          <asp:Repeater ID="rptJobs" runat="server">
+            <ItemTemplate>
+              <div class="job-slide">
+                <article class="job-card p-4 h-100 d-flex flex-column" data-type='<%# Eval("JobType") %>' data-department='<%# Eval("CompanyName") %>'>
+                  <div class="d-flex align-items-start justify-content-between mb-3">
+                    <div>
+                      <h5 class="mb-1"><%# Eval("JobTitle") %></h5>
+                      <p class="mb-0 text-muted small fw-semibold"><%# Eval("CompanyName") %></p>
+                    </div>
+                    <span class="badge rounded px-2 py-1 bg-info-soft fw-bold"><%# Eval("JobType") %></span>
+                  </div>
+                  <p class="text-muted small mb-4 flex-grow-1"><%# Eval("Description") %></p>
+                  <div class="mt-auto"><small class="text-muted">Posted by <%# Eval("CompanyName") %> &bull; <%# Eval("JobType") %></small></div>
+                </article>
+              </div>
+            </ItemTemplate>
+          </asp:Repeater>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-3 text-center">
+      <a href="jobs.aspx" class="btn btn-primary-custom btn-lg">View All Jobs</a>
+    </div>
+
+    <asp:Panel ID="pnlNoJobs" runat="server" CssClass="text-center mt-3" Visible="false">
+      <div class="p-4 bg-white border rounded-3 d-inline-block">
+        <h5 class="mb-2">No job listings available</h5>
+        <p class="text-muted small mb-3">We don't have any active job or internship postings right now. Check the full job board for updates.</p>
+        <a href="jobs.aspx" class="btn btn-outline-secondary btn-sm">Open Job Board</a>
+      </div>
+    </asp:Panel>
+
   </div>
 </section>
 
@@ -139,7 +148,7 @@
               <li>1-on-1 Mentorship</li>
               <li>Skills Bootcamps</li>
             </ul>
-            <a class="btn btn-outline-secondary btn-sm w-100 fw-semibold mt-auto" href="students.aspx">Enter Community</a>
+            <asp:HyperLink ID="lnkStudentArena" runat="server" NavigateUrl="~/students.aspx" CssClass="btn btn-outline-secondary btn-sm w-100 fw-semibold mt-auto">Enter Community</asp:HyperLink>
           </div>
         </div>
         <div class="col-md-6 col-lg-3">
@@ -152,7 +161,7 @@
               <li>Research Mentorship</li>
               <li>Job Dispersal Profiles</li>
             </ul>
-            <a class="btn btn-outline-secondary btn-sm w-100 fw-semibold mt-auto" href="alumni.aspx">Alumni Directory</a>
+            <asp:HyperLink ID="lnkAlumniSphere" runat="server" NavigateUrl="~/alumni.aspx" CssClass="btn btn-outline-secondary btn-sm w-100 fw-semibold mt-auto">Alumni Directory</asp:HyperLink>
           </div>
         </div>
         <div class="col-md-6 col-lg-3">
@@ -165,7 +174,7 @@
               <li>Curriculum Inputs</li>
               <li>Incubation Hubs</li>
             </ul>
-            <a class="btn btn-outline-secondary btn-sm w-100 fw-semibold mt-auto" href="companies.aspx">Partner Paths</a>
+            <asp:HyperLink ID="lnkCollaboration" runat="server" NavigateUrl="~/collaborate.aspx" CssClass="btn btn-outline-secondary btn-sm w-100 fw-semibold mt-auto">Partner Paths</asp:HyperLink>
           </div>
         </div>
         <div class="col-md-6 col-lg-3">
@@ -178,75 +187,59 @@
               <li>Counseling Interfaces</li>
               <li>ATS Optimization</li>
             </ul>
-            <a class="btn btn-outline-secondary btn-sm w-100 fw-semibold mt-auto" href="jobs.aspx">Launch Tools</a>
+            <asp:HyperLink ID="lnkLaunchTools" runat="server" NavigateUrl="~/jobs.aspx" CssClass="btn btn-outline-secondary btn-sm w-100 fw-semibold mt-auto">Launch Tools</asp:HyperLink>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="upcoming-events" class="events main-content py-5 bg-white border-bottom reveal-on-scroll">
+<section id="upcoming-events" class="events main-content py-5 bg-white border-bottom reveal-on-scroll">
     <div class="container">
+      <asp:UpdatePanel ID="upEvents" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
       <div class="text-center mb-5">
         <h6 class="eyebrow">Upcoming Events</h6>
         <h2 class="mt-2">Register for KUET Career Sessions</h2>
         <p class="text-muted mx-auto" style="max-width: 64ch;">Attend our curated workshops, employer panels, and resume clinics to sharpen your career readiness.</p>
+
+        <asp:Label ID="lblEventMsg" runat="server" CssClass="fw-bold d-block my-3 p-2 rounded small" Visible="false"></asp:Label>
       </div>
+
       <div class="row g-4">
-        <div class="col-md-4">
-          <article class="event-card p-4 h-100 d-flex flex-column">
-            <div class="d-flex align-items-start justify-content-between mb-3">
-              <div>
-                <h5 class="mb-1">Career Launch Bootcamp</h5>
-                <p class="mb-0 text-muted small fw-semibold">June 30 | Main Auditorium</p>
-              </div>
-              <span class="badge rounded px-2 py-1 bg-primary-soft fw-bold" style="font-size:0.75rem;">Workshop</span>
+        <asp:Repeater ID="rptEvents" runat="server" OnItemCommand="rptEvents_ItemCommand">
+          <ItemTemplate>
+            <div class="col-md-4">
+              <article class="event-card p-4 h-100 d-flex flex-column border rounded-3 shadow-sm bg-white">
+                <div class="d-flex align-items-start justify-content-between mb-3">
+                  <div>
+                    <h5 class="mb-1 fw-bold text-dark"><%# Eval("EventTitle") %></h5>
+                    <p class="mb-0 text-muted small fw-semibold"><%# Eval("EventDate") %> | <%# Eval("EventLocation") %></p>
+                  </div>
+                  <span class='badge rounded px-2 py-1 fw-bold <%# Eval("BadgeClass") %>' style="font-size:0.75rem;"><%# Eval("EventType") %></span>
+                </div>
+                <p class="text-muted small mb-4 flex-grow-1"><%# Eval("Description") %></p>
+                <ul class="list-unstyled text-muted small mb-4 border-top pt-3">
+                  <li class="mb-1"><i class="bi bi-clock me-2"></i><%# Eval("EventTime") %></li>
+                  <li class="mb-1"><i class="bi bi-geo-alt me-2"></i><%# Eval("EventLocation") %></li>
+                </ul>
+                
+                <asp:Button ID="btnRegister" runat="server" Text="Register" 
+                            CommandName="RegisterEvent" 
+                            CommandArgument='<%# Eval("EventID") %>' 
+                            CausesValidation="false"
+                            UseSubmitBehavior="false"
+                            OnCommand="BtnRegister_Command"
+                            CssClass="btn btn-outline-secondary w-100 btn-sm fw-semibold mt-auto" />
+              </article>
             </div>
-            <p class="text-muted small mb-4 flex-grow-1">Practical sessions on resume writing, interview prep, and networking with KUET industry partners.</p>
-            <ul class="list-unstyled text-muted small mb-4 border-top pt-3">
-              <li class="mb-1"><i class="bi bi-clock me-2"></i>10:00 AM &ndash; 1:00 PM</li>
-              <li class="mb-1"><i class="bi bi-geo-alt me-2"></i>KUET Main Campus</li>
-            </ul>
-            <button type="button" class="btn btn-outline-secondary w-100 btn-sm fw-semibold mt-auto event-register-btn" data-event="bootcamp">Register</button>
-          </article>
-        </div>
-        <div class="col-md-4">
-          <article class="event-card p-4 h-100 d-flex flex-column">
-            <div class="d-flex align-items-start justify-content-between mb-3">
-              <div>
-                <h5 class="mb-1">Employer Panel</h5>
-                <p class="mb-0 text-muted small fw-semibold">July 5 | Innovation Hub</p>
-              </div>
-              <span class="badge rounded px-2 py-1 bg-success-soft fw-bold" style="font-size:0.75rem;">Panel</span>
-            </div>
-            <p class="text-muted small mb-4 flex-grow-1">Hear from hiring managers about current roles and career pathways for KUET graduates.</p>
-            <ul class="list-unstyled text-muted small mb-4 border-top pt-3">
-              <li class="mb-1"><i class="bi bi-clock me-2"></i>2:00 PM &ndash; 5:00 PM</li>
-              <li class="mb-1"><i class="bi bi-geo-alt me-2"></i>Innovation Hub</li>
-            </ul>
-            <button type="button" class="btn btn-outline-secondary w-100 btn-sm fw-semibold mt-auto event-register-btn" data-event="panel">Register</button>
-          </article>
-        </div>
-        <div class="col-md-4">
-          <article class="event-card p-4 h-100 d-flex flex-column">
-            <div class="d-flex align-items-start justify-content-between mb-3">
-              <div>
-                <h5 class="mb-1">Resume & Interview Clinic</h5>
-                <p class="mb-0 text-muted small fw-semibold">July 10 | Career Lab</p>
-              </div>
-              <span class="badge rounded px-2 py-1 bg-orange-soft fw-bold" style="font-size:0.75rem;">Clinic</span>
-            </div>
-            <p class="text-muted small mb-4 flex-grow-1">One-on-one feedback sessions for CVs, cover letters, and mock interviews.</p>
-            <ul class="list-unstyled text-muted small mb-4 border-top pt-3">
-              <li class="mb-1"><i class="bi bi-clock me-2"></i>11:00 AM &ndash; 2:00 PM</li>
-              <li class="mb-1"><i class="bi bi-geo-alt me-2"></i>Career Lab</li>
-            </ul>
-            <button type="button" class="btn btn-outline-secondary w-100 btn-sm fw-semibold mt-auto event-register-btn" data-event="clinic">Register</button>
-          </article>
-        </div>
+          </ItemTemplate>
+        </asp:Repeater>
       </div>
     </div>
-  </section>
+        </ContentTemplate>
+      </asp:UpdatePanel>
+</section>
 
   <section id="counseling" class="counseling-section py-5 bg-white border-bottom reveal-on-scroll">
     <div class="container">
@@ -304,7 +297,7 @@
             <i class="bi bi-people-fill fs-2 mb-2 text-danger"></i>
             <h5 class="mb-2">Alumni Mentorship</h5>
             <p class="text-muted small flex-grow-1">Guide upcoming cohorts of engineers by breaking down your industry path, tech stack transitions, and market insights.</p>
-            <a href="register.aspx" class="text-decoration-none fw-semibold mt-3 small" style="color: var(--bcc-primary);">Become a Mentor <i class="bi bi-arrow-right ms-2"></i></a>
+            <asp:HyperLink ID="lnkBecomeMentor" runat="server" NavigateUrl="~/collaborate.aspx" CssClass="text-decoration-none fw-semibold mt-3 small" style="color: var(--bcc-primary);">Become a Mentor <i class="bi bi-arrow-right ms-2"></i></asp:HyperLink>
           </div>
         </div>
 
@@ -528,8 +521,8 @@
           var detail = eventData[eventKey];
           if (!detail || !eventModal) return;
           document.getElementById('eventModalLabel').textContent = detail.title;
-          document.getElementById('selectedEvent').value = detail.title + ' — ' + detail.date;
-          document.getElementById('eventModalInfo').innerHTML = '<strong>' + detail.date + ' • ' + detail.time + ' • ' + detail.location + '</strong><br>' + detail.description;
+          document.getElementById('selectedEvent').value = detail.title + ' &mdash; ' + detail.date;
+          document.getElementById('eventModalInfo').innerHTML = '<strong>' + detail.date + ' &bull; ' + detail.time + ' &bull; ' + detail.location + '</strong><br>' + detail.description;
           if (eventModal) eventModal.show();
         });
       });
@@ -584,6 +577,38 @@
 
     window.addEventListener('scroll', function(){ revealOnScroll(); checkStats(); });
     window.addEventListener('load', function(){ revealOnScroll(); checkStats(); });
+
+    // Jobs carousel initialization
+    (function(){
+      var track = document.querySelector('.jobs-carousel-track');
+      if(!track) return;
+      var slides = Array.from(track.children);
+      var prev = document.querySelector('.jobs-prev');
+      var next = document.querySelector('.jobs-next');
+      var index = 0;
+      var visible = 3;
+      function updateVisibleCount(){
+        visible = window.innerWidth < 576 ? 1 : (window.innerWidth < 992 ? 2 : 3);
+      }
+      function goTo(i){
+        updateVisibleCount();
+        index = Math.max(0, Math.min(i, Math.max(0, slides.length - visible)));
+        var slideW = slides[0].getBoundingClientRect().width + 20;
+        track.style.transform = 'translateX(' + (-(slideW) * index) + 'px)';
+        slides.forEach(function(s, idx){ if(idx >= index && idx < index + visible) s.classList.add('is-visible'); else s.classList.remove('is-visible'); });
+      }
+      function nextSlide(){ goTo(index + 1); }
+      function prevSlide(){ goTo(index - 1); }
+      if(next) next.addEventListener('click', nextSlide);
+      if(prev) prev.addEventListener('click', prevSlide);
+      window.addEventListener('resize', function(){ goTo(index); });
+      // autoplay
+      var autoplay = setInterval(function(){ if(slides.length > visible) nextSlide(); }, 4200);
+      track.addEventListener('mouseenter', function(){ clearInterval(autoplay); });
+      track.addEventListener('mouseleave', function(){ autoplay = setInterval(function(){ if(slides.length > visible) nextSlide(); }, 4200); });
+      // initial
+      setTimeout(function(){ goTo(0); }, 120);
+    })();
     });
   </script>
 

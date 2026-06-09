@@ -26,8 +26,10 @@
             <a class="nav-link" href="pending-jobs.aspx">Pending Jobs</a>
             <a class="nav-link" href="queued-emails.aspx">Queued Emails</a>
             <a class="nav-link" href="manage-jobs.aspx">Manage Jobs</a>
+            <a class="nav-link" href="manage-events.aspx">Manage Events</a>
             <a class="nav-link" href="manage-students.aspx">Manage Students</a>
             <a id="lnkCompanies" runat="server" class="nav-link" href="manage-companies.aspx">Manage Companies</a>
+            <a id="lnkCollaborations" runat="server" class="nav-link" href="manage-collaborations.aspx">Manage Collaborations</a>
             <a class="nav-link" href="manage-alumni.aspx">Manage Alumni</a>
             <a class="nav-link" href="manage-blogs.aspx">Manage Blogs</a>
             <asp:PlaceHolder runat="server" ID="phSignIn">
