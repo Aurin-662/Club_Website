@@ -16,53 +16,6 @@ A full-stack web application built for the KUET Career Club — connecting stude
 
 -----
 
-## 📁 Project Structure
-Club_Website/
-│
-├── home.aspx / .cs              # Homepage with stats, job carousel, events
-├── register.aspx / .cs          # User registration with password hashing
-├── login.aspx / .cs             # User login with session & cookie support
-├── logout.aspx / .cs            # Session clear and redirect
-├── forgot-password.aspx / .cs   # Password reset request
-├── reset-password.aspx / .cs    # Password update with token validation
-│
-├── jobs.aspx / .cs              # Job board with search & filter
-├── jobdetails.aspx / .cs        # Full job details by ID
-├── post-job.aspx / .cs          # Job posting form for companies/alumni
-├── apply.aspx / .cs             # Job application form for students
-│
-├── students.aspx / .cs          # Current club members listing
-├── alumni.aspx / .cs            # KUET alumni listing
-├── companies.aspx / .cs         # Partner companies listing
-│
-├── blogs.aspx / .cs             # Blog listing with search & category filter
-├── article.aspx / .cs           # Full article view by slug
-│
-├── collaborate.aspx / .cs       # Collaboration request form
-├── contact.aspx / .cs           # Contact form
-├── feedback.aspx / .cs          # Feedback form
-├── support.aspx / .cs           # Support request form
-│
-├── faq.aspx / .cs               # Frequently Asked Questions
-├── help.aspx / .cs              # Help page
-├── privacy.aspx / .cs           # Privacy Policy
-├── terms.aspx / .cs             # Terms of Service
-├── refund.aspx / .cs            # Refund Policy
-│
-├── admin/                       # Admin panel (session-protected)
-│
-├── App_Code/                    # Shared helper classes (e.g. PasswordHelper)
-├── App_Data/                    # App data files
-├── db/migrations/               # SQL database migration scripts
-├── images/                      # Static image assets
-├── Uploads/                     # User-uploaded files
-│
-├── Site.master / .cs            # Master page (shared navbar & footer)
-├── style.css                    # Global stylesheet
-├── script.js                    # Global JavaScript
-└── Web.config                   # App configuration & DB connection string
-
------
 
 ## ✨ Features
 
